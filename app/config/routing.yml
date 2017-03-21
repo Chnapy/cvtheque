@@ -1,0 +1,7 @@
+cv_theque:
+    resource: "@CVThequeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+MGUserBundle:
+    resource: "@MGUserBundle/Resources/config/routing.yml"
+    prefix:   /
