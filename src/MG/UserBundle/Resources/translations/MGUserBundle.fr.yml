@@ -1,0 +1,29 @@
+# Form field labels
+profile:
+    show:
+        link: Voir mon profil
+        username: Profil de %username%
+        country: "Pays : %country%"
+        birthday:
+            m: "Homme né le %birthday% (%age% ans)"
+            f: "Femme née le %birthday% (%age% ans)"
+        created: Créé le %date%.
+        updated: Mise à jour le %date%.
+form:
+    firstname: "Prénom :"
+    lastname: "Nom :"
+    gender: "Vous êtes :"
+    m: Un homme
+    f: Une femme
+    birthdate: "Datte d’anniversaire :"
+    country: "Pays :"
+    town: "Ville :"
+    description: "Décrivez-vous en quelques mots :"
+    image:
+        file: "Ajouter une photo :"
+        alt: "Entrez une courte description de la photo :"
+    hobbys: "Liste de passe-temps :"
+    hobby:
+        name: "Nom du passe-temps :"
+        add_button: "Ajouter un passe-temps"
+        del_button: "Supprimer ce passe-temps"

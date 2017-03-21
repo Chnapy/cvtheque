@@ -1,0 +1,4 @@
+services:
+#    cv_theque.example:
+#        class: CVThequeBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

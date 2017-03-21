@@ -1,0 +1,3 @@
+cv_theque_homepage:
+    path:     /
+    defaults: { _controller: CVThequeBundle:Default:index }

@@ -1,0 +1,14 @@
+{# src/MG/UserBundle/Resources/views/Profile/delete.html.twig #} 
+{% extends "MGBlogBundle::layout.html.twig" %}
+{% block title %}Supprimer le profil - {{ parent() }} {% endblock %} 
+{% block body %}
+<h2>Supprimer le profil</h2>
+<p>Êtes-vous certain de vouloir supprimer votre profile ?</p>
+<form action="{{ path('mg_user_profile_delete') }}" method="post">
+  <a href="{{ path('fos_user_profile_show') }}" class="btn">
+    <i class="icon-chevron-left"></i>Retour à l'article
+  </a>
+  <input type="submit" value="Supprimer" class="btn btn-danger" />
+  {{ form_rest(form) }}
+</form>
+{% endblock %}

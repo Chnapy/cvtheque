@@ -1,0 +1,11 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+{{ form_start(form, { 'action': path('mg_user_profile_picture_edit'), 'attr': { 'class': 'mg_user_profile_picture_edit' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}
+{% endblock fos_user_content %}

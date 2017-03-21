@@ -1,0 +1,13 @@
+{% macro link(user, username) %}
+  {% spaceless %}
+
+  {% if user is not null %}
+    {#<a href="{{ path('MGuser_voir', {'username': user.username}) }}">#}
+        {{ user.username }}
+    {#</a>#}
+  {% else %}
+    {{ username }}
+  {% endif %}
+
+  {% endspaceless %}
+{% endmacro %}
