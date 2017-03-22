@@ -21,7 +21,7 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         \Locale::setDefault('fr');
-        $countries = Intl::getRegionBundle()->getCountryNames();
+        $countries = array_flip(Intl::getRegionBundle()->getCountryNames());
         $builder
         ->add('firstname', TextType::class, array(
                 'label' => 'form.firstname', 
@@ -45,7 +45,7 @@ class RegistrationType extends AbstractType
                 'translation_domain' => 'MGUserBundle'
         ))
         ->add('country',  CountryType::class, array(
-                'choices' => $countries,
+                'choices' => $countries,// Array('France' => 'FR'),
                 'label' => 'form.country',
                 'translation_domain' => 'MGUserBundle'
         ))

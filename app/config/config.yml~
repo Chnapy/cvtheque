@@ -2,12 +2,13 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@CVThequeBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    img_directory: '%kernel.root_dir%/../web/uploads/img'
+    img_directory: '%kernel.root_dir%/../web/uploads/brochures'
 
 framework:
     #esi:             ~
@@ -41,14 +42,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'bootstrap_3_layout.html.twig'
-
-# Activation de l'extension Twig intl
-services:
-  twig.extension.intl:
-    class: Twig_Extensions_Extension_Intl
-    tags:
-      - { name: twig.extension }
-
+        
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -70,25 +64,6 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
-        resolve_target_entities:
-            Symfony\Component\Security\Core\User\UserInterface: MG\UserBundle\Entity\User
-
-# Stof\DoctrineExtensionBundle configuration
-stof_doctrine_extensions:
-    orm:
-        default:
-            sluggable: true
-
-knp_paginator:
-    page_range: 3
-    default_options:
-        page_name: p
-        sort_field_name: sort
-        sort_direction_name: direction
-        distinct: true
-    template:
-        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
-        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -98,12 +73,22 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+sonata_intl:
+    timezone:
+        default: Europe/Paris
+# Activation de l'extension Twig intl
+services:
+  twig.extension.intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+      - { name: twig.extension }
+
 # fos_user configuration
 fos_user:
     from_email:
         address:        noreply@cvtheque.com
         sender_name:    team++
-    db_driver: orm 
+    db_driver: orm
     firewall_name: main
     user_class: MG\UserBundle\Entity\User
     registration:
