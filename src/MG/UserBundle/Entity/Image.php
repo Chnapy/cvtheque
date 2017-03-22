@@ -111,7 +111,7 @@ class Image
 
   public function getWebPath()
   {
-    return '/symfony/web/'.$this->getWebDir().'/'.$this->getId().'.'.$this->getExtension();
+    return '/cvtheque/web/'.$this->getWebDir().'/'.$this->getId().'.'.$this->getExtension();
   }
 
   /**

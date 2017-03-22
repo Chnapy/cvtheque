@@ -27,34 +27,11 @@ class Society extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=32)
+     * @ORM\Column(name="societyname", type="string", length=128)
      * @Assert\Length(min=2, max=128)
+     * @Gedmo\Slug(fields={"societyname"}
      */
     protected $societyname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=32)
-     * @Assert\Length(min=2, max=32)
-     */
-    protected $lastname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="gender", type="string", length=1)
-     * @Assert\Length(min=1, max=1)
-     */
-    protected $gender;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="birthday", type="date")
-     * @Assert\Date
-     */
-    protected $birthday;
 
     /**
      * @var string
@@ -80,11 +57,6 @@ class Society extends BaseUser
      */
     protected $description;
 
-    /**
-     * @Gedmo\Slug(fields={"username"})
-     * @ORM\Column(length=128)
-     */
-    protected $slug;
     
     /**
      * @ORM\Column(type="datetime")
@@ -107,14 +79,6 @@ class Society extends BaseUser
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="Hobby", mappedBy="user", cascade={"persist", "remove"})
-     * @Assert\Valid()
-     */
-    protected $hobbys;
-
-    /**
-     * @var string
-     *
      * @ORM\OneToMany(targetEntity="Ip", mappedBy="user", cascade={"persist"})
      */
     protected $ips;
@@ -123,12 +87,9 @@ class Society extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        
-        $this->hobbys = new ArrayCollection();
         $this->ips = new ArrayCollection();
         $this->image = new Image();
         $this->setCreated(new \DateTime());
-        $this->setUpdated(new \DateTime());
     }
     
     /**
@@ -136,7 +97,6 @@ class Society extends BaseUser
      */
     public function setCreatedValue()
     {
-        $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
     }
     
@@ -147,24 +107,7 @@ class Society extends BaseUser
     {
         $this->setUpdated(new \DateTime());
     }
-    
-    /**
-     * Get age
-     *
-     * @return int
-     */
-    public function getAge() {
-        $year = $this->birthday->format('Y');
-        $month = $this->birthday->format('m'); 
-        $day = $this->birthday->format('d');
-        if(date('m')-(int)$month>= 0){
-            if(date("d")-(int)$day>= 0 ||date('m')>$month){
-                return date('Y')-(int)($year);
-            }
-        }
-        return date('Y')-(int)($year)-1;
-    }
-    
+	
     /**
      * Get id
      *
@@ -176,109 +119,14 @@ class Society extends BaseUser
     }
     
     /**
-     * Set username
+     * Set societyname
      *
-     * @param string $firstname
-     *
-     */
-    public function setUsername($username) {
-        parent::setUsername($username);
-        $this->setSlug($username);
-    }
-    
-    /**
-     * Set firstname
-     *
-     * @param string $firstname
+     * @param string $societyname
      *
      */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    /**
-     * Get firstname
-     *
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * Set lastname
-     *
-     * @param string $lastname
-     *
-     * @return U
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    /**
-     * Get lastname
-     *
-     * @return string
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * Set gender
-     *
-     * @param string $gender
-     *
-     * @return U
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return string
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Set birthday
-     *
-     * @param \DateTime $birthday
-     *
-     * @return U
-     */
-    public function setBirthday($birthday)
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    /**
-     * Get birthday
-     *
-     * @return \DateTime
-     */
-    public function getBirthday()
-    {
-        return $this->birthday;
+    public function setSocietyname($societyname) {
+        parent::setUsername($societyname);
+        $this->setSlug($societyname);
     }
 
     /**
@@ -435,31 +283,6 @@ class Society extends BaseUser
     public function getImage()
     {
         return $this->image;
-    }    
-
-    /**
-     * Set hobbys
-     *
-     * @param string $hobbys
-     *
-     * @return U
-     */
-    public function setHobbys($hobbys)
-    {
-        $this->hobbys = $hobbys;
-
-        return $this;
-    }
-
-    
-    /**
-     * Get hobbys
-     *
-     * @return string
-     */
-    public function getHobbys()
-    {
-        return $this->hobbys;
     }
 
     /**
@@ -467,12 +290,10 @@ class Society extends BaseUser
      *
      * @param string $ips
      *
-     * @return U
      */
     public function setIps($ips)
     {
         $this->ips = $ips;
-
         return $this;
     }
 
@@ -484,32 +305,6 @@ class Society extends BaseUser
     public function getIps()
     {
         return $this->ips;
-    }
-
-    /**
-     * Add hobby
-     *
-     * @param \MG\UserBundle\Entity\Hobby $hobby
-     *
-     * @return User
-     */
-    public function addHobby(\MG\UserBundle\Entity\Hobby $hobby)
-    {
-        $hobby->setUser($this);
-        $this->hobbys[] = $hobby;
-
-        return $this;
-    }
-
-    /**
-     * Remove hobby
-     *
-     * @param \MG\UserBundle\Entity\Hobby $hobby
-     */
-    public function removeHobby(\MG\UserBundle\Entity\Hobby $hobby)
-    {
-        $hobby->setUser(null);
-        $this->hobbys->removeElement($hobby);
     }
 
     /**
