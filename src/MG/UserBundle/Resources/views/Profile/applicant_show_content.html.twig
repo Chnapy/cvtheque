@@ -5,7 +5,7 @@
     {% endif %}
   </div>
   <h1>{{ 'profile.show.username'|trans({'%username%': user.username }, 'MGUserBundle') }}</h1>
-  <p>{{ 'profile.show.country'|trans({'%country%': user.country|country }, 'MGUserBundle') }}</p>
+  <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
   <p>{{ ('profile.show.birthday.'~user.gender)|trans({'%birthday%': user.birthday|date('d/m/Y'), '%age%': user.age}, 'MGUserBundle') }}</p>
   <h2>
     Description 
@@ -15,11 +15,11 @@
     {{ user.description|markdown }}
   </article>
   <div class="well well-small">
-    {% if user.hobbys.count > 0 %}
+    {% if user.hobbies.count > 0 %}
     <h3>Liste de passe-temps :</h3>
     <ul>
-      {% for hobby in user.hobbys %}
-        <li>{{ hobby.name }};</li>
+      {% for hobby in user.hobbies %}
+        <li>{{ hobby.body }};</li>
       {% endfor %}
     </ul>
     {% endif %}

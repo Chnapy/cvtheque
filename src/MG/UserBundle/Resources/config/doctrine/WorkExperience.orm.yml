@@ -1,0 +1,29 @@
+MG\UserBundle\Entity\WorkExperience:
+    type: entity
+    table: null
+    repositoryClass: MG\UserBundle\Repository\WorkExperienceRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        fromDate:
+            type: date
+        toDate:
+            type: date
+        jobTitle:
+            type: string
+            length: '128'
+        employer:
+            type: string
+            length: '128'
+        description:
+            type: string
+            length: '128'
+    manyToOne:
+        applicant:
+            targetEntity: Applicant
+            inversedBy: workExperiences
+    lifecycleCallbacks: {  }

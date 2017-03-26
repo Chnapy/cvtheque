@@ -1,0 +1,18 @@
+MG\UserBundle\Entity\Ip:
+    type: entity
+    table: null
+    repositoryClass: MG\UserBundle\Repository\IpRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        connectDate:
+            type: datetime
+        ip:
+            type: string
+            length: '16'
+    
+    lifecycleCallbacks: {  }

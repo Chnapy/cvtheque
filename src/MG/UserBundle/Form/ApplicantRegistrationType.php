@@ -10,18 +10,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Intl\Intl;
 
-class RegistrationType extends AbstractType
+class ApplicantRegistrationType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        \Locale::setDefault('fr');
-        $countries = array_flip(Intl::getRegionBundle()->getCountryNames());
+    public function buildForm(FormBuilderInterface $builder, array $options) 
+    {    
         $builder
         ->add('firstname', TextType::class, array(
                 'label' => 'form.firstname', 
@@ -44,20 +40,21 @@ class RegistrationType extends AbstractType
                 'label' => 'form.birthdate', 
                 'translation_domain' => 'MGUserBundle'
         ))
-        ->add('country',  CountryType::class, array(
-                'choices' => $countries,// Array('France' => 'FR'),
-                'label' => 'form.country',
-                'translation_domain' => 'MGUserBundle'
-        ))
-        ->add('town', TextType::class, array(
-                'label' => 'form.town', 
+        
+        ->add('address', AddressType::class)
+        ->add('titleProfile', TextType::class, array(
+                'label' => 'form.titleProfile', 
                 'translation_domain' => 'MGUserBundle'
         ))
         ->add('description', TextareaType::class, array(
                 'label' => 'form.description', 
                 'translation_domain' => 'MGUserBundle'
         ))
-        ->add('hobbys',  CollectionType::class, array(
+        ->add('phoneNumber', TextType::class, array(
+                'label' => 'form.phoneNumber', 
+                'translation_domain' => 'MGUserBundle'
+        ))
+        ->add('hobbies',  CollectionType::class, array(
                 'entry_type' => HobbyType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
@@ -80,7 +77,7 @@ class RegistrationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MG\UserBundle\Entity\User'
+            'data_class' => 'MG\UserBundle\Entity\Applicant'
         ));
     }
 
@@ -89,7 +86,7 @@ class RegistrationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'mg_userbundle_registration';
+        return 'mg_userbundle_registration_applicant';
     }
     
     public function getName()

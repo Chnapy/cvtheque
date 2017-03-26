@@ -15,6 +15,20 @@ use MG\UserBundle\Form\PhotoType;
 
 class ProfileController extends BaseController
 {
+    public function showAction() 
+    {
+        $user = $this->getUser();
+        if($this->get('mg_user_bundle.service.role')->isGranted('ROLE_APPLICANT', $user)) {
+            return $this->render('MGUserBundle:Profile:applicant_show.html.twig', array(
+                    'user' => $user,
+            ));
+        } else if ($this->get('mg_user_bundle.service.role')->isGranted('ROLE_SOCIETY', $user)) {
+            return $this->render('MGUserBundle:Profile:society_show.html.twig', array(
+                    'user' => $user,
+            ));
+        }
+    }
+    
     public function visiteAction($slug)
     {
         $repository = $this->getDoctrine()
@@ -22,9 +36,15 @@ class ProfileController extends BaseController
         ->getRepository('MGUserBundle:User');
         
         $user = $repository->findOneBySlug($slug);
-        return $this->render('MGUserBundle:Profile:show.html.twig', array(
-                'user' => $user,
-        ));
+        if($this->get('mg_user_bundle.service.role')->isGranted('ROLE_APPLICANT', $user)) {
+            return $this->render('MGUserBundle:Profile:applicant_show.html.twig', array(
+                    'user' => $user,
+            ));
+        } else if ($this->get('mg_user_bundle.service.role')->isGranted('ROLE_SOCIETY', $user)) {
+            return $this->render('MGUserBundle:Profile:society_show.html.twig', array(
+                    'user' => $user,
+            ));
+        }
     }
     
     public function deleteAction(Request $request)

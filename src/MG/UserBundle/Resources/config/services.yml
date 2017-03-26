@@ -1,1 +1,4 @@
 services:
+    mg_user_bundle.service.role:
+        class: MG\UserBundle\Service\RoleService
+        arguments: ['@security.role_hierarchy']

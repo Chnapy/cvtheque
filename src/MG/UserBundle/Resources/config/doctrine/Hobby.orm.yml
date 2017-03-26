@@ -1,0 +1,22 @@
+MG\UserBundle\Entity\Hobby:
+    type: entity
+    table: null
+    repositoryClass: MG\UserBundle\Repository\HobbyRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '64'
+        body:
+            type: string
+            length: 255
+    manyToOne:
+        applicant:
+            targetEntity: Applicant
+            inversedBy: hobbies
+    lifecycleCallbacks: {  }

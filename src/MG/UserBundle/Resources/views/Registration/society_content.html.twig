@@ -1,0 +1,18 @@
+{{ form_start(form, {'method': 'post', 'action': path('mg_society_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_row(form.societyName) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword) }}
+    {{ form_row(form.address.street) }}
+    {{ form_row(form.address.zipCode) }}
+    {{ form_row(form.address.town) }}
+    {{ form_row(form.address.country) }}
+    {{ form_row(form.phoneNumber) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.image) }}
+    <input type="hidden" name="_csrf_token"
+        value="{{ csrf_token('authenticate') }}"
+    >
+    <div>
+        <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+{{ form_end(form) }}

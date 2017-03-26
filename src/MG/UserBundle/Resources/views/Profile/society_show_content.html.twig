@@ -1,0 +1,35 @@
+<div class="fos_user_user_show">
+  <div style="float: left; margin-right: 1em;">
+    {% if user.image is not null %}
+      <img src="{{ user.image.webPath }}" alt="{{ user.image.alt }}" height="60">
+    {% endif %}
+  </div>
+  <h1>{{ 'profile.show.societyName'|trans({'%societyName%': user.societyName }, 'MGUserBundle') }}</h1>
+  <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
+  
+  <h2>
+    Description 
+  </h2>
+  
+  <article class="well" style="clear: both;">
+    {{ user.description|markdown }}
+  </article>
+  {% if user.id == app.user.id %}
+  <ul>
+  <li><a href="{{ path('fos_user_profile_edit') }}" class="btn">
+    <i class="icon-edit"></i>
+    Modifier le profil
+  </a></li>
+  <li><a href="{{ path('mg_user_profile_picture_edit') }}" class="btn">
+    <i class="icon-edit"></i>
+    Modifier la photo
+  </a></li>
+  <li><a href="{{ path('mg_user_profile_delete') }}" class="btn">
+    <i class="icon-trash"></i>
+    Supprimer 
+  </a></li>
+  </ul>
+  {% endif %}
+  <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>
+  <p>{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
+</div>

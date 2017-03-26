@@ -23,18 +23,20 @@
           <h3 id="h3menu" role="heading" aria-level="3">Menu</h3>
           <ul class="nav nav-pills nav-stacked">
             <li><a href="">Accueil</a></li>
-            {% if is_granted('ROLE_AUTHOR') %}
-              <li><a href="">Ajouter</a></li>
+            {% if is_granted('ROLE_APPLICANT') %}
+              <li><a href="#" >Modifier mon CV</a></li>
             {% endif %}
-
+            {% if is_granted('ROLE_SOCIETY') %}
+              <li><a href="">Ajouter une annonce</a></li>
+            {% endif %}
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
               <h3>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h3>
-              <li><a href="{{ path('fos_user_profile_show') }}" >{{ 'profile.show.link'|trans({}, 'MGUserBundle') }}</a></li>
+              <li><a href="{{ path('mg_user_show') }}" >{{ 'profile.show.link'|trans({}, 'MGUserBundle') }}</a></li>
               <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
-            {% elseif app.request.attributes.get('_route') != 'fos_user_security_login' %}
-              <h3>Identification</h3>
-              {{ render(controller('FOSUserBundle:Security:login')) }}
-            {% endif %}
+            {% else %}
+              <li><a href="{{ path('mg_society_registration') }}">Créer un compte entreprise</a></li>
+              <li><a href="{{ path('mg_applicant_registration') }}">Créer un compte stagiaire</a></li>
+            {% endif %}  
           </ul>
         </nav>
 

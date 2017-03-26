@@ -3,9 +3,9 @@
 namespace MG\UserBundle\Entity;
 
 /**
- * Hobby
+ * Skill
  */
-class Hobby
+class Skill
 {
     /**
      * @var integer
@@ -43,7 +43,7 @@ class Hobby
      *
      * @param string $title
      *
-     * @return Hobby
+     * @return Skill
      */
     public function setTitle($title)
     {
@@ -67,7 +67,7 @@ class Hobby
      *
      * @param string $body
      *
-     * @return Hobby
+     * @return Skill
      */
     public function setBody($body)
     {
@@ -91,7 +91,7 @@ class Hobby
      *
      * @param \MG\UserBundle\Entity\Applicant $applicant
      *
-     * @return Hobby
+     * @return Skill
      */
     public function setApplicant(\MG\UserBundle\Entity\Applicant $applicant = null)
     {

@@ -106,9 +106,35 @@ fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: MG\UserBundle\Entity\User
-    registration:
-        form:
-            type: MG\UserBundle\Form\RegistrationType
-    profile:
-        form:
-            type: MG\UserBundle\Form\RegistrationEditType
+    service:
+        user_manager: pugx_user_manager
+    
+#PUGXMultiUserBundle Configuration            
+pugx_multi_user:
+    users:
+        user_one:
+            entity:
+                class: MG\UserBundle\Entity\Applicant
+                #factory:
+            registration:
+                form:
+                    type: MG\UserBundle\Form\ApplicantRegistrationType
+                    name: fos_user_registration_form
+                    validation_groups:  [Registration, Default]
+                template: MGUserBundle:Registration:applicant.form.html.twig
+            profile:
+                form:
+                    type: MG\UserBundle\Form\ApplicantRegistrationEditType
+                    name: fos_user_profile_form
+                    validation_groups:  [Profile, Default] 
+        user_two:
+            entity:
+                class: MG\UserBundle\Entity\Society
+            registration:
+                form:
+                    type: MG\UserBundle\Form\SocietyRegistrationType
+                template: MGUserBundle:Registration:society.form.html.twig
+            profile:
+                form:
+                    type: MG\UserBundle\Form\society\RegistrationEditType
+

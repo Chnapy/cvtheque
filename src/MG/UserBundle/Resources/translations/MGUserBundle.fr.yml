@@ -2,6 +2,7 @@
 profile:
     show:
         link: Voir mon profil
+        societyName: Profil de l'entreprise %societyName%
         username: Profil de %username%
         country: "Pays : %country%"
         birthday:
@@ -10,6 +11,9 @@ profile:
         created: Créé le %date%.
         updated: Mise à jour le %date%.
 form:
+    society:
+        name: "Nom de l'entreprise :"
+        description: "Description de l'entreprise :"
     firstname: "Prénom :"
     lastname: "Nom :"
     gender: "Vous êtes :"
@@ -17,13 +21,30 @@ form:
     f: Une femme
     birthdate: "Datte d’anniversaire :"
     country: "Pays :"
+    zipCode: "Code postal :"
+    street : "Adresse :"
     town: "Ville :"
+    phoneNumber: "Numéro de téléphone :"
+    titleProfile: "Titre de votre profile :"
     description: "Décrivez-vous en quelques mots :"
     image:
         file: "Ajouter une photo :"
         alt: "Entrez une courte description de la photo :"
-    hobbys: "Liste de passe-temps :"
+    hobbies: "Liste de passe-temps :"
     hobby:
-        name: "Nom du passe-temps :"
+        title:
+        body: "Nom du passe-temps :"
         add_button: "Ajouter un passe-temps"
         del_button: "Supprimer ce passe-temps"
+    educations: "Liste de diplômes"
+    education:
+        add_button: "Ajouter un diplôme"
+        del_button: "Supprimer ce diplôme"
+    workExperiences: "Liste d'expériences de travail"
+    workExperience:
+        add_button: "Ajouter une expérience de travail"
+        del_button: "Supprimer cette expérience de travail"
+    skills: "Liste de compétences"
+    skill:
+        add_button: "Ajouter une compétence"
+        del_button: "Supprimer cette compétence"

@@ -1,0 +1,20 @@
+MG\UserBundle\Entity\Image:
+    type: entity
+    table: null
+    repositoryClass: MG\UserBundle\Repository\ImageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        extension:
+            type: string
+            length: 255
+            nullable: true
+        alt:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }

@@ -14,7 +14,7 @@ class HobbyType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, array(
+        $builder->add('body', TextType::class, array(
                 'label' => 'form.hobby.name',
                 'translation_domain' => 'MGUserBundle'
         ));

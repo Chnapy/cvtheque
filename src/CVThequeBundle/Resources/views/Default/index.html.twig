@@ -1,1 +1,14 @@
-Hello World!
+{% extends '::base.html.twig' %}
+{% block content %}
+  {% for type, messages in app.session.flashBag.all %}
+    {% for message in messages %}
+      <div class="{{ type }}">
+        {{ message|trans({}, 'FOSUserBundle') }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+  {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <h3>Identification</h3>
+    {{ render(controller('FOSUserBundle:Security:login')) }}
+  {% endif %}
+{% endblock %}

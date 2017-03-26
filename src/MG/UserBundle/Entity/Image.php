@@ -22,12 +22,12 @@ class Image
   private $id;
 
   /**
-   * @ORM\Column(name="extension", type="string", length=255, nullable=true)
+   * 
    */
   private $extension;
 
   /**
-   * @ORM\Column(name="alt", type="string", length=255, nullable=true)
+   * 
    */
   private $alt;
 

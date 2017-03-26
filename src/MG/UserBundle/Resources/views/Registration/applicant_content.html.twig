@@ -1,4 +1,4 @@
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+{{ form_start(form, {'method': 'post', 'action': path('mg_applicant_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     {{ form_row(form.username) }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword) }}
@@ -6,15 +6,19 @@
     {{ form_row(form.lastname) }}
     {{ form_row(form.gender) }}
     {{ form_row(form.birthday) }}
-    {{ form_row(form.country) }}
-    {{ form_row(form.town) }}
+    {{ form_row(form.address.street) }}
+    {{ form_row(form.address.zipCode) }}
+    {{ form_row(form.address.town) }}
+    {{ form_row(form.address.country) }}
+    {{ form_row(form.phoneNumber) }}
+    {{ form_row(form.titleProfile) }}
     {{ form_row(form.description) }}
-    <h3>{{ 'form.hobbys'|trans({}, 'MGUserBundle') }}</h3>
+    <h3>{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</h3>
     <ul class="hobbys"
-        data-prototype="{{ form_widget(form.hobbys.vars.prototype)|e('html_attr') }}">
-    {% for hobby in form.hobbys %}
+        data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}">
+    {% for hobby in form.hobbies %}
     <li>
-        {{ form_row(hobby.name) }}
+        {{ form_row(hobby.body) }}
     </li>
     {% endfor %}
     

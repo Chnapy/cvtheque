@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Intl\Intl;
 
-class RegistrationEditType extends RegistrationType
+class ApplicantRegistrationEditType extends ApplicationRegistrationType
 {
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ class RegistrationEditType extends RegistrationType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MG\UserBundle\Entity\User'
+            'data_class' => 'MG\UserBundle\Entity\Applicant'
         ));
     }
 
@@ -51,7 +51,7 @@ class RegistrationEditType extends RegistrationType
      */
     public function getBlockPrefix()
     {
-        return 'mg_userbundle_registration_edit';
+        return 'mg_userbundle_registration_edit_applicant';
     }
     
     public function getName()

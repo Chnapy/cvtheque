@@ -4,13 +4,15 @@ jms_security_extra:
 
 security:
     encoders:
-        MG\UserBundle\Entity\User: sha512
+        MG\UserBundle\Entity\Applicant: sha512
+        MG\UserBundle\Entity\Society: sha512
 
     role_hierarchy:
         ROLE_AUTHOR: ROLE_USER
-        ROLE_MODERATOR:   [ROLE_AUTHOR, ROLE_USER]
-        ROLE_ADMIN:       [ROLE_MODERATOR, ROLE_AUTHOR, ROLE_USER]
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_MODERATOR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_APPLICANT:   [ROLE_AUTHOR, ROLE_USER]
+        ROLE_SOCIETY:   [ROLE_AUTHOR, ROLE_USER]
+        ROLE_ADMIN:       [ROLE_APPLICANT, ROLE_SOCIETY, ROLE_AUTHOR, ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_APPLICANT, ROLE_SOCIETY, ROLE_MODERATOR, ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         in_memory:

@@ -1,0 +1,43 @@
+MG\UserBundle\Entity\User:
+    type: entity
+    inheritanceType: JOINED
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        applicant: Applicant
+        society: Society
+    table: null
+    repositoryClass: MG\UserBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        slug:
+            type: string
+            length: '128'
+        phoneNumber:
+            type: string
+            length: '16'
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        created:
+            type: date
+        updated:
+            type: date
+    oneToOne:
+        address:
+            targetEntity: Address
+            cascade: ["persist", "merge", "remove"]
+
+        image:
+            targetEntity: Image
+            cascade: ["persist", "merge", "remove"]
+    lifecycleCallbacks:
+        prePersist: [setCreatedValue]
+        preUpdate: [setUpdatedValue]

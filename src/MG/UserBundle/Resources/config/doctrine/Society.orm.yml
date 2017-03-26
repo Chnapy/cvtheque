@@ -1,0 +1,9 @@
+MG\UserBundle\Entity\Society:
+    type: entity
+    table: null
+    repositoryClass: MG\UserBundle\Repository\SocietyRepository
+    fields:
+        societyName:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

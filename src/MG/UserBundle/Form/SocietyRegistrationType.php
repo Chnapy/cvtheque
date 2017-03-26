@@ -1,0 +1,70 @@
+<?php
+
+namespace MG\UserBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
+class SocietyRegistrationType extends AbstractType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) 
+    {    
+        $builder
+        ->remove('username')
+        ->add('societyName', TextType::class, array(
+                'label' => 'form.society.name', 
+                'translation_domain' => 'MGUserBundle'
+        ))
+        ->add('address', AddressType::class)
+        ->add('description', TextareaType::class, array(
+                'label' => 'form.society.description', 
+                'translation_domain' => 'MGUserBundle'
+        ))
+        ->add('phoneNumber', TextType::class, array(
+                'label' => 'form.phoneNumber', 
+                'translation_domain' => 'MGUserBundle'
+        ))
+        ->add('image', PhotoType::class, array(
+                'required'     => false
+        ));
+    }
+    
+    public function getParent()
+    {
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'MG\UserBundle\Entity\Society'
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'mg_userbundle_registration_society';
+    }
+    
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+    
+    
+}

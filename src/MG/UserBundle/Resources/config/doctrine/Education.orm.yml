@@ -1,0 +1,26 @@
+MG\UserBundle\Entity\Education:
+    type: entity
+    table: null
+    repositoryClass: MG\UserBundle\Repository\EducationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        fromDate:
+            type: date
+        toDate:
+            type: date
+        school:
+            type: string
+            length: 128
+        degree:
+            type: string
+            length: 128
+    manyToOne:
+        applicant:
+            targetEntity: Applicant
+            inversedBy: educations
+    lifecycleCallbacks: {  }
