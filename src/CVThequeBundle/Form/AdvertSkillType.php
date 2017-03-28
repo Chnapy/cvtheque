@@ -17,7 +17,7 @@ class AdvertSkillType extends AbstractType
   {
     $builder
       ->add('name', TextType::class, array(
-                'label' => 'form.advertSkill.name', 
+                'label' => 'form.skill.name', 
                 'translation_domain' => 'CVThequeBundle'
         ));
   }

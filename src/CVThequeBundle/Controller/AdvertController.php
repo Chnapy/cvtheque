@@ -41,7 +41,7 @@ class AdvertController extends Controller
         $em->persist($advertisement);
         $em->flush();
         $this->get('session')->getFlashBag()->add('info', 'Annonce enregistré');
-        return $this->redirect($this->generateUrl('mgblog_show', array('slug' => $advertisement->getSlug())));
+        return $this->redirect($this->generateUrl('show_advert', array('slug' => $advertisement->getSlug())));
     }
     return $this->render('CVThequeBundle:Advertisement:add.html.twig', array(
       'form' => $form->createView(),
@@ -71,8 +71,8 @@ class AdvertController extends Controller
         }
         $em->persist($advertisement);
         $em->flush();
-        $this->get('session')->getFlashBag()->add('info', 'Annonce modifié');
-        return $this->redirect($this->generateUrl('mgblog_show', array('slug' => $advertisement->getSlug())));
+        $this->get('session')->getFlashBag()->add('info', 'Annonce modifiée');
+        return $this->redirect($this->generateUrl('show_advert', array('slug' => $advertisement->getSlug())));
       }
       return $this->render('CVThequeBundle:Advertisement:update.html.twig', array(
       'form'    => $form->createView(),

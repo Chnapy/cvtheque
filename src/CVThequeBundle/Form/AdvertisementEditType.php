@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ArticleEditType extends AdvertisementType
+class AdvertisementEditType extends AdvertisementType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,7 +16,6 @@ class ArticleEditType extends AdvertisementType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->remove('created');
     }
     
     public function getParent()
@@ -39,7 +38,7 @@ class ArticleEditType extends AdvertisementType
      */
     public function getBlockPrefix()
     {
-        return 'cvtheque_article_edit';
+        return 'cvtheque_advertisement_edit';
     }
     
     /**

@@ -22,7 +22,6 @@
     {% if form.created is defined %}
       {{ form_row(form.created) }}
     {% endif %}
-    {{ form_row(form.updated) }}
     <input type="hidden" name="_csrf_token"
         value="{{ csrf_token('authenticate') }}"
     >

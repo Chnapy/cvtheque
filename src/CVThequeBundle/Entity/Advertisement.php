@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="MG\BlogBundle\Repository\Advertisement Repository")
+ * @ORM\Entity(repositoryClass="CVThequeBundle\Repository\AdvertisementRepository")
  * @ORM\Table(name="advertisement")
  * @ORM\HasLifecycleCallbacks()
  */

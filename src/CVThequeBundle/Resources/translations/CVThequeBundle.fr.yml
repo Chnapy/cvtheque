@@ -7,8 +7,9 @@ form:
     categories: "Liste des catégories :"
     category:
         name: "Nom de la catégorie :"
-    advertSkills: "Liste des compétences :"
+    skills: "Liste des compétences :"
     skill:
+        name: Nom de la compétence
         add_button: "Ajouter une compétence"
         del_button: "Supprimer cette compétence"
     image:

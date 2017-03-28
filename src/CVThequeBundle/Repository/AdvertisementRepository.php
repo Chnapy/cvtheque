@@ -12,7 +12,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  * repository methods below.
  */
 
-class AdvertiseRepository extends EntityRepository
+class AdvertisementRepository extends EntityRepository
 {
   public function getSelectList()
   {
@@ -22,7 +22,7 @@ class AdvertiseRepository extends EntityRepository
     return $qb;
   }
 
-  public function getAdvertisements($numberParPage, $page)
+  public function getAdvertisements($numberByPage, $page)
   {
     if ((int) $page < 1) {
         throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
@@ -39,8 +39,8 @@ class AdvertiseRepository extends EntityRepository
                   ->orderBy('a.created', 'DESC')
                   ->getQuery();
 
-    $query->setFirstResult(($page-1) * $numberParPage)
-          ->setMaxResults($numberParPage);
+    $query->setFirstResult(($page-1) * $numberByPage)
+          ->setMaxResults($numberByPage);
 
     return new Paginator($query);
   }

@@ -54,14 +54,6 @@ class AdvertisementType extends AbstractType
         ->add('image', ImageType::class, array(
                 'required'     => false
         ))
-        ->add('created', DateTimeType::class, array(
-                'label' => 'form.created', 
-                'translation_domain' => 'CVThequeBundle'
-        ))
-        ->add('updated', DateTimeType::class, array(
-                'label' => 'form.updated', 
-                'translation_domain' => 'CVThequeBundle'
-        ))
         ->add('published', CheckboxType::class, array(
                 'label' => 'form.published',
                 'translation_domain' => 'CVThequeBundle',
