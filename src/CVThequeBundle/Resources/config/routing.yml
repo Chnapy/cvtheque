@@ -1,3 +1,23 @@
-cv_theque_homepage:
+homepage:
     path:     /
-    defaults: { _controller: CVThequeBundle:Default:index }
+    defaults: { _controller: CVThequeBundle:CVTheque:index }
+
+show_advert:
+    path:   advert/show/{slug}
+    defaults:  { _controller: CVThequeBundle:Advert:show }
+
+add_advert:
+    path:         society/advert/add
+    defaults:     { _controller: CVThequeBundle:Advert:add }
+
+update_advert:
+    path:         /advertisement/update/{id}
+    defaults:     { _controller: CVThequeBundle:Advert:update }
+    requirements:
+        id:       \d+
+
+delete_advert:
+    path:         /advertisement/delete/{id}
+    defaults:     { _controller: CVThequeBundle:Advert:delete }
+    requirements:
+        id:       \d+

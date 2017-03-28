@@ -15,19 +15,19 @@
     <section class="container">
       <header id="header" class="hero-unit">
         <div><a class="sr-only sr-only-focusable" href="#content">Aller au contenu principal</a></div>
-        <h1><a href="">CVThèque</a></h1>
+        <h1><a href="{{ path('homepage') }}">CVThèque</a></h1>
       </header>
 
       <div class="row">
         <nav id="menu" role="navigation" aria-labelledby="h3menu">
           <h3 id="h3menu" role="heading" aria-level="3">Menu</h3>
           <ul class="nav nav-pills nav-stacked">
-            <li><a href="">Accueil</a></li>
+            <li><a href="{{ path('homepage') }}">Accueil</a></li>
             {% if is_granted('ROLE_APPLICANT') %}
               <li><a href="#" >Modifier mon CV</a></li>
             {% endif %}
             {% if is_granted('ROLE_SOCIETY') %}
-              <li><a href="">Ajouter une annonce</a></li>
+              <li><a href="{{ path('add_advert') }}">Ajouter une annonce</a></li>
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
               <h3>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h3>

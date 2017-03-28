@@ -1,0 +1,11 @@
+{% extends "CVThequeBundle::layout.html.twig" %}
+{% block title %} Modifier une annonce - {{ parent() }} {% endblock %}
+{% block body %}
+<h2>Modifier une annonce</h2>
+{% include "CVThequeBundle:Advertisement:form.html.twig" %}
+<p>
+  <a href="{{ path('show_advert', {'slug': advertisement.slug}) }}" class="btn">
+    <i class="icon-chevron-left"></i>Retour à l'article
+  </a>
+</p>
+{% endblock %}

@@ -4,10 +4,10 @@ namespace CVThequeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class CVThequeController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CVThequeBundle:Default:index.html.twig');
+        return $this->render('CVThequeBundle:CVTheque:index.html.twig');
     }
 }

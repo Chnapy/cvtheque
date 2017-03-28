@@ -1,0 +1,50 @@
+{% extends "CVThequeBundle::layout.html.twig" %}
+{% block title %}
+  {{ advertisement.title }} - {{ parent() }}
+{% endblock %}
+{% block body %}
+  <div style="float: left; margin-right: 1em;">
+    {% if advertisement.image is not null %}
+      <img src="{{ advertisement.image.webPath }}" alt="{{ advertisement.image.alt }}" height="60">
+    {% endif %}
+  </div> 
+  <h2>
+    {{ advertisement.title }} 
+  </h2>
+  <i>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</i>
+  <article class="well" style="clear: both;">
+    {{ advertisement.content|markdown }}
+  </article>
+  <div class="well well-small">
+    {% if advertisement.advertSkills|length > 0 %}
+    <h3>Compétences nécessaires :</h3>
+    <ul>
+      {% for advertSkill in advertisement.advertSkills %}
+        <li>{{ advertSkill.name }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  
+  
+  <hr>
+  </div>
+  
+  <p>
+  <a href="" class="btn">
+    <i class="icon-chevron-left"></i>
+    Retour à la liste 
+  </a>
+  {% if is_granted('ROLE_SOCIETY') %}
+  <a href="{{ path('update_advert', {'id': advertisement.id}) }}" class="btn">
+    <i class="icon-edit"></i>
+    Modifier
+  </a>
+  {% endif %}
+  {% if is_granted('ROLE_ADMIN') %}
+  <a href="{{ path('delete_advert', {'id': advertisement.id}) }}" class="btn">
+    <i class="icon-trash"></i>
+    Supprimer 
+  </a>
+  {% endif %}
+  </p>
+{% endblock %}

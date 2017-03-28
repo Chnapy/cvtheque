@@ -1,0 +1,20 @@
+# Form field labels
+form:
+    user: "Utilisateur :"
+    author: "Auteur :"
+    title: "Titre:"
+    content: "Contenu :"
+    categories: "Liste des catégories :"
+    category:
+        name: "Nom de la catégorie :"
+    advertSkills: "Liste des compétences :"
+    skill:
+        add_button: "Ajouter une compétence"
+        del_button: "Supprimer cette compétence"
+    image:
+        file: "Ajouter une image :"
+        alt: "Entrez une courte description de l’image :"
+    created: "Créé le :"
+    updated: "Mise à jour le :"
+    published: "Publier ?"
+    submit: "Enregistrer l'annonce"

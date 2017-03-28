@@ -61,6 +61,11 @@ class Applicant extends User
     private $hobbies;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $advertisements;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -361,36 +366,37 @@ class Applicant extends User
         return $this->hobbies;
     }
     
-    
     /**
-     * {@inheritdoc}
+     * Add advertisement
+     *
+     * @param \CVThequeBundle\Entity\Advertisement $advertisement
+     *
+     * @return Applicant
      */
-    public function getUsername()
+    public function addAdvertisement(\CVThequeBundle\Entity\Advertisement $advertisement)
     {
-        return $this->username;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
+        $this->advertisements[] = $advertisement;
+
+        return $this;
     }
 
-    
     /**
-     * @var integer
+     * Remove advertisement
+     *
+     * @param \CVThequeBundle\Entity\Advertisement $advertisement
      */
-    //protected $id;
+    public function removeAdvertisement(\CVThequeBundle\Entity\Advertisement $advertisement)
+    {
+        $this->advertisements->removeElement($advertisement);
+    }
 
-
+    /**
+     * Get advertisements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdvertisements()
+    {
+        return $this->advertisements;
+    }
 }

@@ -1,0 +1,26 @@
+{# src/CVThequeBundle/Resources/views/layout.html.twig #}
+
+{% extends "::base.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+ 
+  <hr>
+
+  
+  {% for type in ['info', 'success', 'error'] %}
+    {% for message in app.session.flashbag.get(type) %}
+      <div class="alert alert-{{ type }}" role="alert">
+        <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endfor %}
+
+  {% block body %}
+  {% endblock %}
+
+{% endblock %}
