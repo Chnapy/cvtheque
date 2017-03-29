@@ -9,10 +9,7 @@ MG\UserBundle\Entity\Skill:
             generator:
                 strategy: AUTO
     fields:
-        title:
-            type: string
-            length: '64'
-        body:
+        name:
             type: string
             length: 255
     manyToOne:

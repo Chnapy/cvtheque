@@ -11,16 +11,11 @@ class Hobby
      * @var integer
      */
     private $id;
-
+    
     /**
      * @var string
      */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $body;
+    private $name;
 
     /**
      * @var \MG\UserBundle\Entity\Applicant
@@ -38,52 +33,29 @@ class Hobby
         return $this->id;
     }
 
+
     /**
-     * Set title
+     * Set name
      *
-     * @param string $title
+     * @param string $name
      *
      * @return Hobby
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get name
      *
      * @return string
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return Hobby
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
+        return $this->name;
     }
 
     /**

@@ -19,7 +19,7 @@
     <h3>Liste de passe-temps :</h3>
     <ul>
       {% for hobby in user.hobbies %}
-        <li>{{ hobby.body }};</li>
+        <li>{{ hobby.name }};</li>
       {% endfor %}
     </ul>
     {% endif %}

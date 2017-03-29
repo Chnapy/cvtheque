@@ -15,12 +15,7 @@ class Skill
     /**
      * @var string
      */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $body;
+    private $name;
 
     /**
      * @var \MG\UserBundle\Entity\Applicant
@@ -53,37 +48,27 @@ class Skill
     }
 
     /**
-     * Get title
+     * Set name
      *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
+     * @param string $name
      *
      * @return Skill
      */
-    public function setBody($body)
+    public function setName($name)
     {
-        $this->body = $body;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get body
+     * Get name
      *
      * @return string
      */
-    public function getBody()
+    public function getName()
     {
-        return $this->body;
+        return $this->name;
     }
 
     /**

@@ -18,7 +18,7 @@
         data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}">
     {% for hobby in form.hobbies %}
     <li>
-        {{ form_row(hobby.body) }}
+        {{ form_row(hobby.name) }}
     </li>
     {% endfor %}
     

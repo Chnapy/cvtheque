@@ -32,8 +32,7 @@ form:
         alt: "Entrez une courte description de la photo :"
     hobbies: "Liste de passe-temps :"
     hobby:
-        title:
-        body: "Nom du passe-temps :"
+        name: "Nom du passe-temps :"
         add_button: "Ajouter un passe-temps"
         del_button: "Supprimer ce passe-temps"
     educations: "Liste de diplômes"
