@@ -1,0 +1,39 @@
+{% extends 'CVThequeBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1>Liste des catégories</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Nom de la catégorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_category_show', { 'id': category.id }) }}">Afficher</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_category_edit', { 'id': category.id }) }}">Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_category_new') }}">Créer une nouvelle catégorie</a>
+        </li>
+    </ul>
+{% endblock %}

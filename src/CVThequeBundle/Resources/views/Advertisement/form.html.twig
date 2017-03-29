@@ -8,7 +8,7 @@
     {{ form_row(form.content) }}
     {{ form_row(form.category) }}
     
-    <h3>{{ 'form.advertSkills'|trans({}, 'CVThequeBundle') }}</h3>
+    <h3>{{ 'form.skills'|trans({}, 'CVThequeBundle') }}</h3>
     <ul class="advertSkills"
         data-prototype="{{ form_widget(form.advertSkills.vars.prototype)|e('html_attr') }}">
     {% for skill in form.advertSkills %}

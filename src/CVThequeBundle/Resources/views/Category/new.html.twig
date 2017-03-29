@@ -1,0 +1,16 @@
+{% extends 'CVThequeBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1>Création d'une catégorie</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Créer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_category_index') }}">Retour à la liste des catégories</a>
+        </li>
+    </ul>
+{% endblock %}
