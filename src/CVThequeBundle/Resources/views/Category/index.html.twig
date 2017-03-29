@@ -17,14 +17,12 @@
                 <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
                 <td>{{ category.name }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_category_show', { 'id': category.id }) }}">Afficher</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_category_edit', { 'id': category.id }) }}">Modifier</a>
-                        </li>
-                    </ul>
+                    <p>
+                        <a href="{{ path('admin_category_show', { 'id': category.id }) }}">Afficher</a>
+                    </p>
+                    <p>
+                        <a href="{{ path('admin_category_edit', { 'id': category.id }) }}">Modifier</a>
+                    </p>
                 </td>
             </tr>
         {% endfor %}
