@@ -18,7 +18,11 @@ class ProfileController extends BaseController
     public function showAction() 
     {
         $user = $this->getUser();
-        if($this->get('mg_user_bundle.service.role')->isGranted('ROLE_APPLICANT', $user)) {
+        if($this->get('mg_user_bundle.service.role')->isGranted('ROLE_ADMIN', $user)) {
+            return $this->render('MGUserBundle:Profile:admin_show.html.twig', array(
+                    'user' => $user,
+            ));
+        } else if($this->get('mg_user_bundle.service.role')->isGranted('ROLE_APPLICANT', $user)) {
             return $this->render('MGUserBundle:Profile:applicant_show.html.twig', array(
                     'user' => $user,
             ));

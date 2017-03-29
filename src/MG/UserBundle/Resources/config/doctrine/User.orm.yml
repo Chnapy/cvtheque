@@ -5,6 +5,7 @@ MG\UserBundle\Entity\User:
         name: discr
         type: string
     discriminatorMap:
+        admin: Admin
         applicant: Applicant
         society: Society
     table: null

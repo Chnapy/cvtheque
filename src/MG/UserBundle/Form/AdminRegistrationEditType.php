@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Intl\Intl;
 
-class SocietyRegistrationEditType extends SocietyRegistrationType
+class AdminRegistrationEditType extends AdminRegistrationType
 {
     /**
      * {@inheritdoc}
@@ -21,9 +21,7 @@ class SocietyRegistrationEditType extends SocietyRegistrationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->remove('societyName')
-        ->remove('email')
-        ->remove('plainPassword')
+        $builder->remove('username')
         ->remove('image');
     }
     
@@ -38,7 +36,7 @@ class SocietyRegistrationEditType extends SocietyRegistrationType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MG\UserBundle\Entity\Society'
+            'data_class' => 'MG\UserBundle\Entity\Admin'
         ));
     }
 
@@ -47,7 +45,7 @@ class SocietyRegistrationEditType extends SocietyRegistrationType
      */
     public function getBlockPrefix()
     {
-        return 'mg_userbundle_registration_edit_society';
+        return 'mg_userbundle_registration_edit_admin';
     }
     
     public function getName()

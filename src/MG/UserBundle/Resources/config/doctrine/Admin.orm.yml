@@ -1,0 +1,12 @@
+MG\UserBundle\Entity\Admin:
+    type: entity
+    table: null
+    repositoryClass: MG\UserBundle\Repository\AdminRepository
+    fields:
+        firstname:
+            type: string
+            length: '32'
+        lastname:
+            type: string
+            length: '32'
+    lifecycleCallbacks: {  }

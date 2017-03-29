@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class SocietyRegistrationType extends AbstractType
+class AdminRegistrationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -19,22 +19,18 @@ class SocietyRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {    
         $builder
-        ->remove('username')
-        ->add('societyName', TextType::class, array(
-                'label' => 'form.society.name', 
+        ->add('firstname', TextType::class, array(
+                'label' => 'form.firstname', 
+                'translation_domain' => 'MGUserBundle'
+        ))
+        ->add('lastname', TextType::class, array(
+                'label' => 'form.lastname', 
                 'translation_domain' => 'MGUserBundle'
         ))
         ->add('address', AddressType::class)
         ->add('phoneNumber', TextType::class, array(
                 'label' => 'form.phoneNumber', 
                 'translation_domain' => 'MGUserBundle'
-        ))
-        ->add('description', TextareaType::class, array(
-                'label' => 'form.society.description', 
-                'translation_domain' => 'MGUserBundle'
-        ))
-        ->add('image', PhotoType::class, array(
-                'required'     => false
         ));
     }
     
@@ -49,7 +45,7 @@ class SocietyRegistrationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MG\UserBundle\Entity\Society'
+            'data_class' => 'MG\UserBundle\Entity\Admin'
         ));
     }
 
@@ -58,7 +54,7 @@ class SocietyRegistrationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'mg_userbundle_registration_society';
+        return 'mg_userbundle_registration_admin';
     }
     
     public function getName()

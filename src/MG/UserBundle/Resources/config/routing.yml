@@ -6,6 +6,10 @@ mg_society_registration:
     path:  /register/society
     defaults: { _controller: MGUserBundle:RegistrationSociety:register }
     
+mg_admin_registration:
+    path:  /admin/register
+    defaults: { _controller: MGUserBundle:RegistrationAdmin:register }
+    
 fos_user_security:
     resource: "@MGUserBundle/Resources/config/routing/security.xml"
     prefix: /

@@ -136,5 +136,14 @@ pugx_multi_user:
                 template: MGUserBundle:Registration:society.form.html.twig
             profile:
                 form:
-                    type: MG\UserBundle\Form\society\RegistrationEditType
-
+                    type: MG\UserBundle\Form\SocietyRegistrationEditType
+        user_three:
+            entity:
+                class: MG\UserBundle\Entity\Admin
+            registration:
+                form:
+                    type: MG\UserBundle\Form\AdminRegistrationType
+                template: MGUserBundle:Registration:admin.form.html.twig
+            profile:
+                form:
+                    type: MG\UserBundle\Form\AdminRegistrationEditType

@@ -6,6 +6,7 @@ security:
     encoders:
         MG\UserBundle\Entity\Applicant: sha512
         MG\UserBundle\Entity\Society: sha512
+        MG\UserBundle\Entity\Admin: sha512
 
     role_hierarchy:
         ROLE_AUTHOR: ROLE_USER
