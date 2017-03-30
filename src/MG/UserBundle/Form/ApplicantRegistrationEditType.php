@@ -33,7 +33,7 @@ class ApplicantRegistrationEditType extends ApplicationRegistrationType
     
     public function getParent()
     {
-        return 'MG\UserBundle\Form\RegistrationType';
+        return 'MG\UserBundle\Form\ApplicantRegistrationType';
     }
     
     /**

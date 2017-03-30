@@ -4,11 +4,3 @@ parameters:
 #    parameter_name: value
 
 services:
-    app.form.registration:
-        class: MG\UserBundle\Form\RegistrationType
-        tags:
-            - { name: form.type, alias: mg_userbundle_registration }
-    app.form.registration.edit:
-        class: MG\UserBundle\Form\RegistrationEditType
-        tags:
-            - { name: form.type, alias: mg_userbundle_registration_edit }
