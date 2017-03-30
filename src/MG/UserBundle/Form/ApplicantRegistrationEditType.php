@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Intl\Intl;
 
-class ApplicantRegistrationEditType extends ApplicationRegistrationType
+class ApplicantRegistrationEditType extends ApplicantRegistrationType
 {
     /**
      * {@inheritdoc}

@@ -1,5 +1,4 @@
 <?php
-
 namespace MG\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -67,7 +66,7 @@ class ProfileController extends BaseController
             $em->remove($user);
             $em->flush();
             $this->get('session')->getFlashBag()->add('info', 'Votre profil a été supprimé');
-            return $this->redirect($this->generateUrl('mgblog_home'));
+            return $this->redirect($this->generateUrl('homepage'));
         }
         return $this->render('MGUserBundle:Profile:delete.html.twig', array(
                 'user' => $user,
