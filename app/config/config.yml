@@ -40,7 +40,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
-        - 'bootstrap_3_layout.html.twig'
+        - 'chnapflat_form_layout.html.twig'
 
 # Activation de l'extension Twig intl
 services:

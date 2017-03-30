@@ -1,4 +1,15 @@
-{{ form_start(form, {'method': 'post', 'action': path('mg_society_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+{% extends '::base.html.twig' %}
+
+{% block bandeau %}
+	<div class="row">
+		<h1>Inscription - Entreprise</h1>
+		<div class="lead">Remplissez les différents champs demandés.</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+
+	{{ form_start(form, {'method': 'post', 'action': path('mg_society_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     {{ form_row(form.societyName) }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword) }}
@@ -9,10 +20,12 @@
     {{ form_row(form.phoneNumber) }}
     {{ form_row(form.description) }}
     {{ form_row(form.image) }}
-    <input type="hidden" name="_csrf_token"
-        value="{{ csrf_token('authenticate') }}"
-    >
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
-    </div>
-{{ form_end(form) }}
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+	<div class="form-group">
+		<button type="submit" class="but d-block primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+	</div>
+	{{ form_end(form) }}
+
+{% endblock %}

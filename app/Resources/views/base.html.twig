@@ -14,12 +14,14 @@
 	</head>
 
 	<body>
-		<section class="main-content {% if not is_granted('IS_AUTHENTICATED_FULLY') %} no-header {% endif %}">
+		<section class="main-content {% if app.request.get('_route') == 'homepage' %} no-header {% endif %}">
 
 			<header id="header" class="header">
 				<nav class="header-content container">
 					<a class="logo nav-item" href="{{ path('homepage') }}">CVthèque</a>
-					<a class="nav-item">Liste des annonces</a>
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<a class="nav-item">Liste des annonces</a>
+					{% endif %}
 
 					{% if is_granted('ROLE_ADMIN') %}
 						<a class="nav-item" href="#" >Configuration de CVTheque (admin)</a>
@@ -38,13 +40,15 @@
 					{% endif %}  
 
 					<span class="nav-right">
-						<span class="compte nav-item">
-							<a class="compte-pseudo">{le_username}</a>
-							<span class="deco mini-but">
-								<span class="sr-only sr-only-focusable">Se déconnecter</span>
-								<span class='glyphicon glyphicon-off'></span>
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<span class="compte nav-item">
+								<a class="compte-pseudo">{le_username}</a>
+								<span class="deco mini-but">
+									<span class="sr-only sr-only-focusable">Se déconnecter</span>
+									<span class='glyphicon glyphicon-off'></span>
+								</span>
 							</span>
-						</span>
+						{% endif %}
 					</span>
 				</nav>
 			</header>
