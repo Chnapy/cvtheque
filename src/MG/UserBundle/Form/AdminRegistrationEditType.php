@@ -27,7 +27,7 @@ class AdminRegistrationEditType extends AdminRegistrationType
     
     public function getParent()
     {
-        return 'MG\UserBundle\Form\RegistrationType';
+        return 'MG\UserBundle\Form\AdminRegistrationType';
     }
     
     /**

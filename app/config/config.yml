@@ -147,3 +147,4 @@ pugx_multi_user:
             profile:
                 form:
                     type: MG\UserBundle\Form\AdminRegistrationEditType
+                template: MGUserBundle:Profile:admin.edit.form.html.twig

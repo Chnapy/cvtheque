@@ -29,7 +29,7 @@ class SocietyRegistrationEditType extends SocietyRegistrationType
     
     public function getParent()
     {
-        return 'MG\UserBundle\Form\RegistrationType';
+        return 'MG\UserBundle\Form\SocietyRegistrationType';
     }
     
     /**
