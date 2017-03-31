@@ -1,7 +1,9 @@
 <?php
 namespace MG\UserBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -10,7 +12,7 @@ use MG\UserBundle\Entity\Society;
 use MG\UserBundle\Entity\Admin;
 use MG\UserBundle\Entity\Address;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadUserData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface 
 {
     /**
      * @var ContainerInterface
@@ -77,5 +79,13 @@ $society->setAddress($address);
 $society->setDescription("Fort de plus de 180 000 collaborateurs et présent dans plus de 40 pays, Capgemini est l'un des leaders mondiaux du conseil, des services informatiques et de l'infogérance. Le Groupe a réalisé en 2014 un chiffre d'affaires de 10,573 milliards d'euros. Avec ses clients, Capgemini conçoit et met en oeuvre les solutions business, technologiques et digitales qui correspondent à leurs besoins et leur permettent d'encourager l'innovation tout en gagnant en compétitivité.");
 $society->setEnabled(true);
 $userManager->updateUser($society, true);
+$this->addReference('admin', $admin);
+$this->addReference('applicant', $applicant);
+$this->addReference('society', $society);
+    }
+    
+    public function getOrder()
+    {
+        return 1; // number in which order to load fixtures
     }
 }
