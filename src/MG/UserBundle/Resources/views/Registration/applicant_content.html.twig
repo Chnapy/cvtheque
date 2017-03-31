@@ -26,7 +26,8 @@
 	{{ form_row(form.description) }}
 
 	<label for="ip_hobbys">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
-	<div class="hobbys" {#data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}"#}>
+	<div class="hobbys" {#data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}"#}
+		 data-hobbys='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
 
 		<div class="hobbys-content tag-content">
 			<div class="field inline hobbys-add">
@@ -34,13 +35,6 @@
 				<input type="text" id="ip_hobbys" minLength="2" maxLength="255" />
 				<span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
 			</div>
-
-			{% for hobby in form.hobbies %}
-				<span class="hobbys-item tag deletable onhover">
-					{{ form_row(hobby.name) }}
-					<span class="delete mini-but glyphicon glyphicon-remove"></span>
-				</span>
-			{% endfor %}
 		</div>
 
 	</div>
