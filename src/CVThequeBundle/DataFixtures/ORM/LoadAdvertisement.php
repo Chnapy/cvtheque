@@ -21,6 +21,7 @@ class LoadAdvertisement extends AbstractFixture implements FixtureInterface, Ord
 		$advert = new Advertisement(); //setPublished=true
 
 		$advert->setSociety($this->getReference("society"));
+		$advert->setCategory($category);
 
 		$advert->setCreatedValue();
 		$advert->setUpdatedValue();
