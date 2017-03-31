@@ -36,17 +36,17 @@
 					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 						{#<h3>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h3>#}
 						<a class="nav-item" href="{{ path('mg_user_show') }}" >{{ 'profile.show.link'|trans({}, 'MGUserBundle') }}</a>
-						<a class="nav-item" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+						{#<a class="nav-item" href="{{ path('fos_user_security_logout') }}"></a>#}
 					{% endif %}  
 
 					<span class="nav-right">
 						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 							<span class="compte nav-item">
 								<a class="compte-pseudo">{le_username}</a>
-								<span class="deco mini-but">
-									<span class="sr-only sr-only-focusable">Se déconnecter</span>
+								<a class="deco mini-but" href="{{ path('fos_user_security_logout') }}">
+									<span class="sr-only sr-only-focusable">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
 									<span class='glyphicon glyphicon-off'></span>
-								</span>
+								</a>
 							</span>
 						{% endif %}
 					</span>
