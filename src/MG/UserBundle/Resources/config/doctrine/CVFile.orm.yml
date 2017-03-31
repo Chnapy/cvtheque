@@ -1,6 +1,6 @@
-MG\UserBundle\Entity\Image:
+MG\UserBundle\Entity\CVFile:
     type: entity
-    table: null
+    table: cv_file
     repositoryClass: MG\UserBundle\Repository\ImageRepository
     id:
         id:
@@ -10,10 +10,6 @@ MG\UserBundle\Entity\Image:
                 strategy: AUTO
     fields:
         extension:
-            type: string
-            length: 255
-            nullable: true
-        alt:
             type: string
             length: 255
             nullable: true

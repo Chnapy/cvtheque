@@ -1,0 +1,10 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+ {{ form_start(form, { 'action': path('mg_applicant_profile_cv_upload'), 'attr': { 'class': 'mg_applicant_profile_cv_upload' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'form.cv.submit'|trans({}, 'MGUserBundle') }}" />
+    </div>
+{{ form_end(form) }}
+{% endblock fos_user_content %}

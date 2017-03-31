@@ -241,7 +241,7 @@ abstract class User extends BaseUser
      *
      * @param \MG\UserBundle\Entity\Image $image
      *
-     * @return User
+     * @return Image
      */
     public function setImage(\MG\UserBundle\Entity\Image $image = null)
     {

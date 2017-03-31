@@ -47,3 +47,9 @@ form:
     skill:
         add_button: "Ajouter une compétence"
         del_button: "Supprimer cette compétence"
+    cv:
+        file: Fichier de votre CV
+        submit: Envoyer le CV
+    logbook:
+        file: Fichier de votre journal
+        submit: Envoyer le journal

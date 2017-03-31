@@ -39,7 +39,17 @@ class Applicant extends User
      * @Assert\Length(min=8, max=128)
      */
     private $titleProfile;
-
+    
+    /**
+     * @var CVFile
+     */
+     private $cvFile;
+    
+    /**
+     * @var logBookFile
+     */
+     private $logBookFile;
+          
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -71,6 +81,8 @@ class Applicant extends User
     public function __construct()
     {
         parent::__construct();
+        $this->cvFile = new CVFile;
+        $this->logBookFile = new LogBookFile();
         $this->educations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->workExperiences = new \Doctrine\Common\Collections\ArrayCollection();
         $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
@@ -226,6 +238,56 @@ class Applicant extends User
         return $this->titleProfile;
     }
 
+    
+    /**
+     * Set cvFile
+     *
+     * @param \MG\UserBundle\Entity\CVFile $cvFile
+     *
+     * @return CVFile
+     */
+    public function setCvFile(\MG\UserBundle\Entity\CVFile $cvFile = null)
+    {
+        $this->cvFile = $cvFile;
+
+        return $this;
+    }
+
+    /**
+     * Get cvFile
+     *
+     * @return \MG\UserBundle\Entity\CVFile
+     */
+    public function getCvFile()
+    {
+        return $this->cvFile;
+    }
+    
+    
+    /**
+     * Set logBookFile
+     *
+     * @param \MG\UserBundle\Entity\LogBookFile $logBookFile
+     *
+     * @return LogBookFile
+     */
+    public function setLogBookFile(\MG\UserBundle\Entity\LogBookFile $logBookFile = null)
+    {
+        $this->logBookFile = $logBookFile;
+
+        return $this;
+    }
+
+    /**
+     * Get logBookFile
+     *
+     * @return \MG\UserBundle\Entity\LogBookFile
+     */
+    public function getLogBookFile()
+    {
+        return $this->logBookFile;
+    }
+    
     /**
      * Add education
      *

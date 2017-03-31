@@ -46,6 +46,14 @@ mg_user_profile_picture_edit:
     path:     /profile/picture/edit
     defaults: { _controller: MGUserBundle:Profile:pictureEdit }
     
+mg_applicant_profile_cv_upload:
+    path:     /applicant/cv/upload
+    defaults: { _controller: MGUserBundle:Profile:cvUpload }
+
+mg_applicant_profile_log_book_upload:
+    path:     /applicant/logbook/upload
+    defaults: { _controller: MGUserBundle:Profile:logBookUpload }
+
 mg_user_admin_list:
     path:     /admin/user
     defaults: { _controller: "MGUserBundle:User:list" }

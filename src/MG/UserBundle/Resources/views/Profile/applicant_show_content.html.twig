@@ -1,4 +1,12 @@
 <div class="fos_user_user_show">
+  <ul>
+    {% if user.cvFile is not null %}
+      <li><a href="{{ user.cvFile.webPath }}" >Voir le cv (PDF)</a></li>
+    {% endif %}
+    {% if user.logBookFile is not null %}
+      <li><a href="{{ user.logBookFile.webPath }}" >Voir le journal (PDF)</a></li>
+    {% endif %}
+  </ul>
   <div style="float: left; margin-right: 1em;">
     {% if user.image is not null %}
       <img src="{{ user.image.webPath }}" alt="{{ user.image.alt }}" height="60">
@@ -29,6 +37,14 @@
   <li><a href="{{ path('fos_user_profile_edit') }}" class="btn">
     <i class="icon-edit"></i>
     Modifier le profil
+  </a></li>
+  <li><a href="{{ path('mg_applicant_profile_cv_upload') }}" class="btn">
+    <i class="icon-edit"></i>
+    Ajouter un CV (PDF)
+  </a></li>
+  <li><a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="btn">
+    <i class="icon-edit"></i>
+    Ajouter un journal (PDF)
   </a></li>
   <li><a href="{{ path('mg_user_profile_picture_edit') }}" class="btn">
     <i class="icon-edit"></i>

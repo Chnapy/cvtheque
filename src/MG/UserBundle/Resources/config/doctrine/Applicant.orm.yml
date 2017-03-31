@@ -17,6 +17,13 @@ MG\UserBundle\Entity\Applicant:
         titleProfile:
             type: string
             length: '128'
+    oneToOne:
+        cvFile:
+            targetEntity: CVFile
+            cascade: ["persist", "merge", "remove"]
+        logBookFile:
+            targetEntity: LogBookFile
+            cascade: ["persist", "merge", "remove"]
     oneToMany:
         educations:
             targetEntity: Education

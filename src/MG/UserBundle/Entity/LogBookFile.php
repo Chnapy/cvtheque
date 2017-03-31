@@ -1,4 +1,5 @@
 <?php
+// src/MG/BlogBundle/Entity/Image.php
 
 namespace MG\UserBundle\Entity;
 
@@ -9,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * 
  */
-class Image
+class LogBookFile
 {
     
   /**
@@ -21,12 +22,7 @@ class Image
    * 
    */
   private $extension;
-
-  /**
-   * 
-   */
-  private $alt;
-
+  
   /**
    * @Assert\File(maxSize="10M")
    */
@@ -45,9 +41,6 @@ class Image
     
     $this->extension = $this->file->guessExtension();
     
-    if(null === $this->alt) {
-        $this->alt = $this->file->getClientOriginalName();
-    }
   }
 
   /**
@@ -94,7 +87,7 @@ class Image
 
   public function getWebDir()
   {
-    return 'uploads/img';
+    return 'uploads/logbook';
   }
 
   public function getPhpDir()
@@ -133,23 +126,6 @@ class Image
     return $this->extension;
   }
 
-  /**
-   * @param string $alt
-   * @return Image
-   */
-  public function setAlt($alt)
-  {
-    $this->alt = $alt;
-    return $this;
-  }
-
-  /**
-   * @return string
-   */
-  public function getAlt()
-  {
-    return $this->alt;
-  }
 
   public function setFile($file)
   {
@@ -161,9 +137,8 @@ class Image
       $this->filename = $this->extension;
 
       
-      // Réinitialisation des valeurs des attributs extension et alt
+      // Réinitialisation de la valeur de l'attribut extension
       $this->extension = null;
-      $this->alt = null;
     }
     return $this;
   }

@@ -10,8 +10,10 @@ use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
 use MG\UserBundle\Entity\Image;
 use MG\UserBundle\Form\PhotoType;
-
-
+use MG\UserBundle\Entity\CVFile;
+use MG\UserBundle\Form\CVFileType;
+use MG\UserBundle\Entity\LogBookFile;
+use MG\UserBundle\Form\LogBookFileType;
 class ProfileController extends BaseController
 {
     public function showAction() 
@@ -97,5 +99,52 @@ class ProfileController extends BaseController
                 'form' => $form->createView()
         ));
     }
-
+    
+    public function logBookUploadAction(Request $request, Form $form = null)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        
+        if (null === $form) {
+            $form = $this->createForm(LogBookFileType::class, $user->getLogBookFile());
+        }
+        
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $user->setLogBookFile($form->getData());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+        }
+        return $this->render('MGUserBundle:Profile:log_book_upload.html.twig', array(
+                'user' => $user,
+                'form' => $form->createView()
+        ));
+    }
+    
+    public function cvUploadAction(Request $request, Form $form = null)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        
+        if (null === $form) {
+            $form = $this->createForm(CVFileType::class, $user->getCvFile());
+        }
+        
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $user->setCvFile($form->getData());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+        }
+        return $this->render('MGUserBundle:Profile:cv_upload.html.twig', array(
+                'user' => $user,
+                'form' => $form->createView()
+        ));
+    }
 }
