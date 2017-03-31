@@ -37,12 +37,13 @@ function onLoad() {
 		e.target.value = '';
 	});
 
-	var hobbys = $('.hobbys').data('hobbys');
-
-	hobbys.forEach(h => newHobby(h));
-
 	setHobbyDeletable('.hobbys-item');
 
+	var hobbys = $('.hobbys').data('hobbys');
+
+	if (hobbys) {
+		hobbys.forEach(h => newHobby(h));
+	}
 }
 
 function newHobby(value) {
