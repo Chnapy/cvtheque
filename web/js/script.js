@@ -12,7 +12,7 @@ function onLoad() {
 		$(but).addClass('load disabled');
 	}
 
-	$('.but:not([type="submit"])').click(e => butClicked(e.target));
+	$('.but:not([type="submit"]):not(.disabled)').click(e => butClicked(e.target));
 
 	$('form').submit(e => {
 		let form = e.target;
