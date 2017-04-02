@@ -5,3 +5,15 @@
 .hobbys-content {
 	min-height: 34px;
 }
+
+.colonne .but-group .but:first-child:last-child {
+	width: 100%;
+}
+
+.page-content {
+	h1, h2, h3 {
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}

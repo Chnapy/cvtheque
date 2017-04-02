@@ -26,7 +26,7 @@ class LoadAdvertisement extends AbstractFixture implements FixtureInterface, Ord
 		$advert->setCreatedValue();
 		$advert->setUpdatedValue();
 
-		$advert->setTitle("Analyste développeur Java");
+		$advert->setTitle("analyste java");
 		$advert->setAuthor("Entreprise SOGET SA");
 
 		$advert->setContent("

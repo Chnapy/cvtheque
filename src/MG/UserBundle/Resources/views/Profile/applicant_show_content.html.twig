@@ -1,61 +1,127 @@
-<div class="fos_user_user_show">
-  <ul>
-    {% if user.cvFile is not null %}
-      <li><a href="{{ user.cvFile.webPath }}" >Voir le cv (PDF)</a></li>
-    {% endif %}
-    {% if user.logBookFile is not null %}
-      <li><a href="{{ user.logBookFile.webPath }}" >Voir le journal (PDF)</a></li>
-    {% endif %}
-  </ul>
-  <div style="float: left; margin-right: 1em;">
-    {% if user.image is not null %}
-      <img src="{{ user.image.webPath }}" alt="{{ user.image.alt }}" height="60">
-    {% endif %}
-  </div>
-  <h1>{{ 'profile.show.username'|trans({'%username%': user.username }, 'MGUserBundle') }}</h1>
-  <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
-  <p>{{ ('profile.show.birthday.'~user.gender)|trans({'%birthday%': user.birthday|date('d/m/Y'), '%age%': user.age}, 'MGUserBundle') }}</p>
-  <h2>
-    {{ user.titleProfile }}
-  </h2>
-  
-  <article class="well" style="clear: both;">
-    {{ user.description|markdown }}
-  </article>
-  <div class="well well-small">
-    {% if user.hobbies.count > 0 %}
-    <h3>Liste de passe-temps :</h3>
-    <ul>
-      {% for hobby in user.hobbies %}
-        <li>{{ hobby.name }};</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-  </div>
-  {% if user.id == app.user.id %}
-  <ul>
-  <li><a href="{{ path('fos_user_profile_edit') }}" class="btn">
-    <i class="icon-edit"></i>
-    Modifier le profil
-  </a></li>
-  <li><a href="{{ path('mg_applicant_profile_cv_upload') }}" class="btn">
-    <i class="icon-edit"></i>
-    Ajouter un CV (PDF)
-  </a></li>
-  <li><a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="btn">
-    <i class="icon-edit"></i>
-    Ajouter un journal (PDF)
-  </a></li>
-  <li><a href="{{ path('mg_user_profile_picture_edit') }}" class="btn">
-    <i class="icon-edit"></i>
-    Modifier la photo
-  </a></li>
-  <li><a href="{{ path('mg_user_profile_delete') }}" class="btn">
-    <i class="icon-trash"></i>
-    Supprimer 
-  </a></li>
-  </ul>
-  {% endif %}
-  <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>
-  <p>{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
-</div>
+{% extends '::base.html.twig' %}
+
+{% set isuser = user.id == app.user.id %}
+{#{% set isuser = false %}#}
+
+{% block bandeau %}
+	<div class="row">
+		<h1>{{ 'profile.show.username'|trans({'%username%': user.username }, 'MGUserBundle') }}</h1>
+		<div class="lead">Un accès à toutes vos données.</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 colonne">
+				<div class="row bloc">
+					{% if user.image is not null %}
+						<a href="{{ path('mg_user_profile_picture_edit') }}" class="avatar">
+							<img src="{{ user.image.webPath }}" alt="{{ user.image.alt }}">
+							{% if isuser %}
+								<div class='avatar-front'>
+									<span class="sr-only sr-only-focusable">Ajouter ou modifier l'avatar</span>
+									<span class="avatar-upload glyphicon glyphicon-upload"></span>
+								</div>
+							{% endif %}
+						</a>
+					{% endif %}
+				</div>
+				<hr/>
+				<div class="row but-group">
+					{% if user.cvFile is not null %}
+						<a href="{{ user.cvFile.webPath }}" class="but col-xs-10" >
+							CV (pdf)
+						</a>
+						{% if isuser %}
+							<a href="{{ path('mg_applicant_profile_cv_upload') }}" class="but col-xs-2">
+								<span class="sr-only sr-only-focusable">Ajouter un CV (pdf)</span>
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+						{% endif %}
+					{% else %}
+						<a class="but col-xs-10 disabled" >
+							Aucun CV enregistré
+						</a>
+						{% if isuser %}
+							<a href="{{ path('mg_applicant_profile_cv_upload') }}" class="but col-xs-2">
+								<span class="sr-only sr-only-focusable">Ajouter un CV (pdf)</span>
+								<span class="glyphicon glyphicon-upload"></span>
+							</a>
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="row but-group">
+					{% if user.logBookFile is not null %}
+						<a href="{{ user.logBookFile.webPath }}" class="but col-xs-10" >
+							Journal (pdf)
+						</a>
+						{% if isuser %}
+							<a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
+								<span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+						{% endif %}
+					{% else %}
+						<a class="but col-xs-10 disabled" >
+							Aucun journal enregistré
+						</a>
+						{% if isuser %}
+							<a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
+								<span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
+								<span class="glyphicon glyphicon-upload"></span>
+							</a>
+						{% endif %}
+					{% endif %}
+				</div>
+
+				{% if isuser %}
+					<hr/>
+					<div class="row">
+						<a href='{{ path('fos_user_profile_edit') }}' class="but d-block primary" >
+							Modifier le profil
+						</a>
+					</div>
+					<hr/>
+					<div class="row">
+						<a href='{{ path('mg_user_profile_delete') }}' class="but d-block error" >
+							Supprimer le profil
+						</a>
+					</div>
+				{% endif %}
+			</div>
+
+			<div class="col-md-9">
+				<h3>Informations générales</h3>
+				<div class='bloc'>
+					<p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
+					<p>{{ ('profile.show.birthday.'~user.gender)|trans({'%birthday%': user.birthday|date('d/m/Y'), '%age%': user.age}, 'MGUserBundle') }}</p>
+				</div>
+
+				<h3>Description</h3>
+				<div class="bloc">
+					{{ user.description|markdown }}
+				</div>
+
+				<h3>Liste de passe-temps :</h3>
+				<div class="bloc">
+					{% if user.hobbies.count > 0 %}
+						<div class='tag-content'>
+							{% for hobby in user.hobbies %}
+								<span class='tag'>{{ hobby.name }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						Aucun passe-temps indiqué. Quelle triste vie...
+					{% endif %}
+				</div>
+
+				<hr/>
+
+				<p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}<br/>
+					{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

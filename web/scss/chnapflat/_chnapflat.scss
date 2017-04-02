@@ -60,7 +60,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
 	}
 }
 
-.dark .mini-but, #alertList .mini-but {
+.dark .mini-but, .nav-item.active .mini-but, #alertList .mini-but {
 
 	&:hover {
 		background: rgba(255,255,255,0.05);
@@ -412,7 +412,7 @@ $confirmpad: 3px;
 	}
 
 	&.but:not(.disabled):hover {
-		background: darken($bg_color, 3%);
+		background: darken($bg_color, 1%);
 		text-shadow: 0px 0px 1px rgba($color_main,0.1);
 	}
 
@@ -450,7 +450,7 @@ $confirmpad: 3px;
 		}
 
 		&.but:not(.disabled):hover {
-			background: lighten($color_primary, 5%);
+			background: lighten($color_primary, 8%);
 		}
 
 		&.myalert {
@@ -467,14 +467,14 @@ $confirmpad: 3px;
 	&.but-error, &.error {
 		background: $color_delete;
 		border-color: darken($color_delete, 15%);
-		color: white;
+		color: $color_dark_main;
 
 		&.but {
 			box-shadow: 0 2px 0 darken($color_delete, 20%);
 		}
 
 		&.but:not(.disabled):hover {
-			background: lighten($color_delete, 5%);
+			background: lighten($color_delete, 3%);
 			text-shadow: 0px 0px 1px rgba(white,0.1);
 		}
 
@@ -530,8 +530,54 @@ a.but {
 	color: inherit;
 }
 
+.but-group {
+	&>.but:not(:first-child) {
+		margin-left: 0;
+		border-left: none;
+	}
+}
+
+.avatar {
+	position: relative;
+    display: inline-block;
+    font-size: 2em;
+
+	&>img {
+		display: inline-block;
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	&>.avatar-front {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		color: $color_dark_main;
+		background: rgba($bg_dark_color, 0.5);
+		opacity: 0;
+		transition: $transition_dur;
+
+		&>.avatar-upload {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	&:hover>.avatar-front {
+		opacity: 1;
+	}
+}
+
 .table tr td:first-child label, .table tr td:last-child .field {
 	display: block;
+}
+
+.colonne .row {
+	margin-bottom: 5px;
 }
 
 $header_height: 50px;
@@ -550,6 +596,7 @@ $header_min: 2px;
 	background: $color_primary;
 	min-height: $header_height;
 	transition: $transition_dur;
+	border-bottom: 2px solid $bg_dark_color;
 
 	.header-content {
 		min-height: $header_height;
@@ -655,6 +702,7 @@ $header_min: 2px;
 
 .main-content.no-header {
 	.header {
+		border-bottom-width: 0;
 		transform: translateY(calc(-100% + #{$header_min}));
 		overflow: hidden;
 

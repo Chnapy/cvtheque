@@ -7,14 +7,13 @@
 		<meta name="author" content="Nitram Treblig">
 		<title>{% block title %}CVthèque {% endblock %}</title>
 		{% block stylesheets %}
-			{#			<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">#}
 			<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 		{% endblock %}
 	</head>
 
 	<body>
-		<section class="main-content {% if app.request.get('_route') == 'homepage' %} no-header {% endif %}">
+		<section class="main-content {% if app.request.get('_route') == 'homepage' %} no-header{% endif %}">
 
 			<header id="header" class="header">
 				<nav class="header-content container">
@@ -33,16 +32,16 @@
 							<a class="nav-item" href="{{ path('add_advert') }}">Ajouter une annonce</a>
 						{% endif %}
 					{% endif %}
-					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-						{#<h3>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h3>#}
-						<a class="nav-item" href="{{ path('mg_user_show') }}" >{{ 'profile.show.link'|trans({}, 'MGUserBundle') }}</a>
-						{#<a class="nav-item" href="{{ path('fos_user_security_logout') }}"></a>#}
-					{% endif %}  
+					{#					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
+					{#<h3>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h3>#}
+					{#<a class="nav-item" href="{{ path('mg_user_show') }}" >{{ 'profile.show.link'|trans({}, 'MGUserBundle') }}</a>#}
+					{#<a class="nav-item" href="{{ path('fos_user_security_logout') }}"></a>#}
+					{#					{% endif %}#}
 
 					<span class="nav-right">
-						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<span class="compte nav-item">
-								<a class="compte-pseudo">{le_username}</a>
+						{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+							<span class="compte nav-item{% if app.request.get('_route') == 'mg_user_show' %} active{% endif %}">
+								<a class="compte-pseudo" href="{{ path('mg_user_show') }}">{{ app.user.username }}</a>
 								<a class="deco mini-but" href="{{ path('fos_user_security_logout') }}">
 									<span class="sr-only sr-only-focusable">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
 									<span class='glyphicon glyphicon-off'></span>

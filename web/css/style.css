@@ -82,7 +82,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
     top: 50%;
     transform: translateY(-50%); }
 
-.dark .mini-but:hover, #alertList .mini-but:hover {
+.dark .mini-but:hover, .nav-item.active .mini-but:hover, #alertList .mini-but:hover {
   background: rgba(255, 255, 255, 0.05); }
 
 .but, .mini-but, .nav-item, .confirm {
@@ -343,7 +343,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
   .but.but-fh, .myalert.but-fh {
     height: calc(100% - 2px) !important; }
   .but.but:not(.disabled):hover, .myalert.but:not(.disabled):hover {
-    background: #f2f2f2;
+    background: #f7f7f7;
     text-shadow: 0px 0px 1px rgba(51, 51, 51, 0.1); }
   .but.but:active, .but.disabled, .myalert.disabled, .myalert.but:active, .myalert.disabled {
     box-shadow: none !important;
@@ -368,7 +368,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
     .but.but-primary.but, .but.primary.but, .myalert.but-primary.but, .myalert.primary.but {
       box-shadow: 0 2px 0 #792e97; }
     .but.but-primary.but:not(.disabled):hover, .but.primary.but:not(.disabled):hover, .myalert.but-primary.but:not(.disabled):hover, .myalert.primary.but:not(.disabled):hover {
-      background: #c58ddc; }
+      background: #cb98e0; }
     .but.but-primary.myalert::after, .but.primary.myalert::after, .myalert.but-primary.myalert::after, .myalert.primary.myalert::after {
       content: 'Important'; }
     .but.but-primary.myalert::after, .but.but-primary.myalert::before, .but.primary.myalert::after, .but.primary.myalert::before, .myalert.but-primary.myalert::after, .myalert.but-primary.myalert::before, .myalert.primary.myalert::after, .myalert.primary.myalert::before {
@@ -376,11 +376,11 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
   .but.but-error, .but.error, .myalert.but-error, .myalert.error {
     background: #E74C3C;
     border-color: #bf2718;
-    color: white; }
+    color: #fff; }
     .but.but-error.but, .but.error.but, .myalert.but-error.but, .myalert.error.but {
       box-shadow: 0 2px 0 #a82315; }
     .but.but-error.but:not(.disabled):hover, .but.error.but:not(.disabled):hover, .myalert.but-error.but:not(.disabled):hover, .myalert.error.but:not(.disabled):hover {
-      background: #ea6153;
+      background: #e9594a;
       text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.1); }
     .but.but-error.myalert::after, .but.error.myalert::after, .myalert.but-error.myalert::after, .myalert.error.myalert::after {
       content: "Erreur " attr(data-code); }
@@ -408,8 +408,41 @@ a.but {
   text-decoration: none;
   color: inherit; }
 
+.but-group > .but:not(:first-child) {
+  margin-left: 0;
+  border-left: none; }
+
+.avatar {
+  position: relative;
+  display: inline-block;
+  font-size: 2em; }
+  .avatar > img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%; }
+  .avatar > .avatar-front {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    background: rgba(50, 51, 48, 0.5);
+    opacity: 0;
+    transition: 0.5s; }
+    .avatar > .avatar-front > .avatar-upload {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+  .avatar:hover > .avatar-front {
+    opacity: 1; }
+
 .table tr td:first-child label, .table tr td:last-child .field {
   display: block; }
+
+.colonne .row {
+  margin-bottom: 5px; }
 
 .header {
   display: block;
@@ -423,7 +456,8 @@ a.but {
   font-weight: 600;
   background: #BB79D6;
   min-height: 50px;
-  transition: 0.5s; }
+  transition: 0.5s;
+  border-bottom: 2px solid #323330; }
   .header .header-content {
     min-height: 50px; }
     .header .header-content .nav-item {
@@ -496,6 +530,7 @@ a.but {
   opacity: 0; }
 
 .main-content.no-header .header {
+  border-bottom-width: 0;
   transform: translateY(calc(-100% + 2px));
   overflow: hidden; }
   .main-content.no-header .header > * .nav-item {
@@ -597,5 +632,11 @@ a.but {
 
 .hobbys-content {
   min-height: 34px; }
+
+.colonne .but-group .but:first-child:last-child {
+  width: 100%; }
+
+.page-content h1:first-child, .page-content h2:first-child, .page-content h3:first-child {
+  margin-top: 0; }
 
 /*# sourceMappingURL=style.css.map */
