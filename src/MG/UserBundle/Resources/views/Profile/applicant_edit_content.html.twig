@@ -1,25 +1,30 @@
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_row(form.country) }}
-    {{ form_row(form.town) }}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'class': 'fos_user_profile_edit'}}) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.address.street) }}
+    {{ form_row(form.address.zipCode) }}
+    {{ form_row(form.address.town) }}
+    {{ form_row(form.address.country) }}
+    {{ form_row(form.phoneNumber) }}
+    {{ form_row(form.titleProfile) }}
     {{ form_row(form.description) }}
-    <h3>{{ 'form.hobbys'|trans({}, 'MGUserBundle') }}</h3>
-    <ul class="hobbys"
-        data-prototype="{{ form_widget(form.hobbys.vars.prototype)|e('html_attr') }}">
-    {% for hobby in form.hobbys %}
+    <h3>{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</h3>
+    <ul class="hobbies"
+        data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}">
+    {% for hobby in form.hobbies %}
     <li>
         {{ form_row(hobby.name) }}
     </li>
     {% endfor %}
     
     </ul>
-        
-    <input type="hidden" name="_csrf_token"
-        value="{{ csrf_token('authenticate') }}"
-    >
+    {{ form_widget(form._token) }}
     <div>
         <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
     </div>
-{{ form_end(form) }}
+
+{{ form_end(form, {'render_rest': false}) }}
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" charset="UTF-8" >
@@ -27,7 +32,7 @@ var $collectionHolder;
 var $addHobbyLink = $('<a href="#" class="add_hobby_link">{{ 'form.hobby.add_button'|trans({}, 'MGUserBundle') }}</a>');
 var $newLinkLi = $('<li></li>').append($addHobbyLink);
 jQuery(document).ready(function() {
-    $collectionHolder = $('ul.hobbys');
+    $collectionHolder = $('ul.hobbies');
     $collectionHolder.data('index', $collectionHolder.find(':input').length);
     if ($collectionHolder.data('index') > 0) { 
         $collectionHolder.find('li').each(function() {

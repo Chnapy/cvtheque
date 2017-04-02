@@ -18,19 +18,23 @@ class EducationType extends AbstractType
         $builder
         ->add('fromDate', DateType::class, array(
                 'label' => 'form.fromDate', 
-                'translation_domain' => 'MGUserBundle'
+                'translation_domain' => 'MGUserBundle',
+                'required' => false
                 ))
         ->add('toDate', DateType::class, array(
                 'label' => 'form.toDate', 
-                'translation_domain' => 'MGUserBundle'
+                'translation_domain' => 'MGUserBundle',
+                'required' => false
                 ))
         ->add('school', TextType::class, array(
                 'label' => 'form.education.school', 
-                'translation_domain' => 'MGUserBundle'
+                'translation_domain' => 'MGUserBundle',
+                'required' => false
                 ))
         ->add('degree', TextType::class, array(
                 'label' => 'form.education.degree', 
-                'translation_domain' => 'MGUserBundle'
+                'translation_domain' => 'MGUserBundle',
+                'required' => false
                 ));
     }
     

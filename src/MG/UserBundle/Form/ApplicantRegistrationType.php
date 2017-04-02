@@ -66,21 +66,24 @@ class ApplicantRegistrationType extends AbstractType
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label' => ''
+                'label' => '',
+                'required' => false
         ))
         ->add('skills',  CollectionType::class, array(
                 'entry_type' => SkillType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label' => ''
+                'label' => '',
+                'required' => false
         ))
         ->add('hobbies',  CollectionType::class, array(
                 'entry_type' => HobbyType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label' => ''
+                'label' => '',
+                'required' => false
         ))
         ->add('image', PhotoType::class, array(
                 'required'     => false

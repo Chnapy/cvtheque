@@ -29,21 +29,25 @@ MG\UserBundle\Entity\Applicant:
             targetEntity: Education
             mappedBy: applicant
             cascade: ["persist", "merge", "remove"]
+            orphanRemoval: true
 
         workExperiences:
             targetEntity: WorkExperience
             mappedBy: applicant
             cascade: ["persist", "merge", "remove"]
+            orphanRemoval: true
 
         skills:
             targetEntity: Skill
             mappedBy: applicant
             cascade: ["persist", "merge", "remove"]
+            orphanRemoval: true
 
         hobbies:
             targetEntity: Hobby
             mappedBy: applicant
             cascade: ["persist", "merge", "remove"]
+            orphanRemoval: true
     manyToMany:
         advertisements:
             targetEntity: CVThequeBundle\Entity\Advertisement
