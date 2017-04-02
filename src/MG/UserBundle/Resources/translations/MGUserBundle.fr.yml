@@ -11,6 +11,8 @@ profile:
         created: Créé le %date%.
         updated: Mise à jour le %date%.
 form:
+    fromDate: "Datte de début :"
+    toDate: "Datte de fin :"
     society:
         name: "Nom de l'entreprise :"
         description: "Description de l'entreprise :"
@@ -37,14 +39,20 @@ form:
         del_button: "Supprimer ce passe-temps"
     educations: "Liste de diplômes"
     education:
+        school: "Établissement :"
+        degree: "Diplôme obtenu :"
         add_button: "Ajouter un diplôme"
         del_button: "Supprimer ce diplôme"
     workExperiences: "Liste d'expériences de travail"
     workExperience:
+        jobTitle: "Titre du poste :"
+        employer: "Nom de l'employeur :"
+        description: "Description de l'emploi :"
         add_button: "Ajouter une expérience de travail"
         del_button: "Supprimer cette expérience de travail"
     skills: "Liste de compétences"
     skill:
+        name: "Nom de la compétence :"
         add_button: "Ajouter une compétence"
         del_button: "Supprimer cette compétence"
     cv:

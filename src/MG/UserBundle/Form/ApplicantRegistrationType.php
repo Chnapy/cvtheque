@@ -54,6 +54,27 @@ class ApplicantRegistrationType extends AbstractType
                 'label' => 'form.phoneNumber', 
                 'translation_domain' => 'MGUserBundle'
         ))
+        ->add('educations',  CollectionType::class, array(
+                'entry_type' => EducationType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => ''
+        ))
+        ->add('workExperiences',  CollectionType::class, array(
+                'entry_type' => WorkExperienceType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => ''
+        ))
+        ->add('skills',  CollectionType::class, array(
+                'entry_type' => SkillType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => ''
+        ))
         ->add('hobbies',  CollectionType::class, array(
                 'entry_type' => HobbyType::class,
                 'allow_add'    => true,
