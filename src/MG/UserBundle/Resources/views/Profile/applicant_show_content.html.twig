@@ -116,6 +116,24 @@
 					{% endif %}
 				</div>
 
+				<!-- Bloc Contact -->
+				<h3>Contact:</h3>
+				<div class="bloc">
+
+					{% if user.email %}
+						<p> Email : {{ user.email }} </p>
+					{% else %}
+						<p> Aucun email renseigné </p>
+					{% endif %}
+
+					{% if user.phoneNumber %}
+						<p> Téléphone : {{ user.phoneNumber }} </p>
+					{% else %}
+						<p> Aucun numéro de téléphone renseigné </p>
+					{% endif %}
+
+				</div>
+
 				<hr/>
 
 				<p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}<br/>
