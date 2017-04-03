@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Gedmo\Mapping\Annotation as Gedmo;
-use MG\CVTheque\Entity\Category;
+use src\CVTheque\Entity\Category;
 
 /**
  * User
@@ -282,7 +282,7 @@ abstract class User extends BaseUser
      *
      * @param Category $category
      */
-    public function setCategory(Category $category)
+    public function setCategory($category)
     {
         $this->category = $category;
     }
