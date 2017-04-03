@@ -282,7 +282,7 @@ abstract class User extends BaseUser
      *
      * @param Category $category
      */
-    public function setCategory(Category $category)
+    public function setCategory($category)
     {
         $this->category = $category;
     }
