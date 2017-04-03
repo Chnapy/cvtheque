@@ -1,93 +1,166 @@
 {% extends '::base.html.twig' %}
 
 {% block bandeau %}
-	<div class="row">
-		<h1>Inscription - Étudiant</h1>
-		<div class="lead">Remplissez les différents champs demandés.</div>
-	</div>
+    <div class="row">
+        <h1>Inscription - Étudiant</h1>
+        <div class="lead">Remplissez les différents champs demandés.</div>
+    </div>
 {% endblock %}
 
 {% block content %}
 
-	{{ form_start(form, {'method': 'post', 'action': path('mg_applicant_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-	{{ form_row(form.username) }}
-	{{ form_row(form.email) }}
-	{{ form_row(form.plainPassword) }}
-	{{ form_row(form.firstname) }}
-	{{ form_row(form.lastname) }}
-	{{ form_row(form.gender) }}
-	{{ form_row(form.birthday) }}
-	{{ form_row(form.address.street) }}
-	{{ form_row(form.address.zipCode) }}
-	{{ form_row(form.address.town) }}
-	{{ form_row(form.address.country) }}
-	{{ form_row(form.phoneNumber) }}
-	{{ form_row(form.titleProfile) }}
-	{{ form_row(form.description) }}
+    {{ form_start(form, {'method': 'post', 'action': path('mg_applicant_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
-	<label for="ip_hobbys">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
-	<div class="hobbys" {#data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}"#}
-		 data-hobbys='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+    <script>var FORM = 'registration';</script>
+    
+    <div class='bloc'>
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword) }}
+    </div>
+    
+    <div class='bloc'>
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.gender) }}
+        {{ form_row(form.birthday) }}
+        {{ form_row(form.address.street) }}
+        {{ form_row(form.address.zipCode) }}
+        {{ form_row(form.address.town) }}
+        {{ form_row(form.address.country) }}
+        {{ form_row(form.phoneNumber) }}
+    </div>
+    
+    <div class='bloc'>
+        {{ form_row(form.titleProfile) }}
+        {{ form_row(form.description) }}
+    </div>
+    
+    <div class='bloc'>
+        <label>{{ 'form.educations'|trans({}, 'MGUserBundle') }}</label>
+        <div class="educations" 
+             data-prototype="{{ form_widget(form.educations.vars.prototype)|e('html_attr') }}"
+             data-educations='[
+             {% for e in form.educations %}
+                 {"fromDate": "{{ e.vars.value.fromDate|date('Y-m-d') }}",
+                 "toDate": "{{ e.vars.value.toDate|date('Y-m-d') }}",
+                 "school": "{{ e.vars.value.school }}",
+                 "degree": "{{ e.vars.value.degree }}"}
+                 {% if not loop.last %},{% endif %}
+             {% endfor %}
+             ]'>
 
-		<div class="hobbys-content tag-content">
-			<div class="field inline hobbys-add">
-				<span class="sr-only sr-only-focusable">Entrez l'hobby puis appuyez sur Entrée pour l'ajouter</span>
-				<input type="text" id="ip_hobbys" minLength="2" maxLength="255" />
-				<span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
-			</div>
-		</div>
+            <div class='educations-content'></div>
 
-	</div>
+            <div>
+                <button id='educations-add' class='but'>Ajouter une formation <span class='glyphicon glyphicon-plus'></span></button>
+            </div>
 
-	{{ form_row(form.image) }}
+        </div>
+    </div>
 
-	{{ form_widget(form._token) }}
+    <div class='bloc'>
+        <label>{{ 'form.workExperiences'|trans({}, 'MGUserBundle') }}</label>
+        <div class="works" 
+             data-prototype="{{ form_widget(form.workExperiences.vars.prototype)|e('html_attr') }}"
+             data-works='[
+             {% for w in form.workExperiences %}
+                 {"fromDate": "{{ w.vars.value.fromDate|date('Y-m-d') }}",
+                 "toDate": "{{ w.vars.value.toDate|date('Y-m-d') }}",
+                 "jobTitle": "{{ w.vars.value.jobTitle }}",
+                 "description": "{{ w.vars.value.description }}",
+                 "employer": "{{ w.vars.value.employer }}"}
+                 {% if not loop.last %},{% endif %}
+             {% endfor %}
+             ]'>
+            
+            <div class='works-content'></div>
 
-	<div class="form-group">
-		<button type="submit" class="but d-block primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
-	</div>
-	{{ form_end(form, {'render_rest': false}) }}
+            <div>
+                <button id='works-add' class='but'>Ajouter une expérience professionnelle <span class='glyphicon glyphicon-plus'></span></button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class='bloc'>
+        <label for="ip_skills">{{ 'form.skills'|trans({}, 'MGUserBundle') }}</label>
+        <div class="skills" data-skills='[{% for skill in form.skills %}"{{ skill.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+
+            <div class="skills-content tag-content">
+                <div class="field inline skills-add">
+                    <span class="sr-only sr-only-focusable">Entrez votre compétence puis appuyez sur Entrée pour l'ajouter</span>
+                    <input type="text" id="ip_skills" minLength="2" maxLength="255" />
+                    <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
+                </div>
+            </div>
+
+        </div>
+             
+        <label for="ip_hobbys">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
+        <div class="hobbys" {#data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}"#}
+             data-hobbys='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+
+            <div class="hobbys-content tag-content">
+                <div class="field inline hobbys-add">
+                    <span class="sr-only sr-only-focusable">Entrez le centre d'intérêt puis appuyez sur Entrée pour l'ajouter</span>
+                    <input type="text" id="ip_hobbys" minLength="2" maxLength="255" />
+                    <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
+                </div>
+            </div>
+
+        </div>
+
+        {{ form_row(form.image) }}
+
+        {{ form_widget(form._token) }}
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="but d-block primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
 
 {% endblock %}
 
 {#<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" charset="UTF-8" >
-	var $collectionHolder;
-	var $addHobbyLink = $('<a href="#" class="add_hobby_link">{{ 'form.hobby.add_button'|trans({}, 'MGUserBundle') }}</a>');
-	var $newLinkLi = $('<li></li>').append($addHobbyLink);
-	jQuery(document).ready(function () {
-		$collectionHolder = $('ul.hobbys');
-		$collectionHolder.data('index', $collectionHolder.find(':input').length);
-		if ($collectionHolder.data('index') > 0) {
-			$collectionHolder.find('li').each(function () {
-				addHobbyFormDeleteLink($(this));
-			});
-		}
-		$collectionHolder.append($newLinkLi);
-		$addHobbyLink.on('click', function (e) {
-			e.preventDefault();
-			addHobbyForm($collectionHolder, $newLinkLi);
-		});
-	});
+    var $collectionHolder;
+    var $addHobbyLink = $('<a href="#" class="add_hobby_link">{{ 'form.hobby.add_button'|trans({}, 'MGUserBundle') }}</a>');
+    var $newLinkLi = $('<li></li>').append($addHobbyLink);
+    jQuery(document).ready(function () {
+        $collectionHolder = $('ul.hobbys');
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+        if ($collectionHolder.data('index') > 0) {
+            $collectionHolder.find('li').each(function () {
+                addHobbyFormDeleteLink($(this));
+            });
+        }
+        $collectionHolder.append($newLinkLi);
+        $addHobbyLink.on('click', function (e) {
+            e.preventDefault();
+            addHobbyForm($collectionHolder, $newLinkLi);
+        });
+    });
 
-	function addHobbyForm($collectionHolder, $newLinkLi) {
-		var prototype = $collectionHolder.data('prototype');
-		var index = $collectionHolder.data('index');
-		var newForm = prototype.replace(/__name__/g, index);
-		$collectionHolder.data('index', index + 1);
-		var $newFormLi = $('<li></li>').append(newForm);
-		$newLinkLi.before($newFormLi);
-		addHobbyFormDeleteLink($newFormLi);
-	}
+    function addHobbyForm($collectionHolder, $newLinkLi) {
+        var prototype = $collectionHolder.data('prototype');
+        var index = $collectionHolder.data('index');
+        var newForm = prototype.replace(/__name__/g, index);
+        $collectionHolder.data('index', index + 1);
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+        addHobbyFormDeleteLink($newFormLi);
+    }
 
-	function addHobbyFormDeleteLink($hobbyFormLi) {
-		var $removeFormA = $('<a href="#">{{ 'form.hobby.del_button'|trans({}, 'MGUserBundle') }}</a>');
-		$hobbyFormLi.append($removeFormA);
+    function addHobbyFormDeleteLink($hobbyFormLi) {
+        var $removeFormA = $('<a href="#">{{ 'form.hobby.del_button'|trans({}, 'MGUserBundle') }}</a>');
+        $hobbyFormLi.append($removeFormA);
 
-		$removeFormA.on('click', function (e) {
-			e.preventDefault();
+        $removeFormA.on('click', function (e) {
+            e.preventDefault();
 
-			$hobbyFormLi.remove();
-		});
-	}
+            $hobbyFormLi.remove();
+        });
+    }
 </script>#}
