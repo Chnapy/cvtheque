@@ -72,12 +72,13 @@ class Advertisement
     
     /**
      * @ORM\OneToOne(targetEntity="MG\UserBundle\Entity\Image", cascade={"persist", "merge", "remove"})
+     * @ORM\joinColumn(nullable=true)
      */
     private $image;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="AdvertSkill", mappedBy="advertisement", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AdvertSkill", mappedBy="advertisement", cascade={"persist", "remove"}, orphanRemoval=true)
      * @Assert\Valid()
      */
     private $advertSkills;

@@ -81,8 +81,8 @@ class Applicant extends User
     public function __construct()
     {
         parent::__construct();
-        $this->cvFile = new CVFile;
-        $this->logBookFile = new LogBookFile();
+        //$this->cvFile = new CVFile;
+        //$this->logBookFile = new LogBookFile();
         $this->educations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->workExperiences = new \Doctrine\Common\Collections\ArrayCollection();
         $this->skills = new \Doctrine\Common\Collections\ArrayCollection();

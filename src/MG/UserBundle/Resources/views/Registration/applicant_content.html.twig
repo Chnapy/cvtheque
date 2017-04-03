@@ -41,12 +41,12 @@
 
 	{{ form_row(form.image) }}
 
-	<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+	{{ form_widget(form._token) }}
 
 	<div class="form-group">
 		<button type="submit" class="but d-block primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
 	</div>
-	{{ form_end(form) }}
+	{{ form_end(form, {'render_rest': false}) }}
 
 {% endblock %}
 
