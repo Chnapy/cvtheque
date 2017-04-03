@@ -21,9 +21,13 @@ MG\UserBundle\Entity\Applicant:
         cvFile:
             targetEntity: CVFile
             cascade: ["persist", "merge", "remove"]
+            joinColumn:
+                nullable: true
         logBookFile:
             targetEntity: LogBookFile
             cascade: ["persist", "merge", "remove"]
+            joinColumn:
+                nullable: true
     oneToMany:
         educations:
             targetEntity: Education

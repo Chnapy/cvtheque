@@ -39,6 +39,8 @@ MG\UserBundle\Entity\User:
         image:
             targetEntity: Image
             cascade: ["persist", "merge", "remove"]
+            joinColumn:
+                nullable: true
     lifecycleCallbacks:
         prePersist: [setCreatedValue]
         preUpdate: [setUpdatedValue]
