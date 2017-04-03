@@ -13,15 +13,14 @@ class LoadAdvertisement extends AbstractFixture implements FixtureInterface, Ord
 
 	public function load(ObjectManager $manager){
 
-		//Création de la catégorie
-		$category = new Category();
-		$category->setName("informatique");
-
 		//Création de l'annonce
 		$advert = new Advertisement(); //setPublished=true
 
 		$advert->setSociety($this->getReference("society"));
-		$advert->setCategory($category);
+		
+		$advert->setCategory($this->getReference("Informatique"));
+		$advert->setCategory($this->getReference("Gestion"));
+		$advert->setCategory($this->getReference("Comptabilité"));
 
 		$advert->setCreatedValue();
 		$advert->setUpdatedValue();
@@ -40,7 +39,7 @@ class LoadAdvertisement extends AbstractFixture implements FixtureInterface, Ord
 
 	public function getOrder(){
 
-		return 2;
+		return 3;
 
 	}
 
