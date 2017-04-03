@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 class SocietyRegistrationType extends AbstractType
 {
     /**
@@ -35,6 +35,13 @@ class SocietyRegistrationType extends AbstractType
         ))
         ->add('image', PhotoType::class, array(
                 'required'     => false
+        ))
+        ->add('category',  EntityType::class,        array(
+                'label' => 'form.categories',
+                'translation_domain' => 'CVThequeBundle',
+                'class'    => 'CVThequeBundle:Category',
+                'choice_label' => 'name',
+                'multiple' => false
         ));
     }
     

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ApplicantRegistrationType extends AbstractType
 {
@@ -53,6 +54,13 @@ class ApplicantRegistrationType extends AbstractType
         ->add('phoneNumber', TextType::class, array(
                 'label' => 'form.phoneNumber', 
                 'translation_domain' => 'MGUserBundle'
+        ))
+        ->add('category',  EntityType::class,        array(
+                'label' => 'form.categories',
+                'translation_domain' => 'CVThequeBundle',
+                'class'    => 'CVThequeBundle:Category',
+                'choice_label' => 'name',
+                'multiple' => false
         ))
         ->add('educations',  CollectionType::class, array(
                 'entry_type' => EducationType::class,

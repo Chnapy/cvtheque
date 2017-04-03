@@ -85,7 +85,7 @@ class Advertisement
     
     
     /**
-     * @ORM\ManyToOne(targetEntity="Category", cascade={"persist", "merge", "remove"})
+     * @ORM\ManyToOne(targetEntity="Category", cascade={"persist"})
      * @Assert\Valid()
      */
     private $category;

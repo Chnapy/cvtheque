@@ -26,3 +26,9 @@ delete_advert:
     defaults:     { _controller: CVThequeBundle:Advert:delete }
     requirements:
         id:       \d+
+
+admin_advert_show:
+    path:         /admin/advert/{page}
+    defaults:     { _controller: CVThequeBundle:Advert:listAdvert, page: 1 }
+    requirements:
+        page:     \d+

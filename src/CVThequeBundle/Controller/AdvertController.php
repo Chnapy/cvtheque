@@ -106,4 +106,24 @@ class AdvertController extends Controller
       'form'    => $form->createView()
     ));
   }
+    
+    /**
+    * @Secure(roles="ROLE_ADMIN")
+    */    
+    public function listAdvertAction($page)
+    {
+        // app/config/parameters.yml
+        $nbrByPage = 5;//$this->container->getParameter('mgblog.nbr_by_page');
+  
+        $advertisements = $this->getDoctrine()
+        ->getManager()
+        ->getRepository('CVThequeBundle:Advertisement')
+        ->getAdvertisements($nbrByPage, $page);
+  
+        return $this->render('CVThequeBundle:Admin:adverts.html.twig', array(
+            'advertisements' => $advertisements,
+            'page'     => $page,
+            'nb_page'  => ceil(count($advertisements) / $nbrByPage) ? : 1
+        ));
+    }
 }
