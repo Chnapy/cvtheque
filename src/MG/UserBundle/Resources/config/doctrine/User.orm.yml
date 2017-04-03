@@ -41,6 +41,11 @@ MG\UserBundle\Entity\User:
             cascade: ["persist", "merge", "remove"]
             joinColumn:
                 nullable: true
+    manyToOne:
+        category:
+            targetEntity: CVThequeBundle\Entity\Category
+            cascade: ["persist"]
+            
     lifecycleCallbacks:
         prePersist: [setCreatedValue]
         preUpdate: [setUpdatedValue]

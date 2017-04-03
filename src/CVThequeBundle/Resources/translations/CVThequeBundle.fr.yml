@@ -4,7 +4,7 @@ form:
     author: "Auteur :"
     title: "Titre:"
     content: "Contenu :"
-    categories: "Liste des catégories :"
+    categories: "Domaines d'études :"
     category:
         name: "Nom de la catégorie :"
     skills: "Liste des compétences :"

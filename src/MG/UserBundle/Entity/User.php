@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Gedmo\Mapping\Annotation as Gedmo;
+use MG\CVTheque\Entity\Category;
 
 /**
  * User
@@ -55,6 +56,12 @@ abstract class User extends BaseUser
      * @var \MG\UserBundle\Entity\Image
      */
     protected $image;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", cascade={"persist"})
+     * @Assert\Valid()
+     */
+    private $category;
 
     public function __construct()
     {
@@ -259,4 +266,25 @@ abstract class User extends BaseUser
     {
         return $this->image;
     }
+    
+    /**
+     * Get category
+     *
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+    
+    /**
+     * Set category
+     *
+     * @param Category $category
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+    }
+    
 }
