@@ -109,11 +109,16 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
   padding: 15px;
   border: 1px solid #DDD;
   border-bottom: 2px solid #E8E8E8;
-  background: #FFF; }
+  background: #FFF;
+  margin-bottom: 5px; }
   .bloc:hover {
     border-color: #CCC; }
   .bloc > h1, .bloc > h2, .bloc > h3, .bloc > h4, .bloc > h5, .bloc > h6 {
     margin-top: 0; }
+  .bloc > .delete {
+    float: right; }
+    .bloc > .delete:before {
+      vertical-align: middle; }
 
 .form-group .field {
   display: block;
