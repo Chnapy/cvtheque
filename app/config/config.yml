@@ -126,7 +126,7 @@ pugx_multi_user:
                 form:
                     type: MG\UserBundle\Form\ApplicantRegistrationEditType
                     name: fos_user_profile_form
-                    validation_groups:  [Profile, Default] 
+                    validation_groups:  [Profile, Default]
         user_two:
             entity:
                 class: MG\UserBundle\Entity\Society
@@ -147,4 +147,3 @@ pugx_multi_user:
             profile:
                 form:
                     type: MG\UserBundle\Form\AdminRegistrationEditType
-                template: MGUserBundle:Profile:admin.edit.form.html.twig

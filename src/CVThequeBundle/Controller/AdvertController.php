@@ -19,9 +19,11 @@ class AdvertController extends Controller
 {
   public function showAction(Advertisement $advertisement)
   {
-    return $this->render('CVThequeBundle:Advertisement:view.html.twig', array(
-      'advertisement'      => $advertisement
-    ));
+      $author = $advertisement->getSociety();
+      return $this->render('CVThequeBundle:Advertisement:view.html.twig', array(
+          'advertisement'      => $advertisement,
+          'author' => $author
+      ));
   }
 
   /**

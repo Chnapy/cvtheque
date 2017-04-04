@@ -4,9 +4,11 @@ namespace MG\UserBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 
 /**
- * Applicant
+ * @UniqueEntity(fields = "username", targetClass = "MG\UserBundle\Entity\User", message="fos_user.username.already_used")
+ * @UniqueEntity(fields = "email", targetClass = "MG\UserBundle\Entity\User", message="fos_user.email.already_used")
  */
 class Applicant extends User
 {

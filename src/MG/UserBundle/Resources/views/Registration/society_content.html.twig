@@ -10,7 +10,7 @@
 {% block content %}
 
 	{{ form_start(form, {'method': 'post', 'action': path('mg_society_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_row(form.societyName) }}
+    {{ form_row(form.username) }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword) }}
     {{ form_row(form.address.street) }}
