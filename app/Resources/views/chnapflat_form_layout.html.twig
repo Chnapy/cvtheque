@@ -3,7 +3,7 @@
 {# Widgets #}
 
 {%- block form_start -%}
-{% set attr = attr|merge({class: (attr.class|default('') ~ ' bloc')|trim}) %}
+{% set attr = attr|merge({class: (attr.class|default('') ~ '')|trim}) %}
 {{- parent() -}}
 {%- endblock form_start -%}
 
