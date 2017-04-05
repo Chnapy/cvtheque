@@ -18,12 +18,9 @@
 			<header id="header" class="header">
 				<nav class="header-content container">
 					<a class="logo nav-item" href="{{ path('homepage') }}">CVthèque</a>
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<a class="nav-item">Liste des annonces</a>
-					{% endif %}
-
 					{% if is_granted('ROLE_ADMIN') %}
-						<a class="nav-item" href="#" >Configuration de CVTheque (admin)</a>
+                        <a href="{{ path('admin_advert_show') }}" class="nav-item">Liste des annonces</a>
+						<a href="#" class="nav-item" >Configuration de CVTheque (admin)</a>
 					{% else %}
 						{% if is_granted('ROLE_SOCIETY') %}
 							<a class="nav-item" href="{{ path('add_advert') }}">Ajouter une annonce</a>
