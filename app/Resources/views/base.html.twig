@@ -1,76 +1,83 @@
 {# app/Resources/views/base.html.twig #}
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="author" content="Nitram Treblig">
-		<title>{% block title %}CVthèque {% endblock %}</title>
-		{% block stylesheets %}
-			<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-		{% endblock %}
-	</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Nitram Treblig">
+        <title>{% block title %}CVthèque {% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+    </head>
 
-	<body>
-		<section class="main-content{% if app.request.get('_route') == 'homepage' and not is_granted('IS_AUTHENTICATED_REMEMBERED') %} no-header{% endif %}">
+    <body>
 
-			<header id="header" class="header">
-				<nav class="header-content container">
-					<a class="logo nav-item" href="{{ path('homepage') }}">CVthèque</a>
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<a class="nav-item">Liste des annonces</a>
-					{% endif %}
+        {% set first_access = app.request.get('_route') == 'homepage' and not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 
-					{% if is_granted('ROLE_ADMIN') %}
-						<a class="nav-item" href="#" >Configuration de CVTheque (admin)</a>
-					{% else %}
-						{% if is_granted('ROLE_SOCIETY') %}
-							<a class="nav-item" href="{{ path('add_advert') }}">Ajouter une annonce</a>
-						{% endif %}
-					{% endif %}
+        <section class="main-content{% if first_access %} no-header{% endif %}">
 
-					<span class="nav-right">
-						{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-							<span class="compte nav-item{% if app.request.get('_route') == 'mg_user_show' %} active{% endif %}">
-								<a class="compte-pseudo" href="{{ path('mg_user_show') }}">{{ app.user.username }}</a>
-								<a class="deco mini-but" href="{{ path('fos_user_security_logout') }}">
-									<span class="sr-only sr-only-focusable">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
-									<span class='glyphicon glyphicon-off'></span>
-								</a>
-							</span>
-						{% endif %}
-					</span>
-				</nav>
-			</header>
+            <a href="#content" class="sr-only sr-only-focusable">Passer au contenu principal</a>
 
-			<main id="content" class="body-content" role="main" >
-				<div class="bandeau dark">
-					<div class="container">
-						{% block bandeau %}
-						{% endblock %} 
-					</div>
-				</div>
+            <header id="header" class="header">
+                {% if not first_access %}
+                    <nav class="header-content container">
+                        <a class="logo nav-item" href="{{ path('homepage') }}">CVthèque</a>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a class="nav-item">Liste des annonces</a>
+                        {% endif %}
 
-				<div class="container page-content">
-					{% block content %}
-					{% endblock %} 
-				</div>
-			</main>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="nav-item" href="#" >Configuration de CVTheque (admin)</a>
+                        {% else %}
+                            {% if is_granted('ROLE_SOCIETY') %}
+                                <a class="nav-item" href="{{ path('add_advert') }}">Ajouter une annonce</a>
+                            {% endif %}
+                        {% endif %}
 
-			<hr>
+                        <span class="nav-right">
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                <span class="compte nav-item{% if app.request.get('_route') == 'mg_user_show' %} active{% endif %}">
+                                    <a class="compte-pseudo" href="{{ path('mg_user_show') }}">{{ app.user.username }}</a>
+                                    <a class="deco mini-but" href="{{ path('fos_user_security_logout') }}">
+                                        <span class="sr-only sr-only-focusable">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
+                                        <span class='glyphicon glyphicon-off'></span>
+                                    </a>
+                                </span>
+                            {% endif %}
+                        </span>
+                    </nav>
+                {% endif %}
+            </header>
 
-			<footer id="footer">
-				<div class="container">
-					<p>© {{ 'now'|date('Y') }} Team++</p>
-				</div>
-			</footer>
-		</section>
+            <main id="content" class="body-content" role="main" >
+                <div class="bandeau dark">
+                    <div class="container">
+                        {% block bandeau %}
+                        {% endblock %} 
+                    </div>
+                </div>
 
-		{% block javascripts %}
-			<script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-			<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-			<script src="{{ asset('js/script.js') }}"></script>
-		{% endblock %}
-	</body>
+                <div class="container page-content">
+                    {% block content %}
+                    {% endblock %} 
+                </div>
+            </main>
+
+            <hr>
+
+            <footer id="footer">
+                <div class="container">
+                    <p>© {{ 'now'|date('Y') }} Team++</p>
+                </div>
+            </footer>
+        </section>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/script.js') }}"></script>
+        {% endblock %}
+    </body>
 </html>
