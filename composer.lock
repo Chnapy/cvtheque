@@ -9,29 +9,25 @@
     "packages": [
         {
             "name": "behat/transliterator",
-            "version": "v1.2.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Transliterator.git",
-                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c"
+                "reference": "868e05be3a9f25ba6424c2dd4849567f50715003"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
-                "reference": "826ce7e9c2a6664c0d1f381cbb38b1fb80a7ee2c",
+                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/868e05be3a9f25ba6424c2dd4849567f50715003",
+                "reference": "868e05be3a9f25ba6424c2dd4849567f50715003",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "require-dev": {
-                "chuyskywalker/rolling-curl": "^3.1",
-                "php-yaoi/php-yaoi": "^1.0"
-            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -49,7 +45,7 @@
                 "slug",
                 "transliterator"
             ],
-            "time": "2017-04-04 11:38:05"
+            "time": "2015-09-28 16:26:35"
         },
         {
             "name": "composer/ca-bundle",
@@ -884,12 +880,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "fda6cbe3db268ab35d569d28a37d9b0f6d0eef60"
+                "reference": "2e0243e9e8a3ca0dab753fc5f2e79b4b3093ac9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/fda6cbe3db268ab35d569d28a37d9b0f6d0eef60",
-                "reference": "fda6cbe3db268ab35d569d28a37d9b0f6d0eef60",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/2e0243e9e8a3ca0dab753fc5f2e79b4b3093ac9a",
+                "reference": "2e0243e9e8a3ca0dab753fc5f2e79b4b3093ac9a",
                 "shasum": ""
             },
             "require": {
@@ -953,7 +949,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2017-04-05 07:28:52"
+            "time": "2017-03-29 13:21:34"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -3157,12 +3153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "c64377645ee78b2987aea98761e4b3dab2fb33a6"
+                "reference": "ae7bcaeb964c0f5338afe7a15cfe7787aad92983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/c64377645ee78b2987aea98761e4b3dab2fb33a6",
-                "reference": "c64377645ee78b2987aea98761e4b3dab2fb33a6",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/ae7bcaeb964c0f5338afe7a15cfe7787aad92983",
+                "reference": "ae7bcaeb964c0f5338afe7a15cfe7787aad92983",
                 "shasum": ""
             },
             "require": {
@@ -3300,7 +3296,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-04-05 06:59:47"
+            "time": "2017-04-02 17:33:59"
         },
         {
             "name": "twig/extensions",

@@ -644,12 +644,4 @@ a.but {
 .page-content h1:first-child, .page-content h2:first-child, .page-content h3:first-child {
   margin-top: 0; }
 
-#footer {
-  position:absolute;
-  right:0;
-  left:0;
-  bottom:0;
-  padding:1rem;
-}
-
 /*# sourceMappingURL=style.css.map */
