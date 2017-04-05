@@ -35,6 +35,7 @@ security:
             form_login:
                 login_path: /
                 check_path: /login_check
+                default_target_path: /profile/show
             logout:
                 path: /logout
                 target: /

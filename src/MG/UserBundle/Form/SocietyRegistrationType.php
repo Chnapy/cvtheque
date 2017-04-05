@@ -20,7 +20,7 @@ class SocietyRegistrationType extends AbstractType
     {    
         $builder
         ->remove('username')
-        ->add('societyName', TextType::class, array(
+        ->add('username', TextType::class, array(
                 'label' => 'form.society.name', 
                 'translation_domain' => 'MGUserBundle'
         ))

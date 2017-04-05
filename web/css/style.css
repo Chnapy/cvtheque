@@ -44,6 +44,10 @@
   border-radius: 0 !important;
   outline: 0; }
 
+button {
+  background: none;
+  border: none; }
+
 ::selection {
   background: #BB79D6; }
 
@@ -177,7 +181,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
   max-width: 100%;
   background: #f2f2f2;
   border: 1px solid #999999;
-  padding: 3px;
+  padding: 2px 3px;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: top;

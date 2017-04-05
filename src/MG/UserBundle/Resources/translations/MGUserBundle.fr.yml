@@ -63,3 +63,5 @@ form:
     logbook:
         file: Fichier de votre journal
         submit: Envoyer le CV
+societyname:
+    already_used: "Ce nom d'entreprise est déja utilisé (Vous pouvez contacter un administrateur)"

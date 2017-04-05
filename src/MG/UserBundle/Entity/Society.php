@@ -3,9 +3,10 @@
 namespace MG\UserBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
-
+use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 /**
- * Society
+ * @UniqueEntity(fields = "username", targetClass = "MG\UserBundle\Entity\User", message="fos_user.societyName.already_used")
+ * @UniqueEntity(fields = "email", targetClass = "MG\UserBundle\Entity\User", message="fos_user.email.already_used")
  */
 class Society extends User
 {
@@ -52,10 +53,11 @@ class Society extends User
         return $this->societyName;
     }
     
-    /**
-     * @var integer
-     */
-    //protected $id;
-
-
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        $this->societyName = $username;
+        
+        return $this;
+    }
 }

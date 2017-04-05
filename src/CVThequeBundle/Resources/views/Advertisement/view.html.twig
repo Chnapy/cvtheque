@@ -1,6 +1,6 @@
 {% extends "CVThequeBundle::layout.html.twig" %}
 {% block title %}
-  {{ advertisement.title }} - {{ parent() }}
+  {{ advertisement.title }}
 {% endblock %}
 {% block body %}
   <div style="float: left; margin-right: 1em;">
@@ -28,23 +28,37 @@
   
   <hr>
   </div>
+  {% set isauthor = author.id == app.user.id %}
   
-  <p>
-  <a href="" class="btn">
+  <div>
+  {% if is_granted('ROLE_ADMIN') %}
+  <a href="{{ path('admin_advert_show') }}" class="btn">
     <i class="icon-chevron-left"></i>
     Retour à la liste 
   </a>
-  {% if is_granted('ROLE_SOCIETY') %}
+  <a href="#" class="btn">
+    <i class=""></i>
+    Suggèrer cette annonce à un étudiant
+  </a>  
+  {% endif %}
+  {% if isauthor or is_granted('ROLE_ADMIN') %}
   <a href="{{ path('update_advert', {'id': advertisement.id}) }}" class="btn">
     <i class="icon-edit"></i>
     Modifier
   </a>
-  {% endif %}
-  {% if is_granted('ROLE_ADMIN') %}
   <a href="{{ path('delete_advert', {'id': advertisement.id}) }}" class="btn">
     <i class="icon-trash"></i>
     Supprimer 
   </a>
+  {% elseif is_granted('ROLE_APPLICANT') %}
+  <a href="#" class="btn">
+    <i class=""></i>
+    Postuler à cette offre
+  </a>
+  <a href="{{ path('mg_user_show') }}" class="btn">
+    <i class="icon-chevron-left"></i>
+    Retour à votre profil
+  </a>
   {% endif %}
-  </p>
+  </div>
 {% endblock %}

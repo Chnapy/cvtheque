@@ -10,49 +10,30 @@ use CVThequeBundle\Entity\Category;
 
 class LoadCategory extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface{
 
-	public function load(ObjectManager $manager){
+    public function load(ObjectManager $manager){
 
-		//Création des catégories
-		$cateAdvert = new Category();
-		$cateAdvert->setName("Informatique");
-		$cateAdvert1 = new Category();
-		$cateAdvert1->setName("Gestion");
-		$cateAdvert2 = new Category();
-		$cateAdvert2->setName("Comptabilité");
-        $this->addReference('Informatique', $cateAdvert);
-        $this->addReference('Gestion', $cateAdvert1);
-        $this->addReference('Comptabilité', $cateAdvert2);
+        // Création de catégories
+        $category01 = new Category();
+        $category01->setName("Informatique");
+        $category02 = new Category();
+        $category02->setName("Gestion");
+        $category03 = new Category();
+        $category03->setName("Journalisme");
+        
+        $manager->persist($category01);
+        $manager->persist($category02);
+           $manager->persist($category03);
+        
+        $manager->flush();
+        
+        $this->addReference('category01', $category01);
+        $this->addReference('category02', $category02);
+        $this->addReference('category03', $category03);
+    }
 
-		$cateAdmin = new Category();
-		$cateAdmin->setName("Admin");
-		$this->addReference('Admin', $cateAdmin);
-		
-		$cateApplicant = new Category();
-		$cateApplicant->setName("Applicant");
-		$this->addReference('Applicant', $cateApplicant);
-		
-		$cateSociety = new Category();
-		$cateSociety->setName("Society");
-		$this->addReference('Society', $cateSociety);
+    public function getOrder(){
 
-		$manager->persist($cateAdvert);
-		$manager->persist($cateAdvert1);
-		$manager->persist($cateAdvert2);
-		$manager->persist($cateAdmin);
-		$manager->persist($cateApplicant);
-		$manager->persist($cateSociety);
-		
-		$manager->flush();
-	}
+        return 1;
 
-	public function getOrder(){
-
-		return 1;
-
-	}
-
-
-
-
-
+    }
 }

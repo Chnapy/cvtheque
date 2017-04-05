@@ -11,6 +11,11 @@
     outline: 0;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
 ::selection {
     background: $color_primary;
 }
@@ -200,7 +205,7 @@ $icon_width: 16px;
     max-width: 100%;
     background: darken($bg_color, 3%);
     border: 1px solid darken($bg_color, 38%);
-    padding: 3px;
+    padding: 2px 3px;
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: top;

@@ -18,6 +18,5 @@
 .project
 .settings
 .buildpath
-.lock
 -v
 composer.lock

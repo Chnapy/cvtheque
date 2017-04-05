@@ -79,7 +79,7 @@
         <label for="ip_skills">{{ 'form.skills'|trans({}, 'MGUserBundle') }}</label>
         <div class="skills" data-skills='[{% for skill in form.skills %}"{{ skill.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
 
-            <div class="skills-content tag-content">
+            <div class="skills-content tag-content" aria-live="polite">
                 <div class="field inline skills-add">
                     <span class="sr-only sr-only-focusable">Entrez votre compétence puis appuyez sur Entrée pour l'ajouter</span>
                     <input type="text" id="ip_skills" minLength="2" maxLength="255" />
@@ -93,7 +93,7 @@
         <div class="hobbys" {#data-prototype="{{ form_widget(form.hobbies.vars.prototype)|e('html_attr') }}"#}
              data-hobbys='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
 
-            <div class="hobbys-content tag-content">
+            <div class="hobbys-content tag-content" aria-live="polite">
                 <div class="field inline hobbys-add">
                     <span class="sr-only sr-only-focusable">Entrez le centre d'intérêt puis appuyez sur Entrée pour l'ajouter</span>
                     <input type="text" id="ip_hobbys" minLength="2" maxLength="255" />

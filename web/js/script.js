@@ -4,7 +4,6 @@
 window.onload = onLoad;
 
 var GLOBALS = {
-    form: FORM,
     hobby_index: -1,
     skill_index: -1,
     education_index: -1,
@@ -12,6 +11,10 @@ var GLOBALS = {
 };
 
 function onLoad() {
+    try {
+        GLOBALS.form = FORM;
+    } catch (e) {
+    }
 
     function butClicked(but) {
         $(but).attr('disabled', true);
@@ -27,8 +30,11 @@ function onLoad() {
         }
     });
 
-    initSkills();
-    initHobby();
+    if (GLOBALS.form) {
+        initSkills();
+        initHobby();
+    }
+
     initEducations();
     initWork();
 }
@@ -82,7 +88,7 @@ function initSkills() {
 function newSkill(value) {
     GLOBALS.skill_index++;
     let hobby = `<span class="skills-item tag deletable onhover">
-		${value}<span class="delete mini-but glyphicon glyphicon-remove"></span>
+		${value}<button class="delete mini-but glyphicon glyphicon-remove"><span class="sr-only sr-only-focusable">Supprimer la compétence</span></button>
 		<input type="hidden" name="fos_user_${GLOBALS.form}_form[skills][${GLOBALS.skill_index}][name]" value="${value}"/>
 	</span>`;
 
@@ -123,7 +129,7 @@ function initHobby() {
 function newHobby(value) {
     GLOBALS.hobby_index++;
     let hobby = `<span class="hobbys-item tag deletable onhover">
-		${value}<span class="delete mini-but glyphicon glyphicon-remove"></span>
+		${value}<button class="delete mini-but glyphicon glyphicon-remove"><span class="sr-only sr-only-focusable">Supprimer le passe-temps</span></button>
 		<input type="hidden" name="fos_user_${GLOBALS.form}_form[hobbies][${GLOBALS.hobby_index}][name]" value="${value}"/>
 	</span>`;
 
@@ -152,11 +158,13 @@ function initEducations() {
 
 function newEducation(array) {
     GLOBALS.education_index++;
-    let p = "<div class='bloc educations-item'><span class='delete mini-but glyphicon glyphicon-remove'></span>" + $('.educations').data('prototype') + "</div>";
+    let p = "<div class='bloc educations-item'><button class='delete mini-but glyphicon glyphicon-remove'>\n\
+        <span class='sr-only sr-only-focusable'>Supprimer la formation</span>\n\
+        </button>" + $('.educations').data('prototype') + "</div>";
     p = p.replace(/__name__/g, GLOBALS.education_index);
 
     $('.educations .educations-content').append(p);
-    
+
     setItemDeletable($('.educations .educations-content .educations-item').last());
 
     if (!array) {
@@ -195,11 +203,13 @@ function initWork() {
 
 function newWork(array) {
     GLOBALS.work_index++;
-    let p = "<div class='bloc works-item'><span class='delete mini-but glyphicon glyphicon-remove'></span>" + $('.works').data('prototype') + "</div>";
+    let p = "<div class='bloc works-item'><button class='delete mini-but glyphicon glyphicon-remove'>\n\
+            <span class='sr-only sr-only-focusable'>Supprimer l'expérience professionnelle</span>\n\
+            </button>" + $('.works').data('prototype') + "</div>";
     p = p.replace(/__name__/g, GLOBALS.work_index);
 
     $('.works .works-content').append(p);
-    
+
     setItemDeletable($('.works .works-content .works-item').last());
 
     if (!array) {
