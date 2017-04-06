@@ -14,8 +14,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 colonne">
+            {% if user.image is not null %}
                 <div class="row bloc text-center">
-                    {% if user.image is not null %}
                         <a href="{{ path('mg_user_profile_picture_edit') }}" class="avatar">
                             <img src="{{ user.image.webPath }}" alt="{{ user.image.alt }}">
                             {% if isuser %}
@@ -25,9 +25,9 @@
                                 </div>
                             {% endif %}
                         </a>
-                    {% endif %}
                 </div>
                 <hr/>
+                {% endif %}
                 <div class="row but-group">
                     {% if user.cvFile is not null %}
                         <a href="{{ user.cvFile.webPath }}" class="but col-xs-10" >
