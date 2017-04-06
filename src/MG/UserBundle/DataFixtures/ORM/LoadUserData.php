@@ -49,18 +49,20 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         $userManager->updateUser($admin, true);
         $discriminator->setClass('MG\UserBundle\Entity\Applicant');
         
-        $address = new Address();
+        
+        for($i=0; $i<30; $i++)
+        {
+            $address = new Address();
         $address->setStreet('31 Boulevard Jourdan');
         $address->setTown('Paris');
         $address->setZipCode('75014');
         $address->setCountry('FR');
-        
         $applicant = $userManager->createUser();
-        $applicant->setUsername('applicant');
+        $applicant->setUsername('applicant'.strval($i));
         $applicant->setFirstname('Martin');
         $applicant->setLastname('Gilbert');
         $applicant->setPlainPassword('12345');
-        $applicant->setEmail('martin.gilbert1@uqac.ca');
+        $applicant->setEmail('martin.gilbert'.strval($i).'@uqac.ca');
         $applicant->setPhoneNumber('06 13 74 45 79');
         $applicant->setAddress($address);
         
@@ -71,8 +73,11 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         $applicant->setTitleProfile('Recherche de stage développement Web : À partir de mai 2017 (4 mois)');
         $applicant->setDescription("Passionné par l'informatique, animé du désir d'apprendre, doté d'un fort esprit d'analyse et d'une concentration à toute épreuve, j'ai la capacité de développer des applications de qualité, maintenables, accessibles et ergonomiques sur des environnements variés grâce à un large éventail de connaissances acquises avec mes formations, mes projets et mes aptitudes autodidactes. Initié à plusieurs langages de programmation, je suis surtout fervent de Java, PHP et Python. J'éprouve particulièrement de l'intérêt pour les bases de données, les applications web et l'accessibilité des nouvelles technologies. La rigueur, le travail d'équipe et les applications bien modélisées sont pour moi des critères permettant à un projet d'être couronné de succès. Présentement, je cherche une entreprise dans laquelle je vais pouvoir mettre à profit mes compétences et les renforcer afin qu'elles soient plus spécifique.");
         $applicant->setEnabled(true);
-        
+        if($i > 15) {
+            $applicant->setValidate(true);
+        }
         $userManager->updateUser($applicant, true);
+        }
         $discriminator->setClass('MG\UserBundle\Entity\Society');
         $address = new Address();
         $address->setStreet('31 Boulevard Jourdan');
