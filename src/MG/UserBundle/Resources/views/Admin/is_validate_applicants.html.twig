@@ -17,7 +17,7 @@
   <ul class="pagination">
   {% for p in range(1, nb_page) %}
     {% if p == page %}
-      <li class="active">{{ p }}</li>
+      <li class="active"><a href="{{ path('mg_admin_show_applicants_validate', {'page': p}) }}">{{ p }}</a></li>
     {% else %}
       <li><a href="{{ path('mg_admin_show_applicants_validate', {'page': p}) }}">{{ p }}</a></li>
     {% endif %} 
