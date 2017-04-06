@@ -63,3 +63,19 @@ mg_user_admin_show:
     path:     /admin/user/{id}/show
     defaults: { _controller: "MGUserBundle:User:show" }
     methods:  GET
+    
+mg_admin_show_applicants_validate:
+    path:         /admin/applicants/validate{page}
+    defaults:     { _controller: MGUserBundle:Applicant:listValidate, page: 1 }
+    requirements:
+        page:     \d+
+
+mg_admin_show_applicants_not_validate:
+    path:         /admin/applicants/notvalidate{page}
+    defaults:     { _controller: MGUserBundle:Applicant:listNotValidate, page: 1 }
+    requirements:
+        page:     \d+
+
+mg_admin_validate_applicant:
+    path:     /admin/validate/{slug}
+    defaults: { _controller: MGUserBundle:Applicant:validate }

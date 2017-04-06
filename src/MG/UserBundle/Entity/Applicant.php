@@ -12,6 +12,11 @@ use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
  */
 class Applicant extends User
 {
+        /**
+     * @var bool
+     */
+    protected $validate;
+
     /**
      * @var string
      * @Assert\Length(min=2, max=32)
@@ -83,13 +88,38 @@ class Applicant extends User
     public function __construct()
     {
         parent::__construct();
-        //$this->cvFile = new CVFile;
-        //$this->logBookFile = new LogBookFile();
+        $this->validate = false; // Un administrateur doit valider un compte applicant
         $this->educations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->workExperiences = new \Doctrine\Common\Collections\ArrayCollection();
         $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
         $this->hobbies = new \Doctrine\Common\Collections\ArrayCollection();
         $this->addRole("ROLE_APPLICANT");
+    }
+    
+    public function isValidate()
+    {
+        return $this->validate;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setValidate($boolean)
+    {
+        $this->validate = (bool) $boolean;
+
+        return $this;
+    }
+    /**
+     * permute validate
+     *
+     * @return bool
+     */
+    public function permuteValidation() 
+    {
+        if($this->validate) { $this->validate = false; }
+        else { $this->validate = true; }
+        return $this->validate;
     }
     
     /**

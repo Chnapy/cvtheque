@@ -39,13 +39,13 @@ form:
         name: "Nom du passe-temps :"
         add_button: "Ajouter un passe-temps"
         del_button: "Supprimer ce passe-temps"
-    educations: "Liste de diplômes"
+    educations: "Liste de formations"
     education:
         school: "Établissement :"
         degree: "Diplôme obtenu :"
         add_button: "Ajouter un diplôme"
         del_button: "Supprimer ce diplôme"
-    workExperiences: "Liste d'expériences de travail"
+    workExperiences: "Liste d'expériences professionnelles"
     workExperience:
         jobTitle: "Titre du poste :"
         employer: "Nom de l'employeur :"

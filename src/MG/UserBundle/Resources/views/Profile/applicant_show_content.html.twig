@@ -94,6 +94,20 @@
             <div class="col-md-9">
                 <h3>Informations générales</h3>
                 <div class='bloc'>
+                    {% if (isuser) %}
+                        {% if(user.validate) %}
+                            <p>Profil validé</p>
+                        {% else %}
+                            <p>Profil non validé par l'administrateur</p>
+                        {% endif %}
+                    {% elseif is_granted('ROLE_ADMIN')  %}
+                        {% if(user.validate) %}
+                            <a href="{{ path('mg_admin_validate_applicant', {'slug': user.slug}) }}" class="">Invalider le profil de l'étudiant</a>
+                        {% else %}
+                            <a href="{{ path('mg_admin_validate_applicant', {'slug': user.slug}) }}" class="">Valider le profil de l'étudiant</a>
+                        {% endif %}
+                        
+                    {% endif %}
                     <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
                     <p>{{ ('profile.show.birthday.'~user.gender)|trans({'%birthday%': user.birthday|date('d/m/Y'), '%age%': user.age}, 'MGUserBundle') }}</p>
                 </div>
@@ -133,11 +147,11 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        Aucun talent indiqué. Personne n'est parfait certes, mais tout de même...
+                        Aucun talent indiqué, personne n'est parfait certes, mais tout de même...
                     {% endif %}
                 </div>
 
-                <h3>Liste de passe-temps :</h3>
+                <h3>Liste de centres d'intérêts :</h3>
                 <div class="bloc">
                     {% if user.hobbies.count > 0 %}
                         <div class='tag-content'>

@@ -2,6 +2,7 @@
 
 namespace MG\UserBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * ApplicantRepository
  *
@@ -10,4 +11,22 @@ namespace MG\UserBundle\Repository;
  */
 class ApplicantRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getApplicants($numberByPage, $page, $validate)
+    {
+        if ((int) $page < 1) {
+             throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
+         }
+
+         $query = $this->createQueryBuilder('a')
+                  ->leftJoin('a.image', 'i')
+                    ->addSelect('i')
+                  ->where('a.validate = '.strval((int)$validate))
+                  ->orderBy('a.updated', 'DESC')
+                  ->getQuery();
+
+        $query->setFirstResult(($page-1) * $numberByPage)
+            ->setMaxResults($numberByPage);
+
+        return new Paginator($query);
+    }
 }

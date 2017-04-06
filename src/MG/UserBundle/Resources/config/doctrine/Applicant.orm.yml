@@ -3,6 +3,8 @@ MG\UserBundle\Entity\Applicant:
     table: null
     repositoryClass: MG\UserBundle\Repository\ApplicantRepository
     fields:
+        validate:
+            type: boolean
         firstname:
             type: string
             length: '32'

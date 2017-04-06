@@ -25,10 +25,13 @@
                     <nav class="header-content container">
                         <a class="logo nav-item" href="{{ path('homepage') }}">CVthèque</a>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a class="nav-item">Liste des annonces</a>
+                            
                         {% endif %}
 
                         {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('admin_advert_show') }}" class="nav-item">Liste des annonces</a>
+                            <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="nav-item">Liste des profils étudiants non validés</a>
+                            <a href="{{ path('mg_admin_show_applicants_validate') }}" class="nav-item">Liste des profils étudiants validés</a>
                             <a class="nav-item" href="#" >Configuration de CVTheque (admin)</a>
                         {% else %}
                             {% if is_granted('ROLE_SOCIETY') %}
