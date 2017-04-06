@@ -19,7 +19,7 @@
     {% if p == page %}
       <li class="active">{{ p }}</li>
     {% else %}
-      <li><a href="{{ path('admin_advert_show', {'page': p}) }}">{{ p }}</a></li>
+      <li><a href="{{ path('mg_admin_show_applicants_validate', {'page': p}) }}">{{ p }}</a></li>
     {% endif %} 
   {% endfor %}
   </ul>
