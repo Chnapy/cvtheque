@@ -29,10 +29,10 @@
                         {% endif %}
 
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin_advert_show') }}" class="nav-item">Liste des annonces</a>
-                            <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="nav-item">Liste des profils étudiants non validés</a>
-                            <a href="{{ path('mg_admin_show_applicants_validate') }}" class="nav-item">Liste des profils étudiants validés</a>
-                            <a class="nav-item" href="#" >Configuration de CVTheque (admin)</a>
+                            <a href="{{ path('admin_advert_show') }}" class="nav-item">Annonces</a>
+                            <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="nav-item">Étudiants non validés</a>
+                            <a href="{{ path('mg_admin_show_applicants_validate') }}" class="nav-item">Étudiants validés</a>
+                            {#<a class="nav-item" href="#" >Configuration</a>#}
                         {% else %}
                             {% if is_granted('ROLE_SOCIETY') %}
                                 <a class="nav-item" href="{{ path('add_advert') }}">Ajouter une annonce</a>

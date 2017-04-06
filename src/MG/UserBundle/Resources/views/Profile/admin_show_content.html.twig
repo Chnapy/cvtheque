@@ -1,18 +1,15 @@
 <div class="fos_user_user_show">
 
-  {% if user.id == app.user.id %}
-  <ul>
-  <li><a href="{{ path('fos_user_profile_edit') }}" class="btn">
-    <i class="icon-edit"></i>
-    Modifier le profil administrateur
-  </a></li>
-  
-  <li><a href="{{ path('mg_user_profile_delete') }}" class="btn">
-    <i class="icon-trash"></i>
-    Supprimer le profil administrateur
-  </a></li>
-  </ul>
-  {% endif %}
-  <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>
-  <p>{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
+    {% if user.id == app.user.id %}
+        <a href="{{ path('fos_user_profile_edit') }}" class="but">
+            Modifier le profil administrateur
+        </a>
+
+        <a href="{{ path('mg_user_profile_delete') }}" class="but error">
+            Supprimer le profil administrateur
+        </a>
+
+    {% endif %}
+    <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>
+    <p>{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
 </div>

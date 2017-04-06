@@ -581,7 +581,7 @@ a.but {
         }
     }
 
-    &:hover>.avatar-front {
+    &:hover>.avatar-front, &.avatar-empty>.avatar-front {
         opacity: 1;
     }
 }

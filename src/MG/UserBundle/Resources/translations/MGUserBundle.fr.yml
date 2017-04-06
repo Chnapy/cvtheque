@@ -9,12 +9,12 @@ profile:
             m: "Homme né le %birthday% (%age% ans)"
             f: "Femme née le %birthday% (%age% ans)"
         created: Créé le %date%.
-        updated: Mise à jour le %date%.
+        updated: Mis à jour le %date%.
     edit:
         submit: Envoyer
 form:
-    fromDate: "Datte de début :"
-    toDate: "Datte de fin :"
+    fromDate: "Date de début :"
+    toDate: "Date de fin :"
     society:
         name: "Nom de l'entreprise :"
         description: "Description de l'entreprise :"
@@ -23,13 +23,13 @@ form:
     gender: "Vous êtes :"
     m: Un homme
     f: Une femme
-    birthdate: "Datte d’anniversaire :"
+    birthdate: "Date d’anniversaire :"
     country: "Pays :"
     zipCode: "Code postal :"
     street : "Adresse :"
     town: "Ville :"
     phoneNumber: "Numéro de téléphone :"
-    titleProfile: "Titre de votre profile :"
+    titleProfile: "Titre de votre profil :"
     description: "Décrivez-vous en quelques mots :"
     image:
         file: "Ajouter une photo :"
