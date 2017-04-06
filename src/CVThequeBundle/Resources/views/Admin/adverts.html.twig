@@ -2,19 +2,19 @@
 {% block title %}Annonces{% endblock %} 
 {% block body %}
 <h3>Les dernières annonces</h3>
-<ul>
+<ul class="list-group">
   {% for advertisement in advertisements %}
-    <li><a href="{{ path('show_advert', {'slug': advertisement.slug}) }}" >{{ advertisement.title }}</a>
-      <div><i>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</i></div>
+    <li class="list-group-item"><a href="{{ path('show_advert', {'slug': advertisement.slug}) }}" >{{ advertisement.title }}</a>
+      <div class="badge"><i>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</i></div>
     </li>
   {% else %}
   <p>Il n'y a pas d'annonce dans la base de données.</p>
   {% endfor %}
 </ul>
 {% if nb_page > 1 %}
-<div class="pagination">
+<div>
   <h4>Pages :</h4>
-  <ul>
+  <ul class="pagination">
   {% for p in range(1, nb_page) %}
     {% if p == page %}
       <li class="active">{{ p }}</li>

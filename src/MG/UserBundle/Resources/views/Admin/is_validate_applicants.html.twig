@@ -2,19 +2,19 @@
 {% block title %}Applicants{% endblock %} 
 {% block body %}
 <h3>Profils étudiants validés</h3>
-<ul>
+<ul class="list-group">
   {% for applicant in applicants %}
-    <li><a href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}" >{{ applicant.username }}</a>
-      <div><i>Créé le {{ applicant.created|date('d/m/Y') }}, mis à jour le {{ applicant.created|date('d/m/Y') }}</i></div>
+    <li class="list-group-item"><a href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}" >{{ applicant.username }}</a>
+      <div class="badge"><i>Créé le {{ applicant.created|date('d/m/Y') }}, mis à jour le {{ applicant.created|date('d/m/Y') }}</i></div>
     </li>
   {% else %}
   <p>Il n'y a aucun profil étudiant validé.</p>
   {% endfor %}
 </ul>
 {% if nb_page > 1 %}
-<div class="pagination">
+<div>
   <h4>Pages :</h4>
-  <ul>
+  <ul class="pagination">
   {% for p in range(1, nb_page) %}
     {% if p == page %}
       <li class="active">{{ p }}</li>
