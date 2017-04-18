@@ -14,17 +14,17 @@
         <div class="row">
             <div class="col-md-3 colonne">
                 <div class="row bloc text-center">
-                    {% if user.image is not null %}
-                        <a href="{{ path('mg_user_profile_picture_edit') }}" class="avatar">
-                            <img src="{{ user.image.webPath }}" alt="{{ user.image.alt }}">
-                            {% if isuser %}
-                                <div class='avatar-front'>
-                                    <span class="sr-only sr-only-focusable">Ajouter ou modifier l'avatar</span>
-                                    <span class="avatar-upload glyphicon glyphicon-upload"></span>
-                                </div>
-                            {% endif %}
-                        </a>
-                    {% endif %}
+                    <a href="{% if isuser %}{{ path('mg_user_profile_picture_edit') }}{% endif %}" class="avatar{% if isuser and user.image is null %} avatar-empty{% endif %}">
+                        {#                        {% if user.image is not null %}#}
+                        <img {% if user.image is not null %}src="{{ user.image.webPath }}" alt="{{ user.image.alt }}{% endif %}">
+                        {#                        {% endif %}#}
+                        {% if isuser %}
+                            <div class='avatar-front'>
+                                <span class="sr-only sr-only-focusable">Ajouter ou modifier l'avatar</span>
+                                <span class="avatar-upload glyphicon glyphicon-upload"></span>
+                            </div>
+                        {% endif %}
+                    </a>
                 </div>
                 <hr/>
                 <div class="row but-group">
@@ -87,6 +87,16 @@
                             Supprimer le profil
                         </a>
                     </div>
+                {% elseif is_granted('ROLE_ADMIN')  %}
+                    <hr/>
+                    <div class="row">
+                        {% if(user.validate) %}
+                            <a href="{{ path('mg_admin_validate_applicant', {'slug': user.slug}) }}" class="but d-block error" >Invalider le profil de l'étudiant</a>
+                        {% else %}
+                            <a href="{{ path('mg_admin_validate_applicant', {'slug': user.slug}) }}" class="but d-block primary" >Valider le profil de l'étudiant</a>
+                        {% endif %}
+                    </div>
+
                 {% endif %}
             </div>
 
@@ -99,13 +109,6 @@
                         {% else %}
                             <p>Profil non validé par l'administrateur</p>
                         {% endif %}
-                    {% elseif is_granted('ROLE_ADMIN')  %}
-                        {% if(user.validate) %}
-                            <a href="{{ path('mg_admin_validate_applicant', {'slug': user.slug}) }}" class="">Invalider le profil de l'étudiant</a>
-                        {% else %}
-                            <a href="{{ path('mg_admin_validate_applicant', {'slug': user.slug}) }}" class="">Valider le profil de l'étudiant</a>
-                        {% endif %}
-                        
                     {% endif %}
                     <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
                     <p>{{ ('profile.show.birthday.'~user.gender)|trans({'%birthday%': user.birthday|date('d/m/Y'), '%age%': user.age}, 'MGUserBundle') }}</p>
@@ -117,25 +120,37 @@
                 </div>
 
                 <h3>Formations</h3>
-                {% for e in user.educations %}
+                {% if user.educations.count > 0 %}
+                    {% for e in user.educations %}
+                        <div class='bloc'>
+                            <span class='tag'>{{ e.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ e.toDate|date('d-m-Y') }}</span>
+                            <h4>{{ e.school }}<br/>
+                                <small>{{ e.degree }}</small>
+                            </h4>
+                        </div>
+                    {% endfor %}
+                {% else %}
                     <div class='bloc'>
-                        <span class='tag'>{{ e.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ e.toDate|date('d-m-Y') }}</span>
-                        <h4>{{ e.school }}<br/>
-                            <small>{{ e.degree }}</small>
-                        </h4>
+                        Aucune formation indiquée.
                     </div>
-                {% endfor %}
+                {% endif %}
 
                 <h3>Expériences professionnelle</h3>
-                {% for w in user.workExperiences %}
+                {% if user.workExperiences.count > 0 %}
+                    {% for w in user.workExperiences %}
+                        <div class='bloc'>
+                            <span class='tag'>{{ w.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ w.toDate|date('d-m-Y') }}</span>
+                            <h4>{{ w.jobTitle }}<br/>
+                                <small>{{ w.employer }}</small>
+                            </h4>
+                            <p>{{ w.description }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
                     <div class='bloc'>
-                        <span class='tag'>{{ w.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ w.toDate|date('d-m-Y') }}</span>
-                        <h4>{{ w.jobTitle }}<br/>
-                            <small>{{ w.employer }}</small>
-                        </h4>
-                        <p>{{ w.description }}</p>
+                        Aucune expérience professionnelle indiquée. Il y a un début à tout.
                     </div>
-                {% endfor %}
+                {% endif %}
 
                 <h3>Liste des compétences :</h3>
                 <div class="bloc">
@@ -146,7 +161,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        Aucun talent indiqué, personne n'est parfait certes, mais tout de même...
+                        Aucun talent indiqué. Personne n'est parfait certes, mais tout de même...
                     {% endif %}
                 </div>
 
