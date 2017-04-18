@@ -48,6 +48,7 @@ class ProfileController extends BaseController
         
         $user = $repository->findOneBySlug($slug);
         if(get_class($user) === "MG\UserBundle\Entity\Applicant") {
+            
             return $this->render('MGUserBundle:Profile:applicant_show.html.twig', array(
                     'user' => $user,
             ));
@@ -98,6 +99,7 @@ class ProfileController extends BaseController
 
         $form = $formFactory->createForm();
         $form->setData($user);
+
 
         $form->handleRequest($request);
         if(get_class($user) === "MG\UserBundle\Entity\Admin") {

@@ -1,7 +1,6 @@
 {% extends '::base.html.twig' %}
 
 {% set isuser = user.id == app.user.id %}
-{#{% set isuser = false %}#}
 
 {% block bandeau %}
     <div class="row">
@@ -163,6 +162,23 @@
                         Aucun passe-temps indiqué. Quelle triste vie...
                     {% endif %}
                 </div>
+                
+                <h3>Suggestions d'annonces</h3>
+                <div class="bloc">
+                    {% if user.advertisements.count > 0 %}
+                        <div>
+                        
+                            {% for advertisement in user.advertisements %}
+                                <li><a href="{{ path('show_advert', {'slug': advertisement.slug}) }}" >{{ advertisement.title }}</a>
+                                    <div><i>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</i></div>
+                                </li>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        Aucune suggestion d'annonce.
+                    {% endif %}
+                </div>
+                
 
                 <hr/>
 

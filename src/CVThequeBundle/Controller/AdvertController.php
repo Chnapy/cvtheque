@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use CVThequeBundle\Entity\Advertisement;
@@ -17,12 +19,49 @@ use CVThequeBundle\Form\AdvertisementEditType;
 
 class AdvertController extends Controller
 {
-  public function showAction(Advertisement $advertisement)
+  public function showAction(Advertisement $advertisement, Request $request)
   {
+      
       $author = $advertisement->getSociety();
+      
+      
+      
+      
+      
+      // Formulaire permettant à un admin de suggérer l’annonce à un étudiant
+      $builder = $this
+          ->createFormBuilder()
+          ->add('pseudo', TextType::class, array(
+                'label' => "Entrez le pseudo de l'étudiant:" 
+          ))
+          ->add('submit', SubmitType::class, array(
+                'label' => 'Envoyer' 
+          ));        
+      $form = $builder->getForm();
+      // Si le visiteur est l'auteur ou un admin
+      if(get_class($this->getUser()) === "MG\UserBundle\Entity\Admin" || $this->getUser() === $author)
+      {
+          $form->handleRequest($request);
+          if ($form->isSubmitted()) {
+              $slug = $form['pseudo']->getData();
+              $repository = $this->getDoctrine()
+              ->getManager()
+              ->getRepository('MGUserBundle:User');
+              
+              $user = $repository->findOneBySlug($slug);
+              if(get_class($user) === "MG\UserBundle\Entity\Applicant") {
+                  $user->addAdvertisement($advertisement);
+                  $em = $this->getDoctrine()->getManager();
+                  $em->persist($user);
+                  $em->flush();
+                  $this->get('session')->getFlashBag()->add('info', "Une invitation à consulter cette annonce a été envoyé à ".$user->getUsername());
+              }
+          }
+      }
       return $this->render('CVThequeBundle:Advertisement:view.html.twig', array(
-          'advertisement'      => $advertisement,
-          'author' => $author
+          'advertisement' => $advertisement,
+          'author'        => $author,
+          'form'          => $form->createView()
       ));
   }
 
