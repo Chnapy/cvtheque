@@ -56,7 +56,7 @@ class Society extends User
     public function setUsername($username)
     {
         $this->username = $username;
-        $this->societyName = $username;
+        $this->setSocietyName($username);
         
         return $this;
     }
