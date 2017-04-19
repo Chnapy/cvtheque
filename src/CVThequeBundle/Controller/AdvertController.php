@@ -19,13 +19,25 @@ use CVThequeBundle\Form\AdvertisementEditType;
 
 class AdvertController extends Controller
 {
+  /**
+   * Le visiteur doit au minimum être connecté
+   * @Secure(roles="ROLE_USER")
+   */
   public function showAction(Advertisement $advertisement, Request $request)
   {
       
       $author = $advertisement->getSociety();
-      
-      
-      
+      $user = $this->getUser(); // Visiteur
+      // Vérification des droits de l'utilisateur à consulter l'annonce
+      // Si l'utilisateur est un étudiant ayant une autorisation
+      $authorization = false;
+      if(get_class($user) === "MG\UserBundle\Entity\Applicant" && $user->getAdvertisements()->contains($advertisement)) { $authorization = true; }
+      // S'il n'a pas d'autorisation, qu'il n'est pas l'auteur et qu'il n'est pas admin : Erreur 403
+      if(!$authorization && $author->getId() !== $user->getId() && get_class($user) !== "MG\UserBundle\Entity\Admin")
+      {
+          $message = "Vous n'avez pas les droits pour accèder à cette annonce";
+          throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException ($message);
+      }
       
       
       // Formulaire permettant à un admin de suggérer l’annonce à un étudiant
@@ -39,10 +51,11 @@ class AdvertController extends Controller
           ));        
       $form = $builder->getForm();
       // Si le visiteur est l'auteur ou un admin
-      if(get_class($this->getUser()) === "MG\UserBundle\Entity\Admin" || $this->getUser() === $author)
+      if(get_class($user) === "MG\UserBundle\Entity\Admin" || $user === $author)
       {
           $form->handleRequest($request);
           if ($form->isSubmitted()) {
+              // Récupération de l'utilisateur à qui suggérer l'annonce
               $slug = $form['pseudo']->getData();
               $repository = $this->getDoctrine()
               ->getManager()
