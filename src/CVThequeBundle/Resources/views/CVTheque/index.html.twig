@@ -41,6 +41,7 @@
 			{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 				<h3>Identification</h3>
 				{{ render(controller('FOSUserBundle:Security:login')) }}
+				<a href="{{ path('fos_user_resetting_request') }}" >Mot de passe oublié<a>
 			{% else %}
 				<div class="text-center">
 					<h3>Vous êtes déjà connecté</h3>

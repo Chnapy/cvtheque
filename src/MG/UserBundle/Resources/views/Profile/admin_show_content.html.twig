@@ -4,11 +4,12 @@
         <a href="{{ path('fos_user_profile_edit') }}" class="but">
             Modifier le profil administrateur
         </a>
-
+        <a href='{{ path('fos_user_change_password') }}' class="but d-block primary" >
+            Modifier le mot de passe
+        </a>
         <a href="{{ path('mg_user_profile_delete') }}" class="but error">
             Supprimer le profil administrateur
         </a>
-
     {% endif %}
     <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>
     <p>{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
