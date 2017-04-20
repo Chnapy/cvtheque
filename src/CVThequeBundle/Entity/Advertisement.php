@@ -71,7 +71,7 @@ class Advertisement
     
     
     /**
-     * @ORM\OneToOne(targetEntity="MG\UserBundle\Entity\Image", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToOne(targetEntity="MG/UserBundle/Entity/Image", cascade={"persist", "merge", "remove"})
      * @ORM\joinColumn(nullable=true)
      */
     private $image;
