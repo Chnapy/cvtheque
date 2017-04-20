@@ -78,6 +78,16 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
 
 .bandeau {
     margin-bottom: 20px;
+    padding: 20px 0;
+    
+    &>.container>.row>* {
+        &:first-child  {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .main_title {

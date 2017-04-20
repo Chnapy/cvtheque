@@ -11,7 +11,7 @@
 
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'class': 'fos_user_profile_edit'}}) }}
 
-    <script>var FORM = 'profile';</script>
+    <script>var FORM = 'fos_user_profile_form';</script>
 
     {{ form_errors(form) }}
 
@@ -77,7 +77,10 @@
 
     <div class='bloc'>
         <label for="ip_skills">{{ 'form.skills'|trans({}, 'MGUserBundle') }}</label>
-        <div class="skills form-group" data-skills='[{% for skill in form.skills %}"{{ skill.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+        <div class="skills form-group" 
+             data-name='skills' 
+             data-supp='Supprimer la compétence' 
+             data-skills='[{% for skill in form.skills %}"{{ skill.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
 
             <div class="skills-content tag-content" aria-live="polite">
                 <div class="field inline skills-add">
@@ -89,21 +92,24 @@
 
         </div>
 
-        <label for="ip_hobbys">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
-        <div class="hobbys form-group"
-             data-hobbys='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+        <label for="ip_skills">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
+        <div class="skills form-group" 
+             data-name='hobbies' 
+             data-supp='Supprimer le passe-temps' 
+             data-skills='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
 
-            <div class="hobbys-content tag-content" aria-live="polite">
-                <div class="field inline hobbys-add">
+            <div class="skills-content tag-content" aria-live="polite">
+                <div class="field inline skills-add">
                     <span class="sr-only sr-only-focusable">Entrez le centre d'intérêt puis appuyez sur Entrée pour l'ajouter</span>
-                    <input type="text" id="ip_hobbys" minLength="2" maxLength="255" />
+                    <input type="text" id="ip_skills" minLength="2" maxLength="255" />
                     <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
                 </div>
             </div>
 
         </div>
-        {{ form_widget(form._token) }}
     </div>
+
+    {{ form_widget(form._token) }}
 
     <div class="form-group">
         <button type="submit" class="but d-block primary">{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}</button>

@@ -1,10 +1,20 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{#{% extends "FOSUserBundle::layout.html.twig" %}#}
+{% extends '::base.html.twig' %}
 
-{% block fos_user_content %}
- {{ form_start(form, { 'action': path('mg_applicant_profile_log_book_upload'), 'attr': { 'class': 'mg_applicant_profile_log_book_upload' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'form.logbook.submit'|trans({}, 'MGUserBundle') }}" />
+{% block bandeau %}
+    <div class="row">
+        <h1>Ajout & modification du journal</h1>
+        {#<div class="lead"></div>#}
     </div>
-{{ form_end(form) }}
-{% endblock fos_user_content %}
+{% endblock %}
+
+{% block content %}
+    <div class="bloc">
+ {{ form_start(form, { 'action': path('mg_applicant_profile_log_book_upload'), 'attr': { 'class': 'mg_applicant_profile_log_book_upload' } }) }}
+        {{ form_widget(form) }}
+        <div class="field">
+            <input type="submit" value="{{ 'form.logbook.submit'|trans({}, 'MGUserBundle') }}" class="but primary" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

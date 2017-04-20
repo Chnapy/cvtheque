@@ -98,7 +98,12 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
   user-select: none; }
 
 .bandeau {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  padding: 20px 0; }
+  .bandeau > .container > .row > *:first-child {
+    margin-top: 0; }
+  .bandeau > .container > .row > *:last-child {
+    margin-bottom: 0; }
 
 .main_title {
   text-align: center;

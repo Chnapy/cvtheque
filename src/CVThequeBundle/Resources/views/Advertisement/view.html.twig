@@ -1,63 +1,98 @@
-{% extends "CVThequeBundle::layout.html.twig" %}
+{#{% extends "CVThequeBundle::layout.html.twig" %}#}
+{% extends '::base.html.twig' %}
+
+{% set isauthor = author.id == app.user.id %}
+
 {% block title %}
-  {{ advertisement.title }}
+    {{ advertisement.title }}
 {% endblock %}
-{% block body %}
-  <div style="float: left; margin-right: 1em;">
-    {% if advertisement.image is not null %}
-      <img src="{{ advertisement.image.webPath }}" alt="{{ advertisement.image.alt }}" height="60">
-    {% endif %}
-  </div> 
-  <h2>
-    {{ advertisement.title }} 
-  </h2>
-  <i>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</i>
-  <article class="well" style="clear: both;">
-    {{ advertisement.content|markdown }}
-  </article>
-  <div class="well well-small">
-    {% if advertisement.advertSkills|length > 0 %}
-    <h3>Compétences nécessaires :</h3>
-    <ul>
-      {% for advertSkill in advertisement.advertSkills %}
-        <li>{{ advertSkill.name }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-  
-  
-  <hr>
-  </div>
-  {% set isauthor = author.id == app.user.id %}
-  
-  <div>
-  {% if is_granted('ROLE_ADMIN') %}
-  <a href="{{ path('admin_advert_show') }}" class="btn">
-    <i class="icon-chevron-left"></i>
-    Retour à la liste 
-  </a>
-  
-  {% endif %}
-  {% if isauthor or is_granted('ROLE_ADMIN') %}
-  <a href="{{ path('update_advert', {'id': advertisement.id}) }}" class="btn">
-    <i class="icon-edit"></i>
-    Modifier
-  </a>
-  <a href="{{ path('delete_advert', {'id': advertisement.id}) }}" class="btn">
-    <i class="icon-trash"></i>
-    Supprimer 
-  </a>
-  <h3>Suggérer cette annonce</h3>
-  {{ form(form)  }}
-  {% elseif is_granted('ROLE_APPLICANT') %}
-  <a href="#" class="btn">
-    <i class=""></i>
-    Postuler à cette offre
-  </a>
-  <a href="{{ path('mg_user_show') }}" class="btn">
-    <i class="icon-chevron-left"></i>
-    Retour à votre profil
-  </a>
-  {% endif %}
-  </div>
+
+{% block bandeau %}
+    <div class="row">
+        <h1>{{ advertisement.title }}</h1>
+        <div class="lead">Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</div>
+    </div>
 {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 colonne">
+                <div class="row bloc text-center">
+                    <a class="avatar{% if (isauthor or is_granted('ROLE_ADMIN')) and advertisement.image is null %} avatar-empty{% endif %}">
+                        <img {% if advertisement.image is not null %}src="{{ advertisement.image.webPath }}" alt="{{ advertisement.image.alt }}"{% endif %}>
+                    </a>
+                </div>
+
+                {% if isauthor or is_granted('ROLE_ADMIN') %}
+                    <hr/>
+
+                    <div class="row">
+                        <a href='{{ path('update_advert', {'id': advertisement.id}) }}' class="but d-block primary" >
+                            Modifier l'annonce
+                        </a>
+                    </div>
+
+                    <hr/>
+
+                    <div class="row">
+                        <a href='{{ path('delete_advert', {'id': advertisement.id}) }}' class="but d-block error" >
+                            Supprimer l'annonce
+                        </a>
+                    </div>
+
+                    <hr/>
+
+                    <div class='row bloc'>
+                        <h3>Suggérer cette annonce</h3>
+                        {{ form(form)  }}
+                    </div>
+
+                {% elseif is_granted('ROLE_APPLICANT') %}
+                    <hr/>
+
+                    <div class="row">
+                        <a href='#' class="but d-block primary" >
+                            Postuler à cette offre
+                        </a>
+                    </div>
+
+                    {#<a href="{{ path('mg_user_show') }}" class="btn">
+                        <i class="icon-chevron-left"></i>
+                        Retour à votre profil
+                    </a>#}
+                {% endif %}
+            </div>
+
+            <div class="col-md-9">
+
+                <h3>Description</h3>
+                <div class="bloc">
+                    {{ advertisement.content|markdown }}
+                </div>
+
+                <h3>Liste des compétences demandées</h3>
+                <div class="bloc">
+                    {% if advertisement.advertSkills.count > 0 %}
+                        <div class='tag-content'>
+                            {% for skill in advertisement.advertSkills %}
+                                <span class='tag'>{{ skill.name }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        Aucune compétence demandée. Voila une offre peu exigente.
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{#{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin_advert_show') }}" class="btn">
+        <i class="icon-chevron-left"></i>
+        Retour à la liste 
+    </a>
+{% endif %}#}

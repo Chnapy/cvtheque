@@ -11,14 +11,14 @@
 
     {{ form_start(form, {'method': 'post', 'action': path('mg_applicant_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
-    <script>var FORM = 'registration';</script>
-    
+    <script>var FORM = 'fos_user_registration_form';</script>
+
     <div class='bloc'>
         {{ form_row(form.username) }}
         {{ form_row(form.email) }}
         {{ form_row(form.plainPassword) }}
     </div>
-    
+
     <div class='bloc'>
         {{ form_row(form.firstname) }}
         {{ form_row(form.lastname) }}
@@ -30,12 +30,12 @@
         {{ form_row(form.address.country) }}
         {{ form_row(form.phoneNumber) }}
     </div>
-    
+
     <div class='bloc'>
         {{ form_row(form.titleProfile) }}
         {{ form_row(form.description) }}
     </div>
-    
+
     <div class='bloc'>
         <label>{{ 'form.educations'|trans({}, 'MGUserBundle') }}</label>
         <div class="educations" 
@@ -73,7 +73,7 @@
                  {% if not loop.last %},{% endif %}
              {% endfor %}
              ]'>
-            
+
             <div class='works-content'></div>
 
             <div>
@@ -85,7 +85,10 @@
 
     <div class='bloc'>
         <label for="ip_skills">{{ 'form.skills'|trans({}, 'MGUserBundle') }}</label>
-        <div class="skills form-group" data-skills='[{% for skill in form.skills %}"{{ skill.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+        <div class="skills form-group" 
+             data-name='skills' 
+             data-supp='Supprimer la compétence' 
+             data-skills='[{% for skill in form.skills %}"{{ skill.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
 
             <div class="skills-content tag-content" aria-live="polite">
                 <div class="field inline skills-add">
@@ -96,15 +99,17 @@
             </div>
 
         </div>
-             
-        <label for="ip_hobbys">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
-        <div class="hobbys form-group"
-             data-hobbys='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
 
-            <div class="hobbys-content tag-content" aria-live="polite">
-                <div class="field inline hobbys-add">
+        <label for="ip_skills">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
+        <div class="skills form-group" 
+             data-name='hobbies' 
+             data-supp='Supprimer le passe-temps' 
+             data-skills='[{% for hobby in form.hobbies %}"{{ hobby.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+
+            <div class="skills-content tag-content" aria-live="polite">
+                <div class="field inline skills-add">
                     <span class="sr-only sr-only-focusable">Entrez le centre d'intérêt puis appuyez sur Entrée pour l'ajouter</span>
-                    <input type="text" id="ip_hobbys" minLength="2" maxLength="255" />
+                    <input type="text" id="ip_skills" minLength="2" maxLength="255" />
                     <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
                 </div>
             </div>

@@ -1,13 +1,23 @@
-{% extends "CVThequeBundle::layout.html.twig" %}
-{% block title %}Supprimer une annonce - {{ parent() }} {% endblock %} 
-{% block body %}
-<h2>Supprimer une annonce</h2>
-<p>Êtes-vous certain de vouloir supprimer l'annonce "{{ advertisement.title }}" ?</p>
-<form action="{{ path('delete_advert', {'id': advertisement.id}) }}"	method="post">
-  <a href="{{ path('mgblog_show', {'slug': advertisement.slug}) }}" class="btn">
-    <i class="icon-chevron-left"></i>Retour à l'annonce
-  </a>
-  <input type="submit" value="Supprimer" class="btn btn-danger" />
-  {{ form_rest(form) }}
-</form>
+{#{% extends "CVThequeBundle::layout.html.twig" %}#}
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Supprimer une annonce - {{ parent() }} 
+{% endblock %} 
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Suppression d'une annonce : {{ advertisement.title }}</h1>
+        <div class="lead">Action irréversible. Êtes-vous sûr de ce que vous faites ?</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ path('delete_advert', {'id': advertisement.id}) }}"	method="post">
+        <a href="{{ path('mgblog_show', {'slug': advertisement.slug}) }}" class="but">
+            Retour à l'annonce
+        </a>
+        <input type="submit" value="Confirmer la suppression" class="but error" />
+        {{ form_rest(form) }}
+    </form>
 {% endblock %}

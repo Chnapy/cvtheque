@@ -1,72 +1,51 @@
-<div class="well">
-  {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
-    {{ form_errors(form) }}
+{{ form_start(form, {'attr': {'class': ''}}) }}
+
+{{ form_errors(form) }}
+
+<div class='bloc'>
     {{ form_row(form.author) }}
-    {{ form_row(form.image.file) }}
-    {{ form_row(form.image.alt) }}
     {{ form_row(form.title) }}
     {{ form_row(form.content) }}
-    {{ form_row(form.category) }}
-    
-    <h3>{{ 'form.skills'|trans({}, 'CVThequeBundle') }}</h3>
-    <ul class="advertSkills"
-        data-prototype="{{ form_widget(form.advertSkills.vars.prototype)|e('html_attr') }}">
-    {% for skill in form.advertSkills %}
-    <li>
-        {{ form_row(skill.name) }}
-    </li>
-    {% endfor %}
-    </ul>
-    
-    {{ form_row(form.published) }}
-    {% if form.created is defined %}
-      {{ form_row(form.created) }}
-    {% endif %}
-    <input type="hidden" name="_csrf_token"
-        value="{{ csrf_token('authenticate') }}"
-    >
-    {{ form_row(form.save) }}
-    
-  {{ form_end(form) }}
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" charset="UTF-8" >
-var $collectionHolder;
-var $addSkillLink = $('<a href="#" class="add_skill_link">{{ 'form.skill.add_button'|trans({}, 'CVThequeBundle') }}</a>');
-var $newLinkLi = $('<li></li>').append($addSkillLink);
-jQuery(document).ready(function() {
-    $collectionHolder = $('ul.advertSkills');
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
-    if ($collectionHolder.data('index') > 0) { 
-        $collectionHolder.find('li').each(function() {
-            addSkillFormDeleteLink($(this));
-        });
-    }
-    $collectionHolder.append($newLinkLi );
-    $addSkillLink.on('click', function(e) {
-        e.preventDefault();
-        addSkillForm($collectionHolder, $newLinkLi);
-    });
-});
 
-function addSkillForm($collectionHolder, $newLinkLi) {
-    var prototype = $collectionHolder.data('prototype');
-    var index = $collectionHolder.data('index');
-    var newForm = prototype.replace(/__name__/g, index);
-    $collectionHolder.data('index', index + 1);
-    var $newFormLi = $('<li></li>').append(newForm);
-    $newLinkLi.before($newFormLi);
-    addSkillFormDeleteLink($newFormLi);
-}
+<div class='bloc'>
+    {{ form_row(form.category) }}
 
-function addSkillFormDeleteLink($skillFormLi) {
-    var $removeFormA = $('<a href="#">{{ 'form.skill.del_button'|trans({}, 'CVThequeBundle') }}</a>');
-    $skillFormLi.append($removeFormA);
+    <label for="ip_skills">{{ 'form.skills'|trans({}, 'CVThequeBundle') }}</label>
+    <div class="skills form-group" 
+         data-name='advertSkills' 
+         data-supp='Supprimer la compétence' 
+         data-skills='[{% for skill in form.advertSkills %}"{{ skill.vars.value.name }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+        
+        <div class="skills-content tag-content" aria-live="polite">
+            <div class="field inline skills-add">
+                <span class="sr-only sr-only-focusable">Entrez la compétence demandée puis appuyez sur Entrée pour l'ajouter</span>
+                <input type="text" id="ip_skills" minLength="2" maxLength="255" />
+                <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
+            </div>
+        </div>
 
-    $removeFormA.on('click', function(e) {
-        e.preventDefault();
+    </div>
+</div>
 
-        $skillFormLi.remove();
-    });
-}
-</script>
+<ul class="advertSkills"
+    data-prototype="{{ form_widget(form.advertSkills.vars.prototype)|e('html_attr') }}">
+</ul>
+
+<div class='bloc'>
+    {{ form_row(form.image.file) }}
+    {{ form_row(form.image.alt) }}
+</div>
+
+{{ form_row(form.published) }}
+{% if form.created is defined %}
+    {{ form_row(form.created) }}
+{% endif %}
+
+{{ form_widget(form._token) }}
+
+<div class="form-group">
+    {{ form_row(form.save, {'attr': {'class': 'but primary d-block'}}) }}
+</div>
+
+{{ form_end(form, {'render_rest': false}) }}

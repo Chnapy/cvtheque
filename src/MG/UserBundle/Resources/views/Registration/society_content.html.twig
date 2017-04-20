@@ -1,32 +1,45 @@
 {% extends '::base.html.twig' %}
 
 {% block bandeau %}
-	<div class="row">
-		<h1>Inscription - Entreprise</h1>
-		<div class="lead">Remplissez les différents champs demandés.</div>
-	</div>
+    <div class="row">
+        <h1>Inscription - Entreprise</h1>
+        <div class="lead">Remplissez les différents champs demandés.</div>
+    </div>
 {% endblock %}
 
 {% block content %}
 
-	{{ form_start(form, {'method': 'post', 'action': path('mg_society_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword) }}
-    {{ form_row(form.address.street) }}
-    {{ form_row(form.address.zipCode) }}
-    {{ form_row(form.address.town) }}
-    {{ form_row(form.address.country) }}
-    {{ form_row(form.phoneNumber) }}
-    {{ form_row(form.category) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.image) }}
+    {{ form_start(form, {'method': 'post', 'action': path('mg_society_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <script>var FORM = 'fos_user_registration_form';</script>
 
-	<div class="form-group">
-		<button type="submit" class="but d-block primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
-	</div>
-	{{ form_end(form) }}
+    <div class='bloc'>
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword) }}
+    </div>
+
+    <div class='bloc'>
+        {{ form_row(form.address.street) }}
+        {{ form_row(form.address.zipCode) }}
+        {{ form_row(form.address.town) }}
+        {{ form_row(form.address.country) }}
+        {{ form_row(form.phoneNumber) }}
+    </div>
+
+    <div class='bloc'>
+        {{ form_row(form.category) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.image) }}
+    </div>
+
+    {{ form_widget(form._token) }}
+{#    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">#}
+
+    <div class="form-group">
+        <button type="submit" class="but d-block primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+    </div>
+    
+    {{ form_end(form) }}
 
 {% endblock %}

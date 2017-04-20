@@ -1,59 +1,73 @@
+{% extends '::base.html.twig' %}
+
+{% set isuser = user.id == app.user.id %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>{{ 'profile.show.societyName'|trans({'%societyName%': user.societyName }, 'MGUserBundle') }}</h1>
+        <div class="lead">Un accès à toutes vos données.</div>
+    </div>
+{% endblock %}
+
 {% block content %}
-  <div class="fos_user_user_show">
-    <div style="float: left; margin-right: 1em;">
-      {% if user.image is not null %}
-        <img src="{{ user.image.webPath }}" alt="{{ user.image.alt }}" height="60">
-      {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 colonne">
+                <div class="row bloc text-center">
+                    <a href="{% if isuser %}{{ path('mg_user_profile_picture_edit') }}{% endif %}" class="avatar{% if isuser and user.image is null %} avatar-empty{% endif %}">
+                        <img {% if user.image is not null %}src="{{ user.image.webPath }}" alt="{{ user.image.alt }}{% endif %}">
+                        {% if isuser %}
+                            <div class='avatar-front'>
+                                <span class="sr-only sr-only-focusable">Ajouter ou modifier l'avatar</span>
+                                <span class="avatar-upload glyphicon glyphicon-upload"></span>
+                            </div>
+                        {% endif %}
+                    </a>
+                </div>
+                {% if isuser %}
+                    <hr/>
+                    <div class="row">
+                        <a href='{{ path('fos_user_profile_edit') }}' class="but d-block primary" >
+                            Modifier le profil
+                        </a>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <a href='{{ path('mg_user_profile_delete') }}' class="but d-block error" >
+                            Supprimer le profil
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-9">
+                <h3>Informations générales</h3>
+                <div class='bloc'>
+                    <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
+                </div>
+
+                <h3>Description</h3>
+                <div class="bloc">
+                    {{ user.description|markdown }}
+                </div>
+
+                <h3>Contact</h3>
+                <div class="bloc">
+                    {% if user.email %}
+                        <p> Par email : {{ user.email }} </p>
+                    {% endif %}
+
+                    {% if user.phoneNumber %}
+                        <p> Par téléphone : {{ user.phoneNumber }} </p>
+                    {% endif %}
+                </div>
+
+                <hr/>
+
+                <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}<br/>
+                    {{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
+            </div>
+        </div>
     </div>
-    <h1>{{ 'profile.show.societyName'|trans({'%societyName%': user.societyName }, 'MGUserBundle') }}</h1>
-    <h2>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</h2>
-    
-    <h3>
-      Description 
-    </h3>
-    
-    <article class="well" style="clear: both;">
-      {{ user.description|markdown }}
-    </article>
-
-      <!-- Infos de contact de l'entreprise -->
-    <h3> Nous contacter </h3>
-    <div class="bloc">
-
-      {% if user.email %}
-        <p> Par email : {{ user.email }} </p>
-      {% endif %}
-
-      {% if user.phoneNumber %}
-        <p> Par téléphone : {{ user.phoneNumber }} </p>
-      {% endif %}
-
-    </div>
-
-    <hr/>
-
-    {% if user.id == app.user.id %}
-      <div class="row">
-        <a href="{{ path('mg_user_profile_picture_edit') }}" class="but col-xs-2">
-          Modifier la photo
-        </a>
-      </div>
-      <div class="row">
-        <a href="{{ path('fos_user_profile_edit') }}" class="but d-block primary">
-          Modifier le profil
-        </a>
-      </div>
-      <div class="row">
-        <a href="{{ path('mg_user_profile_delete') }}" class="but d-block error">
-          Supprimer 
-        </a>
-      </div>
-
-    <hr/>
-
-    {% endif %}
-    <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>
-    <p>{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
-  </div>
 
 {% endblock %}

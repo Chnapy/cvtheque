@@ -1,14 +1,20 @@
 {# src/MG/UserBundle/Resources/views/Profile/delete.html.twig #} 
-{% extends "MGUserBundle::layout.html.twig" %}
-{% block title %}Supprimer le profil - {{ parent() }} {% endblock %} 
-{% block fos_user_content %}
-<h2>Supprimer le profil</h2>
-<p>Êtes-vous certain de vouloir supprimer le profile ?</p>
-<form action="{{ path('mg_user_profile_delete') }}" method="post">
-  <a href="{{ path('fos_user_profile_show') }}" class="btn">
-    <i class="icon-chevron-left"></i>Retour au profile
-  </a>
-  <input type="submit" value="Supprimer" class="btn btn-danger" />
-  {{ form_rest(form) }}
-</form>
+{#{% extends "MGUserBundle::layout.html.twig" %}#}
+{% extends '::base.html.twig' %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Suppression du profil</h1>
+        <div class="lead">Action irréversible. Êtes-vous sûr de ce que vous faites ?</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form class="" action="{{ path('mg_user_profile_delete') }}" method="post">
+        <a href="{{ path('fos_user_profile_show') }}" class="but">
+            Retour au profil
+        </a>
+        <input type="submit" value="Confirmer la suppression" class="but error" />
+        {{ form_rest(form) }}
+    </form>
 {% endblock %}
