@@ -23,6 +23,124 @@
     min-height: 50px;
 }
 
-/*.but.primary {
-    color: white;
-}*/
+#footer {
+    .row {
+        display: table;
+
+        &>* {
+            display: table-cell;
+            float: none;
+        }
+    }
+
+    .univ-logo {
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+    }
+}
+
+.list-user {
+    .list-user-row {
+        display: block;
+        color: initial;
+        padding: 0;
+        height: 50px;
+        line-height: 50px;
+
+        &>* {
+            height: 100%;
+
+            &>* {
+                display: inline;
+
+                &.icon-bloc {
+                    padding: 5px;
+                }
+            }
+
+            &:not(.user-avatar) {
+                text-align: center;
+            }
+        }
+
+        &>*:nth-child(odd):not(:first-child) {
+            background: rgba($bg_dark_color, 0.05);
+        }
+
+        .user-name {
+
+            .user-lastname {
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            .user-firstname {
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+
+            .user-username {
+                font-size: .9em;
+                color: #555;
+            }
+        }
+
+        .user-category {
+            /*padding: 11px 0;*/
+        }
+
+        .user-avatar {
+            padding-left: 0;
+
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                height: auto;
+                vertical-align: top;
+            }
+        }
+
+        &:hover {
+            .user-name {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.pagination>li>a, .pagination>li>span {
+    color: $color_primary;
+    background-color: $bg_dark_color;
+    border: none;
+
+    &:hover, &:focus {
+        color: $color_primary;
+        background-color: darken($bg_dark_color, 3%);
+    }
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, 
+.pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: $color_primary;
+}
+
+.icon-bloc {
+    position: relative;
+    display: inline-block;
+    color: $color_dark_main;
+    background: $bg_dark_color;
+    padding-left: $ajax_bloc_pad;
+    padding-right: $ajax_bloc_pad;
+    font-weight: lighter;
+    font-size: .8em;
+
+    .spinner-box {
+        margin-left: $ajax_bloc_pad;
+
+        .glyphicon {
+            @include wout-prefix(animation-name, opa);
+            @include wout-prefix(animation-duration, $transition_dur);
+        }
+    }
+}

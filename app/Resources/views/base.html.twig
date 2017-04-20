@@ -25,7 +25,7 @@
                     <nav class="header-content container">
                         <a class="logo nav-item" href="{{ path('homepage') }}">CVthèque</a>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            
+
                         {% endif %}
 
                         {% if is_granted('ROLE_ADMIN') %}
@@ -68,12 +68,18 @@
                 </div>
             </main>
 
-            <hr>
-
-            <footer id="footer">
+            <footer id="footer" class='footer dark'>
                 <div class="container">
-                    <p>© {{ 'now'|date('Y') }} Team++</p>
-                </div>
+                    <div class='row'>
+                        <div class='col-md-8 vertical-center-parent'>
+                            <div class='vertical-center-child'>
+                                Copyright © {{ 'now'|date('Y') }} Université Paris 13. Tous droits réservés
+                            </div>
+                        </div>
+                        <div class='col-md-4'>
+                            <img class='univ-logo' src='{{ asset('img/univ/USPCPARIS13-blanc-retina.png') }}' alt='Logo de l\'université Paris 13 et de la Sorbonne'/>
+                        </div>
+                    </div>
             </footer>
         </section>
 
