@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="CVThequeBundle\Repository\AdvertisementRepository")
  * @ORM\Table(name="advertisement")
@@ -71,7 +72,7 @@ class Advertisement
     
     /**
      * @ORM\OneToOne(targetEntity="MG\UserBundle\Entity\Image", cascade={"persist", "merge", "remove"})
-     * ORM\joinColumn(nullable=true)
+     * ORM\JoinColumn(nullable=true)
      */
     private $image;
     
@@ -119,7 +120,7 @@ class Advertisement
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function setUpdatedValue()
     {
