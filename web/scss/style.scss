@@ -50,6 +50,9 @@
 
         &>* {
             height: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
 
             &>* {
                 display: inline;
@@ -107,6 +110,12 @@
             }
         }
     }
+}
+
+a.bloc {
+    color: initial;
+    display: block;
+    
 }
 
 .pagination>li>a, .pagination>li>span {

@@ -1,28 +1,71 @@
-{% extends "CVThequeBundle::layout.html.twig" %} 
-{% block title %}Annonces{% endblock %} 
-{% block body %}
-<h3>Les dernières annonces</h3>
-<ul class="list-group">
-  {% for advertisement in advertisements %}
-    <li class="list-group-item"><a href="{{ path('show_advert', {'slug': advertisement.slug}) }}" >{{ advertisement.title }}</a>
-      <div class="badge"><i>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</i></div>
-    </li>
-  {% else %}
-  <p>Il n'y a pas d'annonce dans la base de données.</p>
-  {% endfor %}
-</ul>
-{% if nb_page > 1 %}
-<div>
-  <h4>Pages :</h4>
-  <ul class="pagination">
-  {% for p in range(1, nb_page) %}
-    {% if p == page %}
-      <li class="active"><a href="{{ path('admin_advert_show', {'page': p}) }}">{{ p }}</a></li>
-    {% else %}
-      <li><a href="{{ path('admin_advert_show', {'page': p}) }}">{{ p }}</a></li>
+{#{% extends "CVThequeBundle::layout.html.twig" %} #}
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Annonces
+{% endblock %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Annonces</h1>
+        <div class="lead">Liste des annonces.</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="list-user container">
+        {% for advertisement in advertisements %}
+
+            <a class="bloc list-user-row row" href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
+                <div class='col-md-1 user-avatar'>
+                    <img {% if advertisement.image is not null %}src="{{ advertisement.image.webPath }}" alt="{{ advertisement.image.alt }}"{% endif %} />
+                </div>
+                <div class='col-md-3 user-name'>
+                    <span class='user-firstname'>{{ advertisement.society.username }}</span> 
+                    <span class='user-username'>{{ advertisement.author }}</span>
+                </div>
+                <div class='col-md-2'>
+                    {{ advertisement.title }}
+                </div>
+                <div class='col-md-2 user-category'>
+                    <span class='tag'>{{ advertisement.category.name }}</span>
+                </div>
+                <div class='col-md-1'>
+                    <span class='icon-bloc'>
+                        Publiée
+                        <span class='spinner-box'>
+                            <span class='icon l-white glyphicon {% if advertisement.published is null %}glyphicon-remove{% else %}glyphicon-ok{% endif %}'></span>
+                        </span>
+                    </span>
+                </div>
+                <div class='col-md-3'>
+                    Créé le {{ advertisement.created|date('d/m/Y') }}, màj le {{ advertisement.updated|date('d/m/Y') }}
+                </div>
+            </a>
+
+        {% else %}
+            <div class="bloc list-user-row row">
+                Il n'y a pas d'annonce dans la base de données.
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if nb_page > 1 %}
+        <div>
+            <ul class="pagination">
+                {% for p in range(1, nb_page) %}
+                    {% if p == page %}
+                        <li class="active">
+                            <span>{{ p }}</span>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{{ path('admin_advert_show', {'page': p}) }}">{{ p }}</a>
+                        </li>
+                        {% endif %} 
+                    {% endfor %}
+            </ul>
+        </div>
     {% endif %} 
-  {% endfor %}
-  </ul>
-</div>
-{% endif %} 
 {% endblock %}

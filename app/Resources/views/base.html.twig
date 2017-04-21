@@ -15,6 +15,7 @@
     <body>
 
         {% set first_access = app.request.get('_route') == 'homepage' and not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% set route = app.request.get('_route') %}
 
         <section class="main-content{% if first_access %} no-header{% endif %}">
 
@@ -29,19 +30,19 @@
                         {% endif %}
 
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin_advert_show') }}" class="nav-item">Annonces</a>
-                            <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="nav-item">Étudiants non validés</a>
-                            <a href="{{ path('mg_admin_show_applicants_validate') }}" class="nav-item">Étudiants validés</a>
+                            <a href="{{ path('admin_advert_show') }}" class="nav-item{% if route == 'admin_advert_show' %} active{% endif %}">Annonces</a>
+                            <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="nav-item{% if route == 'mg_admin_show_applicants_not_validate' %} active{% endif %}">Étudiants non validés</a>
+                            <a href="{{ path('mg_admin_show_applicants_validate') }}" class="nav-item{% if route == 'mg_admin_show_applicants_validate' %} active{% endif %}">Étudiants validés</a>
                             {#<a class="nav-item" href="#" >Configuration</a>#}
                         {% else %}
                             {% if is_granted('ROLE_SOCIETY') %}
-                                <a class="nav-item" href="{{ path('add_advert') }}">Ajouter une annonce</a>
+                                <a class="nav-item{% if route == 'add_advert' %} active{% endif %}" href="{{ path('add_advert') }}">Ajouter une annonce</a>
                             {% endif %}
                         {% endif %}
 
                         <span class="nav-right">
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                <span class="compte nav-item{% if app.request.get('_route') == 'mg_user_show' %} active{% endif %}">
+                                <span class="compte nav-item{% if route == 'mg_user_show' %} active{% endif %}">
                                     <a class="compte-pseudo" href="{{ path('mg_user_show') }}">{{ app.user.username }}</a>
                                     <a class="deco mini-but" href="{{ path('fos_user_security_logout') }}">
                                         <span class="sr-only sr-only-focusable">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
@@ -63,6 +64,14 @@
                 </div>
 
                 <div class="container page-content">
+                    {% for type, messages in app.session.flashBag.all %}
+                        {% for message in messages %}
+                            <div class="alert alert-dismissible alert-{{ type }}" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ message|trans({}, 'FOSUserBundle') }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
                     {% block content %}
                     {% endblock %} 
                 </div>
