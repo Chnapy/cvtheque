@@ -80,6 +80,11 @@ class Applicant extends User
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
+    private $applications;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
     private $advertisements;
     
     /**
@@ -93,6 +98,7 @@ class Applicant extends User
         $this->workExperiences = new \Doctrine\Common\Collections\ArrayCollection();
         $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
         $this->hobbies = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->application = new \Doctrine\Common\Collections\ArrayCollection();
         $this->addRole("ROLE_APPLICANT");
     }
     
@@ -458,6 +464,41 @@ class Applicant extends User
     public function getHobbies()
     {
         return $this->hobbies;
+    }
+
+    /**
+     * Add application
+     *
+     * @param \MG\UserBundle\Entity\Application $application
+     *
+     * @return Applicant
+     */
+    public function addApplication(\MG\UserBundle\Entity\Application $application)
+    {
+        $application->setApplicant($this);
+        $this->applications[] = $application;
+
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param \MG\UserBundle\Entity\Application $application
+     */
+    public function removeApplication(\MG\UserBundle\Entity\Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
     }
     
     /**

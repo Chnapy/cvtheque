@@ -45,17 +45,21 @@
 
                     <div class='row bloc'>
                         <h3>Suggérer cette annonce</h3>
-                        {{ form(form)  }}
+                        {{ form(formSuggest)  }}
                     </div>
 
                 {% elseif is_granted('ROLE_APPLICANT') %}
                     <hr/>
 
-                    <div class="row">
+                    <div class='row bloc'>
+                        <h3>Postuler à cette offre</h3>
+                        {{ form(formApply)  }}
+                    </div>
+                    {#<div class="row">
                         <a href='#' class="but d-block primary" >
                             Postuler à cette offre
                         </a>
-                    </div>
+                    </div>#}
 
                     {#<a href="{{ path('mg_user_show') }}" class="btn">
                         <i class="icon-chevron-left"></i>

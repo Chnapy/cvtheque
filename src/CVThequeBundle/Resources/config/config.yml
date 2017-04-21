@@ -1,0 +1,3 @@
+parameters:
+    cvtheque.emails.contact: contact@email.com
+    cvtheque.emails.noreply: noreply.cvtheque@ntaccess.org

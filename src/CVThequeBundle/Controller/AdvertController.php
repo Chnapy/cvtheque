@@ -14,6 +14,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use CVThequeBundle\Entity\Advertisement;
 use CVThequeBundle\Entity\Categorie;
 use CVThequeBundle\Entity\AdvertSkill;
+use CVThequeBundle\Entity\Application;
 use CVThequeBundle\Form\AdvertisementType;
 use CVThequeBundle\Form\AdvertisementEditType;
 
@@ -41,7 +42,13 @@ class AdvertController extends Controller
       
       
       // Formulaire permettant à un admin de suggérer l’annonce à un étudiant
-      $builder = $this
+      $formSuggest = null;
+      // Formulaire permettant à un étudiant depostuler
+      $formApply = null;
+      // Si le visiteur est l'auteur ou un admin
+      if(get_class($user) === "MG\UserBundle\Entity\Admin" || $user === $author)
+      {
+        $builder = $this
           ->createFormBuilder()
           ->add('pseudo', TextType::class, array(
                 'label' => "Entrez le pseudo de l'étudiant:" 
@@ -49,14 +56,13 @@ class AdvertController extends Controller
           ->add('submit', SubmitType::class, array(
                 'label' => 'Envoyer' 
           ));        
-      $form = $builder->getForm();
-      // Si le visiteur est l'auteur ou un admin
-      if(get_class($user) === "MG\UserBundle\Entity\Admin" || $user === $author)
-      {
-          $form->handleRequest($request);
-          if ($form->isSubmitted()) {
+        $formSuggest = $builder->getForm();
+      
+      
+          $formSuggest->handleRequest($request);
+          if ($formSuggest->isSubmitted() && $formSuggest->isValid()) {
               // Récupération de l'utilisateur à qui suggérer l'annonce
-              $slug = $form['pseudo']->getData();
+              $slug = $formSuggest['pseudo']->getData();
               $repository = $this->getDoctrine()
               ->getManager()
               ->getRepository('MGUserBundle:User');
@@ -70,11 +76,40 @@ class AdvertController extends Controller
                   $this->get('session')->getFlashBag()->add('info', "Une invitation à consulter cette annonce a été envoyé à ".$user->getUsername());
               }
           }
+          $formSuggest = $formSuggest->createView();
+      } else if(get_class($user) === "MG\UserBundle\Entity\Applicant")
+      {
+          $application = new Application();
+        $formApply = $this->createForm('CVThequeBundle\Form\ApplicationType', $application);
+        $formApply->handleRequest($request);
+
+        if ($formApply->isSubmitted() && $formApply->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $application->setAdvertisement($advertisement);
+            $application->setCandidate($user);
+            $em->persist($application);
+            $em->flush();
+            
+            $message = \Swift_Message::newInstance()
+            ->setSubject("Candidature de ".$user->getFirstname()." ".$user->getLastname())
+            ->setFrom($this->container->getParameter('cvtheque.emails.noreply'))
+            ->setTo($advertisement->getSociety()->getEmail())
+            ->setBody($this->renderView('CVThequeBundle:CVTheque:ApplyEmail.txt.twig', 
+            array('application' => $application, 'profile' => $this->generateUrl('mg_user_profile_visite', array('slug' => $user->getSlug())))
+            ));
+        $this->get('mailer')->send($message);
+        
+            $this->get('session')->getFlashBag()->add('info', "Votre candidature a bien été envoyée");
+        }
+
+          $formApply = $formApply->createView();
       }
+          
       return $this->render('CVThequeBundle:Advertisement:view.html.twig', array(
           'advertisement' => $advertisement,
           'author'        => $author,
-          'form'          => $form->createView()
+          'formSuggest'          => $formSuggest,
+          'formApply'          => $formApply
       ));
   }
 

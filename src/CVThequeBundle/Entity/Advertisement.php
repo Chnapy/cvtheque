@@ -20,8 +20,7 @@ class Advertisement
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
-    
+    protected $id;    
     
     /**
      * @ORM\Column(name="published", type="boolean")
@@ -83,6 +82,10 @@ class Advertisement
      */
     private $advertSkills;
     
+        /**
+     * @ORM\OneToMany(targetEntity="Application", mappedBy="advertisement", cascade={"persist"})
+     */
+    private $applications;
     
     /**
      * @ORM\ManyToOne(targetEntity="Category", cascade={"persist"})
@@ -105,10 +108,10 @@ class Advertisement
     public function __construct()
     {
         $this->advertSkills = new ArrayCollection();
+        $this->application = new ArrayCollection();
         $this->applicants = new ArrayCollection();
         $this->published = true;
     }
-    
     
     /**
      * @ORM\PrePersist
@@ -458,5 +461,41 @@ class Advertisement
     public function getApplicants()
     {
         return $this->applicants;
+    }
+    
+    
+    /**
+     * Add application
+     *
+     * @param \MG\UserBundle\Entity\Application $application
+     *
+     * @return Advertisement
+     */
+    public function addApplication(\MG\UserBundle\Entity\Application $application)
+    {
+        $application->setAdvertisement($this);
+        $this->applications[] = $application;
+
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param \MG\UserBundle\Entity\Application $application
+     */
+    public function removeApplication(\MG\UserBundle\Entity\Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
     }
 }

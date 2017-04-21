@@ -54,6 +54,10 @@ MG\UserBundle\Entity\Applicant:
             mappedBy: applicant
             cascade: ["persist", "merge", "remove"]
             orphanRemoval: true
+        applications:
+            targetEntity: CVThequeBundle\Entity\Application
+            mappedBy: candidate
+            cascade: ["persist", "merge"]
     manyToMany:
         advertisements:
             targetEntity: CVThequeBundle\Entity\Advertisement
