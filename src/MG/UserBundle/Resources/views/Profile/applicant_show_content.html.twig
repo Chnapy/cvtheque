@@ -80,6 +80,8 @@
                         <a href='{{ path('fos_user_profile_edit') }}' class="but d-block primary" >
                             Modifier le profil
                         </a>
+                    </div>
+                    <div class="row">
                         <a href='{{ path('fos_user_change_password') }}' class="but d-block primary" >
                             Modifier le mot de passe
                         </a>
@@ -107,11 +109,13 @@
                 <h3>Informations générales</h3>
                 <div class='bloc'>
                     {% if (isuser) %}
-                        {% if(user.validate) %}
-                            <p>Profil validé</p>
-                        {% else %}
-                            <p>Profil non validé par l'administrateur</p>
-                        {% endif %}
+                        <span class="tag">
+                            {% if(user.validate) %}
+                                Profil validé
+                            {% else %}
+                                Profil non validé par l'administrateur
+                            {% endif %}
+                        </span>
                     {% endif %}
                     <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
                     <p>{{ ('profile.show.birthday.'~user.gender)|trans({'%birthday%': user.birthday|date('d/m/Y'), '%age%': user.age}, 'MGUserBundle') }}</p>
@@ -155,7 +159,7 @@
                     </div>
                 {% endif %}
 
-                <h3>Liste des compétences :</h3>
+                <h3>Compétences :</h3>
                 <div class="bloc">
                     {% if user.skills.count > 0 %}
                         <div class='tag-content'>
@@ -168,7 +172,7 @@
                     {% endif %}
                 </div>
 
-                <h3>Liste de centres d'intérêts :</h3>
+                <h3>Centres d'intérêts</h3>
                 <div class="bloc">
                     {% if user.hobbies.count > 0 %}
                         <div class='tag-content'>
@@ -180,23 +184,23 @@
                         Aucun passe-temps indiqué. Quelle triste vie...
                     {% endif %}
                 </div>
-                
+
                 <h3>Suggestions d'annonces</h3>
-                <div class="bloc">
-                    {% if user.advertisements.count > 0 %}
-                        <div>
-                        
-                            {% for advertisement in user.advertisements %}
-                                <li><a href="{{ path('show_advert', {'slug': advertisement.slug}) }}" >{{ advertisement.title }}</a>
-                                    <div><i>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</i></div>
-                                </li>
-                            {% endfor %}
-                        </div>
-                    {% else %}
+                {% if user.advertisements.count > 0 %}
+
+                    {% for advertisement in user.advertisements %}
+                        <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
+                            <h4>{{ advertisement.society.username }}<br/>
+                                <small>{{ advertisement.title }}</small>
+                            </h4>
+                            <p>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</p>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class='bloc'>
                         Aucune suggestion d'annonce.
-                    {% endif %}
-                </div>
-                
+                    </div>
+                {% endif %}
 
                 <hr/>
 

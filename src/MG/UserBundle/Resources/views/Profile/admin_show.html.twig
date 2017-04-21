@@ -1,5 +1,13 @@
-{% extends "MGUserBundle::layout.html.twig" %}
+{#{% extends "MGUserBundle::layout.html.twig" %}#}
+{% extends '::base.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:admin_show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block bandeau %}
+    <div class="row">
+        <h1>Panneau d'administration</h1>
+        <div class="lead">Un accès à toutes les actions disponibles.</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% include "FOSUserBundle:Profile:admin_show_content.html.twig" %}
+{% endblock %}

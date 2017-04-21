@@ -15,6 +15,7 @@ function onLoad() {
     }
 
     bugFixes();
+    fixFooter();
 
     function butClicked(but) {
         $(but).attr('disabled', true);
@@ -37,6 +38,11 @@ function onLoad() {
 
     initEducations();
     initWork();
+}
+
+function fixFooter() {
+    let footHeight = $('#footer').height();
+    $('.main-content').css('padding-bottom', footHeight + 'px');
 }
 
 //Corrige les bugs recensés non corrigés de PHP

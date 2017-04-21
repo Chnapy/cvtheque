@@ -9,41 +9,45 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
 
-	<div class="form-group">
-		<label for="username">{{ 'security.login.username'|trans }}</label>
-		<div class="field">
-			<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-			<span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
-		</div>
-	</div>
+    <div class="form-group">
+        <label for="username">{{ 'security.login.username'|trans }}</label>
+        <div class="field">
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+            <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
+        </div>
+    </div>
 
-	<div class="form-group">
-		<label for="password">{{ 'security.login.password'|trans }}</label>
-		<div class="field">
-			<input type="password" id="password" name="_password" required="required" />
-			<span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
-		</div>
-	</div>
+    <div class="form-group">
+        <label for="password">{{ 'security.login.password'|trans }}</label>
+        <div class="field">
+            <input type="password" id="password" name="_password" required="required" />
+            <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
+        </div>
+    </div>
 
-	<div class="form-group">
-		<label for="remember_me"> 
-			<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-			{{ 'security.login.remember_me'|trans }}
-		</label>
-	</div>
+    <div class="form-group">
+        <label for="remember_me"> 
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            {{ 'security.login.remember_me'|trans }}
+        </label>
+    </div>
 
-	<div class="form-group">
-		<button type="submit" id="_submit" name="_submit" class="but d-block primary">{{ 'security.login.submit'|trans }}</button>
-	</div>
-	
-	<hr/>
+    <div class="form-group">
+        <button type="submit" id="_submit" name="_submit" class="but d-block primary">{{ 'security.login.submit'|trans }}</button>
 
-	<div class="form-group">
-		<a class="but d-block" href="{{ path('mg_applicant_registration') }}">Créer un compte étudiant</a>
-	</div>
+        <div class="text-center">
+            <a href="{{ path('fos_user_resetting_request') }}" >Mot de passe oublié</a>
+        </div>
+    </div>
 
-	<div class="form-group">
-		<a class="but d-block" href="{{ path('mg_society_registration') }}">Créer un compte entreprise</a>
-	</div>
-	
+    <hr/>
+
+    <div class="form-group">
+        <a class="but d-block" href="{{ path('mg_applicant_registration') }}">Créer un compte étudiant</a>
+    </div>
+
+    <div class="form-group">
+        <a class="but d-block" href="{{ path('mg_society_registration') }}">Créer un compte entreprise</a>
+    </div>
+
 </form>

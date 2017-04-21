@@ -1,28 +1,76 @@
-{% extends "CVThequeBundle::layout.html.twig" %} 
-{% block title %}Applicants{% endblock %} 
-{% block body %}
-<h3>Profils étudiants non validés</h3>
-<ul class="list-group">
-  {% for applicant in applicants %}
-    <li class="list-group-item"><a href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}" >{{ applicant.username }}</a>
-      <div class="badge"><i>Créé le {{ applicant.created|date('d/m/Y') }}, mis à jour le {{ applicant.created|date('d/m/Y') }}</i></div>
-    </li>
-  {% else %}
-  <p>Il n'y a aucun profil étudiant non validé.</p>
-  {% endfor %}
-</ul>
-{% if nb_page > 1 %}
-<div>
-  <h4>Pages :</h4>
-  <ul class="pagination">
-  {% for p in range(1, nb_page) %}
-    {% if p == page %}
-      <li class="active"><a href="{{ path('mg_admin_show_applicants_not_validate', {'page': p}) }}">{{ p }}</a></li>
-    {% else %}
-      <li><a href="{{ path('mg_admin_show_applicants_not_validate', {'page': p}) }}">{{ p }}</a></li>
+{#{% extends "CVThequeBundle::layout.html.twig" %}#}
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Applicants non validés
+{% endblock %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Profils étudiants non validés</h1>
+        <div class="lead">Liste des profils étudiants <b>non validés</b> par un administrateur.</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="list-user container">
+        {% for applicant in applicants %}
+            
+            <a class="bloc list-user-row row" href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}">
+                <div class='col-md-1 user-avatar'>
+                    <img {% if applicant.image is not null %}src="{{ applicant.image.webPath }}" alt="{{ applicant.image.alt }}"{% endif %} />
+                </div>
+                <div class='col-md-4 user-name'>
+                    <span class='user-lastname'>{{ applicant.lastname }}</span> 
+                    <span class='user-firstname'>{{ applicant.firstname }}</span> 
+                    <span class='user-username'>{{ applicant.username }}</span>
+                </div>
+                <div class='col-md-2 user-category'>
+                    <span class='tag'>{{ applicant.category.name }}</span>
+                </div>
+                <div class='col-md-1'>
+                    <span class='icon-bloc'>
+                        CV
+                        <span class='spinner-box'>
+                            <span class='icon l-white glyphicon {% if applicant.cvFile is null %}glyphicon-remove{% else %}glyphicon-ok{% endif %}'></span>
+                        </span>
+                    </span>
+                </div>
+                <div class='col-md-1'>
+                    <span class='icon-bloc'>
+                        Journal
+                        <span class='spinner-box'>
+                            <span class='icon l-white glyphicon {% if applicant.logBookFile is null %}glyphicon-remove{% else %}glyphicon-ok{% endif %}'></span>
+                        </span>
+                    </span>
+                </div>
+                <div class='col-md-3'>
+                    Créé le {{ applicant.created|date('d/m/Y') }}, màj le {{ applicant.updated|date('d/m/Y') }}
+                </div>
+            </a>
+                
+        {% else %}
+            <div class="bloc list-user-row row">
+                Il n'y a aucun profil étudiant non validé.
+            </div>
+        {% endfor %}
+    </div>
+    {% if nb_page > 1 %}
+        <div>
+            <ul class="pagination">
+                {% for p in range(1, nb_page) %}
+                    {% if p == page %}
+                        <li class="active">
+                            <span>{{ p }}</span>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{{ path('mg_admin_show_applicants_not_validate', {'page': p}) }}">{{ p }}</a>
+                        </li>
+                        {% endif %} 
+                    {% endfor %}
+            </ul>
+        </div>
     {% endif %} 
-  {% endfor %}
-  </ul>
-</div>
-{% endif %} 
 {% endblock %}

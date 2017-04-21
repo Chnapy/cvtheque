@@ -1,16 +1,39 @@
-<div class="fos_user_user_show">
 
-    {% if user.id == app.user.id %}
+{% if user.id == app.user.id %}
+
+    <h3>Profil administrateur</h3>
+    <div class="bloc">
+
         <a href="{{ path('fos_user_profile_edit') }}" class="but">
             Modifier le profil administrateur
         </a>
-        <a href='{{ path('fos_user_change_password') }}' class="but d-block primary" >
+        <a href='{{ path('fos_user_change_password') }}' class="but" >
             Modifier le mot de passe
         </a>
         <a href="{{ path('mg_user_profile_delete') }}" class="but error">
             Supprimer le profil administrateur
         </a>
-    {% endif %}
-    <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>
-    <p>{{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    
-</div>
+
+    </div>
+
+    <h3>Étudiants</h3>
+    <div class="bloc">
+
+        <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="but">Étudiants non validés</a>
+        <a href="{{ path('mg_admin_show_applicants_validate') }}" class="but">Étudiants validés</a>
+
+    </div>
+
+    <h3>Annonces</h3>
+    <div class="bloc">
+
+        <a href="{{ path('admin_advert_show') }}" class="but">Liste d'annonces</a>
+
+    </div>
+
+{% endif %}
+
+<hr/>
+
+<p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}<br/>
+    {{ 'profile.show.updated'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}</p>    

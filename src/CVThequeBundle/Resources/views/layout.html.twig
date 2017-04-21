@@ -3,24 +3,24 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-  {{ parent() }}
+    {{ parent() }}
 {% endblock %}
 
 {% block content %}
+    {#{{ parent() }}
 
- 
-  <hr>
+    <hr>
 
-  
-  {% for type in ['info', 'success', 'error'] %}
-    {% for message in app.session.flashbag.get(type) %}
-      <div class="alert alert-{{ type }}" role="alert">
-        <p>{{ message }}</p>
-      </div>
-    {% endfor %}
-  {% endfor %}
 
-  {% block body %}
-  {% endblock %}
+    {% for type in ['info', 'success', 'error'] %}
+        {% for message in app.session.flashbag.get(type) %}
+            <div class="alert alert-{{ type }}" role="alert">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}#}
+
+    {% block body %}
+    {% endblock %}
 
 {% endblock %}

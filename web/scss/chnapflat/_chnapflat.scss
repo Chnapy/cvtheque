@@ -25,6 +25,20 @@ button {
     width: 100% !important;
 }
 
+.vertical-center-parent {
+    position: relative;
+}
+
+.vertical-center-child {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+html {
+    height: 100%;
+}
+
 body {
     width: 100%;
     height: 100%;
@@ -32,6 +46,13 @@ body {
     color: $color_main;
     font-family: Open Sans, "Open Sans", calibri, sans-serif;
     background: $bg_color;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 h1, h2, h3 {
@@ -79,7 +100,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
 .bandeau {
     margin-bottom: 20px;
     padding: 20px 0;
-    
+
     &>.container>.row>* {
         &:first-child  {
             margin-top: 0;
@@ -607,6 +628,8 @@ a.but {
 $header_height: 50px;
 $header_min: 2px;
 
+$ajax_bloc_pad: 5px;
+
 .header {
     display: block;
     position: fixed;
@@ -673,8 +696,6 @@ $header_min: 2px;
             &.nav-ajax {
                 cursor: default;
 
-                $ajax_bloc_pad: 5px;
-
                 &>.ajax-bloc {
                     position: relative;
                     display: inline-block;
@@ -710,12 +731,18 @@ $header_min: 2px;
 }
 
 .body-content {
-    margin-top: $header_height;
+    padding-top: $header_height;
+    margin-bottom: 20px;
     transition: $transition_dur;
 }
 
 .bandeau>*, .page-content>* {
     transition: opacity $transition_dur;
+}
+
+.main-content {
+    position: relative;
+    min-height: 100%;
 }
 
 .main-content.no-display {
@@ -738,7 +765,7 @@ $header_min: 2px;
     }
 
     .body-content {
-        margin-top: $header_min;
+        padding-top: $header_min;
     }
 }
 
