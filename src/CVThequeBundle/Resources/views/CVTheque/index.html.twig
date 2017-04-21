@@ -1,52 +1,60 @@
 {% extends '::base.html.twig' %}
 
 {% block bandeau %}
-	<div class="row main_title">
-		<h1>CVthèque</h1>
-		<div class="lead">
-			Slogan qui déchire
-		</div>
-	</div>
+    <div class="row d-table main_title">
+        <div class="col-md-3 d-table-el">
+            <img class='univ-logo-front' src='{{ asset('img/logo/logo_iut_villeta_white.png') }}' alt='Logo de l\'IUT de Villetaneuse'/>
+        </div>
+        <div class="col-md-6 d-table-el">
+            <h1>CVthèque</h1>
+            <div class="lead">
+                Slogan qui déchire
+            </div>
+        </div>
+        <div class="col-md-3 d-table-el">
+            <img class='univ-logo-front' src='{{ asset('img/logo/logo_univ_paris13_white.png') }}' alt='Logo de l\'Université Paris 13'/>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
-	<div class="row">
-		<div class="description col-md-6 col-xs-12">
-			<div class="lead">
-				Slogan qui déchire, un truc marketing qui vend du rève.
-			</div>
-			<div>
-				Description du service, blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-				blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-			</div>
-		</div>
+    <div class="row">
+        <div class="description col-md-6 col-xs-12">
+            <div class="lead">
+                Slogan qui déchire, un truc marketing qui vend du rève.
+            </div>
+            <div>
+                Description du service, blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+            </div>
+        </div>
 
-		<div id="form_conn_insc" class="col-md-6 col-xs-12 bloc">
-			{#{% for type, messages in app.session.flashBag.all %}
-				{% for message in messages %}
-					<div class="{{ type }}">
-						{{ message|trans({}, 'FOSUserBundle') }}
-					</div>
-				{% endfor %}
-			{% endfor %}#}
-			{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-				<h3>Identification</h3>
-				{{ render(controller('FOSUserBundle:Security:login')) }}
-			{% else %}
-				<div class="text-center">
-					<h3>Vous êtes déjà connecté</h3>
-					<a href="{{ path('mg_user_show') }}" class="but">Accéder à mon profil</a>
-				</div>
-			{% endif %}
-		</div>
-	</div>
+        <div id="form_conn_insc" class="col-md-6 col-xs-12 bloc">
+            {#{% for type, messages in app.session.flashBag.all %}
+                {% for message in messages %}
+                    <div class="{{ type }}">
+                        {{ message|trans({}, 'FOSUserBundle') }}
+                    </div>
+                {% endfor %}
+            {% endfor %}#}
+            {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <h3>Identification</h3>
+                {{ render(controller('FOSUserBundle:Security:login')) }}
+            {% else %}
+                <div class="text-center">
+                    <h3>Vous êtes déjà connecté</h3>
+                    <a href="{{ path('mg_user_show') }}" class="but">Accéder à mon profil</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

@@ -23,21 +23,16 @@
     min-height: 50px;
 }
 
-#footer {
-    .row {
-        display: table;
+.univ-logo {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
 
-        &>* {
-            display: table-cell;
-            float: none;
-        }
-    }
-
-    .univ-logo {
-        max-width: 100%;
-        max-height: 100%;
-        height: auto;
-    }
+.univ-logo-front {
+    max-width: 100%;
+    max-height: 140px;
+    height: auto;
 }
 
 .list-user {
@@ -115,7 +110,7 @@
 a.bloc {
     color: initial;
     display: block;
-    
+
 }
 
 .pagination>li>a, .pagination>li>span {

@@ -1,5 +1,5 @@
-{% extends "CVThequeBundle::layout.html.twig" %}
-{#{% extends '::base.html.twig' %}#}
+{#{% extends "CVThequeBundle::layout.html.twig" %}#}
+{% extends '::base.html.twig' %}
 
 {% set isauthor = author.id == app.user.id %}
 
@@ -48,23 +48,6 @@
                         {{ form(formSuggest)  }}
                     </div>
 
-                {% elseif is_granted('ROLE_APPLICANT') %}
-                    <hr/>
-
-                    <div class='row bloc'>
-                        <h3>Postuler à cette offre</h3>
-                        {{ form(formApply)  }}
-                    </div>
-                    {#<div class="row">
-                        <a href='#' class="but d-block primary" >
-                            Postuler à cette offre
-                        </a>
-                    </div>#}
-
-                    {#<a href="{{ path('mg_user_show') }}" class="btn">
-                        <i class="icon-chevron-left"></i>
-                        Retour à votre profil
-                    </a>#}
                 {% endif %}
             </div>
 
@@ -87,6 +70,13 @@
                         Aucune compétence demandée. Voila une offre peu exigente.
                     {% endif %}
                 </div>
+
+                {% if is_granted('ROLE_APPLICANT') %}
+                    <h3>Postuler à cette offre</h3>
+                    <div class="bloc">
+                        {{ form(formApply)  }}
+                    </div>
+                {% endif %}
 
             </div>
         </div>
