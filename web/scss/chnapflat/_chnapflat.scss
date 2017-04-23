@@ -25,6 +25,15 @@ button {
     width: 100% !important;
 }
 
+.d-table {
+    display: table;
+
+    .d-table-el {
+        display: table-cell;
+        float: none;
+    }
+}
+
 .vertical-center-parent {
     position: relative;
 }

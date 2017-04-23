@@ -61,6 +61,12 @@ button {
   display: block !important;
   width: 100% !important; }
 
+.d-table {
+  display: table; }
+  .d-table .d-table-el {
+    display: table-cell;
+    float: none; }
+
 .vertical-center-parent {
   position: relative; }
 
@@ -685,14 +691,14 @@ a.but {
   min-width: 50px;
   min-height: 50px; }
 
-#footer .row {
-  display: table; }
-  #footer .row > * {
-    display: table-cell;
-    float: none; }
-#footer .univ-logo {
+.univ-logo {
   max-width: 100%;
   max-height: 100%;
+  height: auto; }
+
+.univ-logo-front {
+  max-width: 100%;
+  max-height: 140px;
   height: auto; }
 
 .list-user .list-user-row {
