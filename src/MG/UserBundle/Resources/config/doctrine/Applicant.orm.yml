@@ -42,18 +42,6 @@ MG\UserBundle\Entity\Applicant:
             mappedBy: applicant
             cascade: ["persist", "merge", "remove"]
             orphanRemoval: true
-
-        skills:
-            targetEntity: Skill
-            mappedBy: applicant
-            cascade: ["persist", "merge", "remove"]
-            orphanRemoval: true
-
-        hobbies:
-            targetEntity: Hobby
-            mappedBy: applicant
-            cascade: ["persist", "merge", "remove"]
-            orphanRemoval: true
         applications:
             targetEntity: CVThequeBundle\Entity\Application
             mappedBy: candidate
@@ -62,4 +50,12 @@ MG\UserBundle\Entity\Applicant:
         advertisements:
             targetEntity: CVThequeBundle\Entity\Advertisement
             inversedBy: applicants
+        skills:
+            targetEntity: Skill
+            mappedBy: applicants
+            cascade: ["persist", "merge"]
+        hobbies:
+            targetEntity: Hobby
+            mappedBy: applicants
+            cascade: ["persist", "merge"]
     lifecycleCallbacks: {  }

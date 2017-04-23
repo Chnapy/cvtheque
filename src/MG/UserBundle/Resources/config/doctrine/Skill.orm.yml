@@ -12,8 +12,13 @@ MG\UserBundle\Entity\Skill:
         name:
             type: string
             length: 255
-    manyToOne:
-        applicant:
+    manyToMany:
+        applicants:
             targetEntity: Applicant
             inversedBy: skills
+            cascade: ["persist", "merge"]
+        advertisements:
+            targetEntity: CVThequeBundle\Entity\Advertisement
+            inversedBy: skills
+            cascade: ["persist", "merge"]
     lifecycleCallbacks: {  }

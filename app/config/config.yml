@@ -18,7 +18,8 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+#    serializer:
+#        enabled: true
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -92,9 +93,9 @@ knp_paginator:
 swiftmailer:
     disable_delivery:  false
     transport: "%mailer_transport%"
-    auth_mode: "%mailer_auth_mode%"
+    #auth_mode: "%mailer_auth_mode%"
     host:      "%mailer_host%"
-    port:      "%mailer_port%"
+    #port:      "%mailer_port%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     #spool:     { type: memory }
@@ -154,3 +155,47 @@ pugx_multi_user:
             profile:
                 form:
                     type: MG\UserBundle\Form\AdminRegistrationEditType
+
+                    #app/config/config.yml
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml: true
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json
+        
+#fos_elastica
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    serializer:
+        callback_class: FOS\ElasticaBundle\Serializer\Callback
+        serializer: serializer
+    indexes:
+        elastic:
+            client: default
+            types:
+                Applicant:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model:  MG\UserBundle\Entity\Applicant
+                        provider: ~
+                Advertisement:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model:  CVThequeBundle\Entity\Advertisement
+                        provider: ~
+                        

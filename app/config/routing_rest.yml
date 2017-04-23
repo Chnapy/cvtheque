@@ -5,9 +5,3 @@ cv_theque:
 MGUserBundle:
     resource: "@MGUserBundle/Resources/config/routing.yml"
     prefix:   /
-    
-#REST 
-rest:
-  type: rest 
-  resource: "@MGUserBundle/Resources/config/routing_rest.yml"
-  prefix : /api

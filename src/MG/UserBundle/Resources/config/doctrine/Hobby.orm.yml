@@ -12,8 +12,8 @@ MG\UserBundle\Entity\Hobby:
         name:
             type: string
             length: 255
-    manyToOne:
-        applicant:
+    manyToMany:
+        applicants:
             targetEntity: Applicant
             inversedBy: hobbies
     lifecycleCallbacks: {  }

@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
+use MG\UserBundle\Form\SkillType;
 
 class AdvertisementType extends AbstractType
 {
@@ -46,7 +47,7 @@ class AdvertisementType extends AbstractType
                 'multiple' => false
         ))
         ->add('advertSkills', CollectionType::class, array(
-                'entry_type' => AdvertSkillType::class,
+                'entry_type' => SkillType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,

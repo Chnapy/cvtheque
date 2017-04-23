@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use CVThequeBundle\Entity\Advertisement;
 use CVThequeBundle\Entity\Categorie;
-use CVThequeBundle\Entity\AdvertSkill;
+use MG\UserBundle\Entity\Skill;
 use CVThequeBundle\Entity\Application;
 use CVThequeBundle\Form\AdvertisementType;
 use CVThequeBundle\Form\AdvertisementEditType;

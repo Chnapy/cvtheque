@@ -2,26 +2,43 @@
 
 namespace MG\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 /**
  * Skill
+ * @ExclusionPolicy("all") 
  */
 class Skill
 {
     /**
      * @var integer
+     * @Expose
      */
     private $id;
 
     /**
      * @var string
+     * @Expose
      */
     private $name;
 
     /**
      * @var \MG\UserBundle\Entity\Applicant
      */
-    private $applicant;
-
+    private $applicants;
+    
+    /**
+     * @var \CVThequeBundle\Entity\Advertisement
+     */
+    private $advertisements;
+    
+    public function __construct()
+    {
+        $this->applicants = new ArrayCollection();
+        $this->advertisements = new ArrayCollection();    
+    }
 
     /**
      * Get id
@@ -70,28 +87,73 @@ class Skill
     {
         return $this->name;
     }
-
+    
+    
     /**
-     * Set applicant
+     * Add applicant
      *
      * @param \MG\UserBundle\Entity\Applicant $applicant
      *
-     * @return Skill
+     * @return Advertisement
      */
-    public function setApplicant(\MG\UserBundle\Entity\Applicant $applicant = null)
+    public function addApplicant(\MG\UserBundle\Entity\Applicant $applicant)
     {
-        $this->applicant = $applicant;
+        $this->applicants[] = $applicant;
 
         return $this;
     }
 
     /**
-     * Get applicant
+     * Remove applicant
      *
-     * @return \MG\UserBundle\Entity\Applicant
+     * @param \MG\UserBundle\Entity\Applicant $applicant
      */
-    public function getApplicant()
+    public function removeApplicant(\MG\UserBundle\Entity\Applicant $applicant)
     {
-        return $this->applicant;
+        $this->applicants->removeElement($applicant);
+    }
+
+    /**
+     * Get applicants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplicants()
+    {
+        return $this->applicants;
+    }
+    
+    /**
+     * Add advertisement
+     *
+     * @param \CVThequeBundle\Entity\Advertisement $advertisement
+     *
+     * @return Advertisement
+     */
+    public function addAdvertisement(\CVThequeBundle\Entity\Advertisement $advertisement)
+    {
+        $this->advertisements[] = $advertisement;
+
+        return $this;
+    }
+
+    /**
+     * Remove advertisement
+     *
+     * @param \CVThequeBundle\Entity\Advertisement $advertisement
+     */
+    public function removeAdvertisement(\CVThequeBundle\Entity\Advertisement $advertisement)
+    {
+        $this->advertisements->removeElement($advertisement);
+    }
+
+    /**
+     * Get advertisements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdvertisements()
+    {
+        return $this->advertisements;
     }
 }

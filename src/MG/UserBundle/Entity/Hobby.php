@@ -2,6 +2,8 @@
 
 namespace MG\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Hobby
  */
@@ -20,9 +22,13 @@ class Hobby
     /**
      * @var \MG\UserBundle\Entity\Applicant
      */
-    private $applicant;
-
-
+    private $applicants;
+    
+    public function __construct()
+    {
+        $this->applicants = new ArrayCollection();    
+    }
+    
     /**
      * Get id
      *
@@ -57,28 +63,40 @@ class Hobby
     {
         return $this->name;
     }
-
+    
+    
     /**
-     * Set applicant
+     * Add applicant
      *
      * @param \MG\UserBundle\Entity\Applicant $applicant
      *
-     * @return Hobby
+     * @return Advertisement
      */
-    public function setApplicant(\MG\UserBundle\Entity\Applicant $applicant = null)
+    public function addApplicant(\MG\UserBundle\Entity\Applicant $applicant)
     {
-        $this->applicant = $applicant;
+        $this->applicants[] = $applicant;
 
         return $this;
     }
 
     /**
-     * Get applicant
+     * Remove applicant
      *
-     * @return \MG\UserBundle\Entity\Applicant
+     * @param \MG\UserBundle\Entity\Applicant $applicant
      */
-    public function getApplicant()
+    public function removeApplicant(\MG\UserBundle\Entity\Applicant $applicant)
     {
-        return $this->applicant;
+        $this->applicants->removeElement($applicant);
     }
+
+    /**
+     * Get applicants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplicants()
+    {
+        return $this->applicants;
+    }
+    
 }

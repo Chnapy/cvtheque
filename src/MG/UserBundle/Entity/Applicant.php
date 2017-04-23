@@ -405,7 +405,7 @@ class Applicant extends User
      */
     public function addSkill(\MG\UserBundle\Entity\Skill $skill)
     {
-        $skill->setApplicant($this);
+        $skill->addApplicant($this);
         $this->skills[] = $skill;
 
         return $this;
@@ -440,7 +440,7 @@ class Applicant extends User
      */
     public function addHobby(\MG\UserBundle\Entity\Hobby $hobby)
     {
-        $hobby->setApplicant($this);
+        $hobby->addApplicant($this);
         $this->hobbies[] = $hobby;
 
         return $this;

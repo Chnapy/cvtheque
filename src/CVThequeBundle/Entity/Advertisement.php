@@ -70,14 +70,14 @@ class Advertisement
     
     
     /**
-     * @ORM\OneToOne(targetEntity="MG\UserBundle\Entity\Image", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToOne(targetEntity="MG\UserBundle\Entity\Image", cascade={"persist", "merge", "remove", "merge"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $image;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="AdvertSkill", mappedBy="advertisement", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="MG\UserBundle\Entity\Skill", mappedBy="advertisements", cascade={"persist"})
      * @Assert\Valid()
      */
     private $advertSkills;
@@ -108,7 +108,7 @@ class Advertisement
     public function __construct()
     {
         $this->advertSkills = new ArrayCollection();
-        $this->application = new ArrayCollection();
+        $this->applications = new ArrayCollection();
         $this->applicants = new ArrayCollection();
         $this->published = true;
     }
@@ -324,19 +324,19 @@ class Advertisement
      * Add advertSkill
      * 
      */
-    public function addAdvertSkill(AdvertSkill $advertSkill)
+    public function addAdvertSkill(\MG\UserBundle\Entity\Skill $advertSkill)
     {
-        $advertSkill->setAdvertisement ($this);
+        $advertSkill->addAdvertisement ($this);
         $this->advertSkills->add($advertSkill);
         return $this;
     }
     
     
     /**
-     * Remove advertisement Competence
+     * Remove advertSkill
      * 
      */
-    public function removeAdvertSkill(AdvertSkill $advertSkill)
+    public function removeAdvertSkill(\MG\UserBundle\Entity\Skill $advertSkill)
     {
         $this->advertSkills->removeElement($advertSkill);
     }
@@ -356,7 +356,7 @@ class Advertisement
      * Set advertSkills
      *
      */
-    public function setAdvertSkills(AdvertSkill $advertSkills)
+    public function setAdvertSkills(\MG\UserBundle\Entity\Skill $advertSkills)
     {
         $this->advertSkills = $advertSkills;
         return $this;

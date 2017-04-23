@@ -2,6 +2,8 @@
 
 namespace MG\UserBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Address
  */
