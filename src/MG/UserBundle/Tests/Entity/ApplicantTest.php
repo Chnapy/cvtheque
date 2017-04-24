@@ -15,7 +15,7 @@ final class ApplicantTest extends TestCase {
 	public function testRole(){
 
 		$applicant = new Applicant();
-		$r = applicant->getRoles();
+		$r = $applicant->getRoles();
 		$this->assertEquals($r, "ROLE_APPLICANT");
 
 	}
