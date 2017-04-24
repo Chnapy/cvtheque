@@ -100,7 +100,6 @@ class Applicant extends User
         $this->hobbies = new \Doctrine\Common\Collections\ArrayCollection();
         $this->application = new \Doctrine\Common\Collections\ArrayCollection();
         $this->addRole("ROLE_APPLICANT");
-        $this->advertisement->
     }
     
     public function isValidate()
