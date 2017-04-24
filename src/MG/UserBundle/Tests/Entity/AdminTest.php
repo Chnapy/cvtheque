@@ -2,11 +2,12 @@
 
 namespace MG\UserBundle\Tests\Entity;
 use MG\UserBundle\Entity\Admin;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Classe de test pour l'objet Admin
  */
-final class AdminTest extends \PHPUnit_Framework_TestCase {
+final class AdminTest extends TestCase {
 
 	/**
 	 * Test du rôle pour l'admin

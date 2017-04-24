@@ -36,7 +36,7 @@ class AdvertController extends Controller
       // S'il n'a pas d'autorisation, qu'il n'est pas l'auteur et qu'il n'est pas admin : Erreur 403
       if(!$authorization && $author->getId() !== $user->getId() && get_class($user) !== "MG\UserBundle\Entity\Admin")
       {
-          $message = "Vous n'avez pas les droits pour accèder à cette annonce";
+          $message = "Vous n'avez pas les droits pour accéder à cette annonce";
           throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException ($message);
       }
       
