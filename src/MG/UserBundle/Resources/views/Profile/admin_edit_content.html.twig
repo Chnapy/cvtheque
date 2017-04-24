@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_row(form.category) }}
-    {{ form_row(form.address.street) }}
-    {{ form_row(form.address.country) }}
-    {{ form_row(form.address.town) }}
-    {{ form_row(form.phoneNumber) }}    
-    <input type="hidden" name="_csrf_token"
-        value="{{ csrf_token('authenticate') }}"
-    >
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
-    </div>
-{{ form_end(form) }}
-=======
 {% extends '::base.html.twig' %}
 
 {% block bandeau %}
@@ -43,4 +28,3 @@
     {{ form_end(form) }}
 
 {% endblock %}
->>>>>>> 36d407962b7334e995c55a5b9be9882b6107d7b8
