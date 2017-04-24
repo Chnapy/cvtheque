@@ -97,7 +97,7 @@ class CVFile
 
   public function getWebPath()
   {
-    return '/cvtheque/web/'.$this->getWebDir().'/'.$this->getId().'.'.$this->getExtension();
+    return '/'.$this->getWebDir().'/'.$this->getId().'.'.$this->getExtension();
   }
 
   /**
