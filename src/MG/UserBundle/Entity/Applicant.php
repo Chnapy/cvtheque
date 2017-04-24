@@ -473,7 +473,7 @@ class Applicant extends User
      *
      * @return Applicant
      */
-    public function addApplication(\MG\UserBundle\Entity\Application $application)
+    public function addApplication(\CVThequeBundle\Entity\Application $application)
     {
         $application->setApplicant($this);
         $this->applications[] = $application;
@@ -486,7 +486,7 @@ class Applicant extends User
      *
      * @param \MG\UserBundle\Entity\Application $application
      */
-    public function removeApplication(\MG\UserBundle\Entity\Application $application)
+    public function removeApplication(\CVThequeBundle\Entity\Application $application)
     {
         $this->applications->removeElement($application);
     }

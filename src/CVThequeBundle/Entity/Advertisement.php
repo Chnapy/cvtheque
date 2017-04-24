@@ -471,7 +471,7 @@ class Advertisement
      *
      * @return Advertisement
      */
-    public function addApplication(\MG\UserBundle\Entity\Application $application)
+    public function addApplication(\CVThequeBundle\Entity\Application $application)
     {
         $application->setAdvertisement($this);
         $this->applications[] = $application;
@@ -484,7 +484,7 @@ class Advertisement
      *
      * @param \MG\UserBundle\Entity\Application $application
      */
-    public function removeApplication(\MG\UserBundle\Entity\Application $application)
+    public function removeApplication(\CVThequeBundle\Entity\Application $application)
     {
         $this->applications->removeElement($application);
     }
