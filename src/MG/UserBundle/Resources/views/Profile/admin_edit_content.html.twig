@@ -1,7 +1,9 @@
 {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    {{ form_row(form.category) }}
     {{ form_row(form.address.street) }}
     {{ form_row(form.address.country) }}
-    {{ form_row(form.address.town) }}    
+    {{ form_row(form.address.town) }}
+    {{ form_row(form.phoneNumber) }}    
     <input type="hidden" name="_csrf_token"
         value="{{ csrf_token('authenticate') }}"
     >
