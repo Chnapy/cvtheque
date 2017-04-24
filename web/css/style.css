@@ -782,7 +782,8 @@ a.bloc {
 
 .bloc {
   text-overflow: clip;
-  overflow: hidden; }
+  overflow: hidden;
+  word-wrap: break-word; }
 
 #footer {
   padding: 15px 0; }

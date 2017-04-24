@@ -152,6 +152,7 @@ a.bloc {
 .bloc {
     text-overflow: clip;
     overflow: hidden;
+    word-wrap: break-word;
 }
 
 #footer {
