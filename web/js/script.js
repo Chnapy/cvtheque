@@ -8,7 +8,7 @@ var GLOBALS = {
     skill_data: undefined //Données ajax
 };
 
-var SKILLS_URL = '/cvtheque/web/api/skills';
+var SKILLS_URL = '/api/skills';
 
 window.onload = onLoad;
 
