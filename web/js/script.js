@@ -1,12 +1,16 @@
 
 /* global FORM, FORM_NAME */
 
-window.onload = onLoad;
-
 var GLOBALS = {
     education_index: -1,
-    work_index: -1
+    work_index: -1,
+    skill_id_index: -1,
+    skill_data: undefined //Données ajax
 };
+
+var SKILLS_URL = '/cvtheque/web/api/skills';
+
+window.onload = onLoad;
 
 function onLoad() {
     try {
@@ -38,6 +42,8 @@ function onLoad() {
 
     initEducations();
     initWork();
+    
+    minorFixes();
 }
 
 function fixFooter() {
@@ -49,6 +55,15 @@ function fixFooter() {
 
 function bugFixes() {
     $('.field>input[type="hidden"]').parent().hide();
+    $('input[type="password"]').each((i, element) => {
+        element.onpaste = (e) => e.preventDefault();
+    });
+}
+
+//Réglages mineurs
+
+function minorFixes() {
+    $('select option[value="FR"]').attr('selected', true);
 }
 
 //General
@@ -72,6 +87,8 @@ function setItemDeletable(item) {
 
 function initSkills() {
 
+    getSkillData();
+
     $('.skills').each((i, element) => {
         var name = $(element).data('name');
         var supp = $(element).data('supp');
@@ -81,7 +98,7 @@ function initSkills() {
 
         $(element).data('index', -1);
 
-        $(element).find('#ip_skills').keypress(e => {
+        $(element).find('.ip_skills').keypress(e => {
             if (e.key !== 'Enter') {
                 return;
             }
@@ -108,12 +125,63 @@ function initSkills() {
     });
 }
 
+function getSkillData() {
+    $.get(SKILLS_URL, {}, (data) => {
+        GLOBALS.skill_data = data;
+        
+        $('.skills').each((i, element) => {
+            var name = $(element).data('name');
+            if (name !== 'skills') {
+                return;
+            }
+
+            GLOBALS.skill_id_index++;
+            let list_id = GLOBALS.skill_id_index;
+
+            let list = 'list' + list_id;
+            let list_sel = list + '_select';
+
+            let datalist = `<datalist id="${list}">
+                        <label for="${list_sel}">ou sélectionner dans la liste</label>
+                        <select id="${list_sel}">
+                            ${data.map(d => `<option value="${d.name}">${d.name}</option>`).join('')}
+                        </select>
+                    </datalist>`;
+
+            let input = $(element).find('.ip_skills');
+            $(input).attr('list', list);
+            $(input).parent().append(datalist);
+        });
+    });
+}
+
 function newSkill(element, value, name, supp) {
     let index = $(element).data('index') + 1;
     $(element).data('index', index);
 
+    function skillIndex(name) {
+        if (!GLOBALS.skill_data) {
+            return -1;
+        }
+        for (var i = 0; i < GLOBALS.skill_data.length; i++) {
+            if (GLOBALS.skill_data[i].name === name) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    var id_html;
+    if (name === 'skills' && skillIndex(value) > -1) {
+        let id = GLOBALS.skill_data[skillIndex(value)].id;
+        id_html = `<input type="hidden" name="${GLOBALS.form}[${name}][${index}][id]" value="${id}"/>`;
+    } else {
+        id_html = '';
+    }
+
     let hobby = `<span class="skills-item tag deletable onhover">
 		${value}<button class="delete mini-but glyphicon glyphicon-remove"><span class="sr-only sr-only-focusable">${supp}</span></button>
+		${id_html}
 		<input type="hidden" name="${GLOBALS.form}[${name}][${index}][name]" value="${value}"/>
 	</span>`;
 
@@ -121,47 +189,6 @@ function newSkill(element, value, name, supp) {
 
     setItemDeletable($(element).find('.skills-content .skills-item').first());
 }
-
-//Hobbys
-//
-//function initHobby() {
-//
-//    $('#ip_hobbys').keypress(e => {
-//        if (e.key !== 'Enter') {
-//            return;
-//        }
-//        e.preventDefault();
-//
-//        let i = e.target;
-//        let val = i.value;
-//        if (!val || !i.checkValidity()) {
-//            return;
-//        }
-//
-//        newHobby(val);
-//        e.target.value = '';
-//    });
-//
-//    setItemDeletable('.hobbys-item');
-//
-//    var hobbys = $('.hobbys').data('hobbys');
-//
-//    if (hobbys) {
-//        hobbys.forEach(h => newHobby(h));
-//    }
-//}
-//
-//function newHobby(value) {
-//    GLOBALS.hobby_index++;
-//    let hobby = `<span class="hobbys-item tag deletable onhover">
-//		${value}<button class="delete mini-but glyphicon glyphicon-remove"><span class="sr-only sr-only-focusable">Supprimer le passe-temps</span></button>
-//		<input type="hidden" name="${GLOBALS.form}[hobbies][${GLOBALS.hobby_index}][name]" value="${value}"/>
-//	</span>`;
-//
-//    $('.hobbys .hobbys-content .hobbys-add').after(hobby);
-//
-//    setItemDeletable($('.hobbys .hobbys-content .hobbys-item').first());
-//}
 
 //Educations
 

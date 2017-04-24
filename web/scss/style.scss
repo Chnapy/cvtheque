@@ -148,3 +148,12 @@ a.bloc {
         }
     }
 }
+
+.bloc {
+    text-overflow: clip;
+    overflow: hidden;
+}
+
+#footer {
+    padding: 15px 0;
+}

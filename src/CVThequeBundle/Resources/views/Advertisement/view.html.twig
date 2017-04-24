@@ -71,7 +71,7 @@
                     {% endif %}
                 </div>
 
-                {% if is_granted('ROLE_APPLICANT') %}
+                {% if is_granted('ROLE_APPLICANT') and formApply is not null %}
                     <h3>Postuler à cette offre</h3>
                     <div class="bloc">
                         {{ form(formApply)  }}

@@ -3,16 +3,20 @@
 {% block bandeau %}
     <div class="row d-table main_title">
         <div class="col-md-3 d-table-el">
-            <img class='univ-logo-front' src='{{ asset('img/logo/logo_iut_villeta_white.png') }}' alt='Logo de l\'IUT de Villetaneuse'/>
+            <a href="https://iutv.univ-paris13.fr/" target="_blank">
+                <img class='univ-logo-front' src='{{ asset('img/logo/logo_iut_villeta_white.png') }}' alt='Logo de l\'IUT de Villetaneuse'/>
+            </a>
         </div>
         <div class="col-md-6 d-table-el">
             <h1>CVthèque</h1>
             <div class="lead">
-                Slogan qui déchire
+                L'IUT de Villetaneuse : incubateur de talents !
             </div>
         </div>
         <div class="col-md-3 d-table-el">
-            <img class='univ-logo-front' src='{{ asset('img/logo/logo_univ_paris13_white.png') }}' alt='Logo de l\'Université Paris 13'/>
+            <a href="https://www.univ-paris13.fr/" target="_blank">
+                <img class='univ-logo-front' src='{{ asset('img/logo/logo_univ_paris13_white.png') }}' alt='Logo de l\'Université Paris 13'/>
+            </a>
         </div>
     </div>
 {% endblock %}
@@ -21,31 +25,25 @@
     <div class="row">
         <div class="description col-md-6 col-xs-12">
             <div class="lead">
-                Slogan qui déchire, un truc marketing qui vend du rève.
+                L'IUT de Villetaneuse : incubateur de talents !
             </div>
             <div>
-                Description du service, blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
-                blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+                Le CREIP, Centre de Relations Extérieures pour l'Insertion 
+                Professionnelle, a pour mission de faciliter le circuit d'informations 
+                et les relations entre les publics de l'iut et le monde professionnel.  
+                Dans cette optique, tout en restant en étroite collaboration avec les 
+                autres acteurs de l'IUT,  3 pôles y agissent en synergie  : 
+                l'apprentissage/stages , la formation continue et développement.
+                <br/>
+                Cette CVthèque permet, dans cette relation tripartite,  aux étudiants et 
+                public de formation continue de donner une visibilité augmentée de leur 
+                profil, aux entreprises de diffuser leurs profils de poste et d'accéder 
+                aux CVs en ciblant les compétences recherchées et au CREIP, 
+                administrateur de la plateforme, de  faciliter cette mise en relation.
             </div>
         </div>
 
         <div id="form_conn_insc" class="col-md-6 col-xs-12 bloc">
-            {#{% for type, messages in app.session.flashBag.all %}
-                {% for message in messages %}
-                    <div class="{{ type }}">
-                        {{ message|trans({}, 'FOSUserBundle') }}
-                    </div>
-                {% endfor %}
-            {% endfor %}#}
             {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <h3>Identification</h3>
                 {{ render(controller('FOSUserBundle:Security:login')) }}

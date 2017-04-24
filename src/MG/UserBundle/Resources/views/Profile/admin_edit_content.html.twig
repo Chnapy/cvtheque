@@ -1,11 +1,30 @@
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_row(form.address.street) }}
-    {{ form_row(form.address.country) }}
-    {{ form_row(form.address.town) }}    
-    <input type="hidden" name="_csrf_token"
-        value="{{ csrf_token('authenticate') }}"
-    >
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+{% extends '::base.html.twig' %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Modification de profil - Administrateur</h1>
+        <div class="lead">Remplissez les champs que vous souhaitez modifier.</div>
     </div>
-{{ form_end(form) }}
+{% endblock %}
+
+{% block content %}
+
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+    <script>var FORM = 'fos_user_profile_form';</script>
+
+    <div class='bloc'>
+        {{ form_row(form.address.street) }}
+        {{ form_row(form.address.country) }}
+        {{ form_row(form.address.town) }}
+    </div>
+
+    {{ form_widget(form._token) }}
+
+    <div class="form-group">
+        <button type="submit" class="but d-block primary">{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}</button>
+    </div>
+
+    {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}

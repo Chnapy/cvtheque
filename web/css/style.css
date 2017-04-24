@@ -780,4 +780,11 @@ a.bloc {
       -ms-animation-duration: 0.5s;
       animation-duration: 0.5s; }
 
+.bloc {
+  text-overflow: clip;
+  overflow: hidden; }
+
+#footer {
+  padding: 15px 0; }
+
 /*# sourceMappingURL=style.css.map */
