@@ -80,13 +80,27 @@
             <footer id="footer" class='footer dark'>
                 <div class="container">
                     <div class='row d-table'>
-                        <div class='col-md-8 d-table-el vertical-center-parent'>
-                            <div class='vertical-center-child'>
-                                Copyright © {{ 'now'|date('Y') }} Université Paris 13. Tous droits réservés
+                        <div class='col-md-8 d-table-el {#vertical-center-parent#}'>
+                            <div class='{#vertical-center-child#}'>
+                                Copyright © {{ 'now'|date('Y') }} Université Paris 13. Tous droits réservés.<br/>
+                                <br/>
+                                Site web commandé par <b>Sylvie CARDOSO</b><br/>
+                                Coordinatrice des stage à l'IUT de Villetaneuse<br/>
+                                <br/>
+                                tél. 01 49 40 31 19<br/>
+                                <a href="mailto:sylvie.cardoso@univ-paris13.fr">sylvie.cardoso@univ-paris13.fr</a>
                             </div>
                         </div>
                         <div class='col-md-4 d-table-el'>
-                            <img class='univ-logo' src='{{ asset('img/logo/logo_univ_paris13_uspc.png') }}' alt='Logo de l\'université Paris 13 et de la Sorbonne'/>
+                            <a href="https://www.univ-paris13.fr/" target="_blank">
+                                <img class='univ-logo' src='{{ asset('img/logo/logo_univ_paris13_uspc.png') }}' alt="Logo de l'université Paris 13 et de la Sorbonne"/>
+                            </a><br/>
+                            Université Paris 13 - IUT de Villetaneuse<br/>
+                            Centre des Relations Extérieures pour l'Insertion Professionnelle<br/>
+                            99, Avenue Jean-Batiste Clément - 93430 Villetaneuse<br/>
+                            <br/>
+                            <a href="www.univ-paris13.fr">www.univ-paris13.fr</a><br/>
+                            <a href="www.iutv.univ-paris13.fr">www.iutv.univ-paris13.fr</a>
                         </div>
                     </div>
             </footer>

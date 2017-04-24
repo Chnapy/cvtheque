@@ -94,14 +94,14 @@
             <div class="skills-content tag-content" aria-live="polite">
                 <div class="field inline skills-add">
                     <span class="sr-only sr-only-focusable">Entrez votre compétence puis appuyez sur Entrée pour l'ajouter</span>
-                    <input type="text" id="ip_skills" minLength="2" maxLength="255" />
+                    <input type="text" id="ip_skills" class="ip_skills" minLength="2" maxLength="255" />
                     <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
                 </div>
             </div>
 
         </div>
 
-        <label for="ip_skills">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
+        <label for="ip_hobbies">{{ 'form.hobbies'|trans({}, 'MGUserBundle') }}</label>
         <div class="skills form-group" 
              data-name='hobbies' 
              data-supp='Supprimer le passe-temps' 
@@ -110,7 +110,7 @@
             <div class="skills-content tag-content" aria-live="polite">
                 <div class="field inline skills-add">
                     <span class="sr-only sr-only-focusable">Entrez le centre d'intérêt puis appuyez sur Entrée pour l'ajouter</span>
-                    <input type="text" id="ip_skills" minLength="2" maxLength="255" />
+                    <input type="text" id="ip_hobbies" class="ip_skills" minLength="2" maxLength="255" />
                     <span class='field-feedback form-control-feedback'><span class='glyphicon'></span></span>
                 </div>
             </div>

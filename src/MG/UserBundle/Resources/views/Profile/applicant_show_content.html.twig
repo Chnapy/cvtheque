@@ -15,9 +15,7 @@
             <div class="col-md-3 colonne">
                 <div class="row bloc text-center">
                     <a href="{% if isuser %}{{ path('mg_user_profile_picture_edit') }}{% endif %}" class="avatar{% if isuser and user.image is null %} avatar-empty{% endif %}">
-                        {#                        {% if user.image is not null %}#}
                         <img {% if user.image is not null %}src="{{ user.image.webPath }}" alt="{{ user.image.alt }}{% endif %}">
-                        {#                        {% endif %}#}
                         {% if isuser %}
                             <div class='avatar-front'>
                                 <span class="sr-only sr-only-focusable">Ajouter ou modifier l'avatar</span>
@@ -77,12 +75,12 @@
                 {% if isuser %}
                     <hr/>
                     <div class="row">
-                        <a href='{{ path('fos_user_profile_edit') }}' class="but d-block primary" >
+                        <a href='{{ path('fos_user_profile_edit') }}' class="but d-block" >
                             Modifier le profil
                         </a>
                     </div>
                     <div class="row">
-                        <a href='{{ path('fos_user_change_password') }}' class="but d-block primary" >
+                        <a href='{{ path('fos_user_change_password') }}' class="but d-block" >
                             Modifier le mot de passe
                         </a>
                     </div>
