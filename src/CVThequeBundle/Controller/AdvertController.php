@@ -36,7 +36,7 @@ class AdvertController extends Controller
       // S'il n'a pas d'autorisation, qu'il n'est pas l'auteur et qu'il n'est pas admin : Erreur 403
       if(!$authorization && $author->getId() !== $user->getId() && get_class($user) !== "MG\UserBundle\Entity\Admin")
       {
-          $message = "Vous n'avez pas les droits pour accèder à cette annonce";
+          $message = "Vous n'avez pas les droits pour accéder à cette annonce";
           throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException ($message);
       }
       
@@ -75,11 +75,17 @@ class AdvertController extends Controller
                   $em->flush();
                   $this->get('session')->getFlashBag()->add('info', "Une invitation à consulter cette annonce a été envoyé à ".$user->getUsername());
               }
+              else
+              {
+                  $this->get('session')->getFlashBag()->add('info', "Ce pseudo n'existe pas.");
+                  
+              }
           }
           $formSuggest = $formSuggest->createView();
-      } else if(get_class($user) === "MG\UserBundle\Entity\Applicant")
+      } 
+      else if(get_class($user) === "MG\UserBundle\Entity\Applicant")
       {
-          $application = new Application();
+        $application = new Application();
         $formApply = $this->createForm('CVThequeBundle\Form\ApplicationType', $application);
         $formApply->handleRequest($request);
 
@@ -102,7 +108,7 @@ class AdvertController extends Controller
             $this->get('session')->getFlashBag()->add('info', "Votre candidature a bien été envoyée");
         }
 
-          $formApply = $formApply->createView();
+        $formApply = $formApply->createView();
       }
           
       return $this->render('CVThequeBundle:Advertisement:view.html.twig', array(

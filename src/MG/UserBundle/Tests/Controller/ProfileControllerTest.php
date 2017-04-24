@@ -13,4 +13,16 @@ class ProfileControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/profile/{slug}');
     }
 
+    public function testEdit(){
+
+    	$client = static::createClient();
+
+    	$crawler = $client->request("GET", '/profile/{slug}');
+
+    	
+
+
+
+    }
+
 }

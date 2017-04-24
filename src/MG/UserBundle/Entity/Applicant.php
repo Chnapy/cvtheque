@@ -510,7 +510,12 @@ class Applicant extends User
      */
     public function addAdvertisement(\CVThequeBundle\Entity\Advertisement $advertisement)
     {
-        $this->advertisements[] = $advertisement;
+        
+        
+        if(!$this->advertisements->contains($advertisement))
+        {    
+            $this->advertisements[] = $advertisement;
+        }
 
         return $this;
     }

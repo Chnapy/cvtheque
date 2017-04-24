@@ -3,8 +3,9 @@
 namespace CVThequeBundle\Tests\Entity;
 use CVThequeBundle\Entity\AdvertSkill;
 use CVThequeBundle\Entity\Advertisement;
+use PHPUnit\Framework\TestCase;
 
-class AdvertSkillTest extends \PHPUnit_Framework_TestCase {
+class AdvertSkillTest extends TestCase {
 
 	public function testAdvertisement(){
 

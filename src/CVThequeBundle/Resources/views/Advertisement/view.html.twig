@@ -43,10 +43,12 @@
 
                     <hr/>
 
+                    {% if formSuggest is not null %}
                     <div class='row bloc'>
                         <h3>Suggérer cette annonce</h3>
                         {{ form(formSuggest)  }}
                     </div>
+                    {% endif %}
 
                 {% endif %}
             </div>
@@ -76,6 +78,7 @@
                     <div class="bloc">
                         {{ form(formApply)  }}
                     </div>
+                {% endif %}
                 {% endif %}
 
             </div>

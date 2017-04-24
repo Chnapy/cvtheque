@@ -2,8 +2,9 @@
 
 namespace MG\UserBundle\Tests\Entity;
 use MG\UserBundle\Entity\User;
+use PHPUnit\Framework\TestCase;
 
-final class UserTest extends \PHPUnit_Framework_TestCase {
+final class UserTest extends TestCase {
 
 	public function testSlugify(){
 
