@@ -14,9 +14,11 @@
     <script>var FORM = 'fos_user_profile_form';</script>
 
     <div class='bloc'>
+        {{ form_row(form.category) }}
         {{ form_row(form.address.street) }}
         {{ form_row(form.address.country) }}
         {{ form_row(form.address.town) }}
+        {{ form_row(form.phoneNumber) }}
     </div>
 
     {{ form_widget(form._token) }}
