@@ -40,4 +40,25 @@ class AdvertisementRepository extends EntityRepository
 
     return new Paginator($query);
   }
+  
+  public function getSocietyAdvertisements($society, $numberByPage, $page)
+  {
+    if ((int) $page < 1) {
+        throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
+    }
+
+    $query = $this->createQueryBuilder('a')
+                  ->leftJoin('a.image', 'i')
+                    ->addSelect('i')
+                  ->leftJoin('a.society', 's')
+                    ->addSelect('s')
+                  ->where('s.id = '.$society->getId())
+                  ->orderBy('a.created', 'DESC')
+                  ->getQuery();
+
+    $query->setFirstResult(($page-1) * $numberByPage)
+          ->setMaxResults($numberByPage);
+
+    return new Paginator($query);
+  }
 }

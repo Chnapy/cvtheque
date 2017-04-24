@@ -215,4 +215,29 @@ class AdvertController extends Controller
             'nb_page'  => ceil(count($advertisements) / $nbrByPage) ? : 1
         ));
     }
+    
+    /**
+    * @Secure(roles="ROLE_SOCIETY")
+    */    
+    public function listSocietyAdvertAction($page)
+    {
+        // app/config/parameters.yml
+        $nbrByPage = 5;//$this->container->getParameter('mgblog.nbr_by_page');
+        $user = $this->getUser();
+        if(get_class($user) !== "MG\UserBundle\Entity\Society")
+        {
+          $message = "Vous n'avez pas les droits pour accèder à cette page, vous devez être connecté avec un profil entreprise";
+          throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException ($message);
+        }
+        $advertisements = $this->getDoctrine()
+        ->getManager()
+        ->getRepository('CVThequeBundle:Advertisement')
+        ->getSocietyAdvertisements($user, $nbrByPage, $page);
+  
+        return $this->render('CVThequeBundle:Society:adverts.html.twig', array(
+            'advertisements' => $advertisements,
+            'page'     => $page,
+            'nb_page'  => ceil(count($advertisements) / $nbrByPage) ? : 1
+        ));
+    }
 }

@@ -27,6 +27,9 @@
                 {% if isuser %}
                     <hr/>
                     <div class="row">
+                        <a href="{{ path('society_advert_show') }}" class="but">
+                            Liste de vos annonces
+                        </a>
                         <a href='{{ path('fos_user_profile_edit') }}' class="but d-block primary" >
                             Modifier le profil
                         </a>

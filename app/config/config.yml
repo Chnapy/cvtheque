@@ -175,27 +175,3 @@ fos_rest:
     routing_loader:
         default_format: json
         
-#fos_elastica
-fos_elastica:
-    clients:
-        default: { host: localhost, port: 9200 }
-    serializer:
-        callback_class: FOS\ElasticaBundle\Serializer\Callback
-        serializer: serializer
-    indexes:
-        elastic:
-            client: default
-            types:
-                Applicant:
-                    mappings: ~
-                    persistence:
-                        driver: orm
-                        model:  MG\UserBundle\Entity\Applicant
-                        provider: ~
-                Advertisement:
-                    mappings: ~
-                    persistence:
-                        driver: orm
-                        model:  CVThequeBundle\Entity\Advertisement
-                        provider: ~
-                        

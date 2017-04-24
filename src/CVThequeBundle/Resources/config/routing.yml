@@ -32,3 +32,9 @@ admin_advert_show:
     defaults:     { _controller: CVThequeBundle:Advert:listAdvert, page: 1 }
     requirements:
         page:     \d+
+
+society_advert_show:
+    path:         /society/advert/{page}
+    defaults:     { _controller: CVThequeBundle:Advert:listSocietyAdvert, page: 1 }
+    requirements:
+        page:     \d+
