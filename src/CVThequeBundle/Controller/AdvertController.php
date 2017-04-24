@@ -75,6 +75,11 @@ class AdvertController extends Controller
                   $em->flush();
                   $this->get('session')->getFlashBag()->add('info', "Une invitation à consulter cette annonce a été envoyé à ".$user->getUsername());
               }
+              else
+              {
+                  $this->get('session')->getFlashBag()->add('info', "Ce pseudo n'existe pas.");
+                  
+              }
           }
           $formSuggest = $formSuggest->createView();
       } else if(get_class($user) === "MG\UserBundle\Entity\Applicant")

@@ -100,6 +100,7 @@ class Applicant extends User
         $this->hobbies = new \Doctrine\Common\Collections\ArrayCollection();
         $this->application = new \Doctrine\Common\Collections\ArrayCollection();
         $this->addRole("ROLE_APPLICANT");
+        $this->advertisement->
     }
     
     public function isValidate()
@@ -510,7 +511,12 @@ class Applicant extends User
      */
     public function addAdvertisement(\CVThequeBundle\Entity\Advertisement $advertisement)
     {
-        $this->advertisements[] = $advertisement;
+        
+        
+        if(!$this->advertisement->contains($advertisement))
+        {    
+            $this->advertisements[] = $advertisement;
+        }
 
         return $this;
     }
