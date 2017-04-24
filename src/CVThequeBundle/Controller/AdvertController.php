@@ -82,9 +82,10 @@ class AdvertController extends Controller
               }
           }
           $formSuggest = $formSuggest->createView();
-      } else if(get_class($user) === "MG\UserBundle\Entity\Applicant")
+      } 
+      else if(get_class($user) === "MG\UserBundle\Entity\Applicant")
       {
-          $application = new Application();
+        $application = new Application();
         $formApply = $this->createForm('CVThequeBundle\Form\ApplicationType', $application);
         $formApply->handleRequest($request);
 
@@ -107,7 +108,7 @@ class AdvertController extends Controller
             $this->get('session')->getFlashBag()->add('info', "Votre candidature a bien été envoyée");
         }
 
-          $formApply = $formApply->createView();
+        $formApply = $formApply->createView();
       }
           
       return $this->render('CVThequeBundle:Advertisement:view.html.twig', array(

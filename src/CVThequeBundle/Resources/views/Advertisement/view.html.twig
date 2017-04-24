@@ -43,10 +43,12 @@
 
                     <hr/>
 
+                    {% if formSuggest is not null %}
                     <div class='row bloc'>
                         <h3>Suggérer cette annonce</h3>
                         {{ form(formSuggest)  }}
                     </div>
+                    {% endif %}
 
                 {% endif %}
             </div>
@@ -71,11 +73,13 @@
                     {% endif %}
                 </div>
 
-                {% if is_granted('ROLE_APPLICANT') %}
+                {% if is_granted('ROLE_APPLICANT') and not is_granted('ROLE_ADMIN') %}
+                {% if formApply is not null %}
                     <h3>Postuler à cette offre</h3>
                     <div class="bloc">
                         {{ form(formApply)  }}
                     </div>
+                {% endif %}
                 {% endif %}
 
             </div>

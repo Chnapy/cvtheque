@@ -512,7 +512,7 @@ class Applicant extends User
     {
         
         
-        if(!$this->advertisement->contains($advertisement))
+        if(!$this->advertisements->contains($advertisement))
         {    
             $this->advertisements[] = $advertisement;
         }
