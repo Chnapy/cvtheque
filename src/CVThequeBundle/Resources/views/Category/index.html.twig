@@ -1,37 +1,54 @@
-{% extends 'CVThequeBundle::layout.html.twig' %}
+{#{% extends 'CVThequeBundle::layout.html.twig' %}#}
+{% extends '::base.html.twig' %}
 
-{% block body %}
-    <h1>Liste des catégories</h1>
+{% block title %}
+    Domaines d'étude
+{% endblock %}
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Identifiant</th>
-                <th>Nom de la catégorie</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+{% block bandeau %}
+    <div class="row">
+        <h1>Domaines d'étude</h1>
+        <div class="lead">Liste des domaines d'étude</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="list-user container">
+
+        <div class="bloc list-user-head list-user-row row">
+                <div class='col-md-1'>
+                    Identifiant
+                </div>
+                <div class='col-md-7'>
+                    Nom
+                </div>
+                <div class='col-md-4'>
+                    Actions
+                </div>
+        </div>
+
         {% for category in categories %}
-            <tr>
-                <td><a href="{{ path('admin_category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <p>
-                        <a href="{{ path('admin_category_show', { 'id': category.id }) }}">Afficher</a>
-                    </p>
-                    <p>
-                        <a href="{{ path('admin_category_edit', { 'id': category.id }) }}">Modifier</a>
-                    </p>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_category_new') }}">Créer une nouvelle catégorie</a>
-        </li>
-    </ul>
+            <div class="bloc list-user-row row">
+                <div class='col-md-1'>
+                    {{ category.id }}
+                </div>
+                <div class='col-md-7'>
+                    <span class='tag'>{{ category.name }}</span> 
+                </div>
+                <div class='col-md-2'>
+                    <a href="{{ path('admin_category_show', { 'id': category.id }) }}" class="but">Afficher</a>
+                </div>
+                <div class='col-md-2'>
+                    <a href="{{ path('admin_category_edit', { 'id': category.id }) }}" class="but">Modifier</a>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="text-center">
+        <a href="{{ path('admin_category_new') }}" class="but">Créer un nouveau domaine d'étude</a>
+    </div>
 {% endblock %}

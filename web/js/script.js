@@ -37,17 +37,16 @@ function onLoad() {
 
     if (GLOBALS.form) {
         initSkills();
-//        initHobby();
     }
 
     initEducations();
     initWork();
-    
+
     minorFixes();
 }
 
 function fixFooter() {
-    let footHeight = $('#footer').height();
+    let footHeight = $('#footer')[0].clientHeight;
     $('.main-content').css('padding-bottom', footHeight + 'px');
 }
 
@@ -63,7 +62,9 @@ function bugFixes() {
 //Réglages mineurs
 
 function minorFixes() {
-    $('select option[value="FR"]').attr('selected', true);
+    if (!$('select option[selected]').length) {
+        $('select option[value="FR"]').attr('selected', true);
+    }
 }
 
 //General
@@ -128,7 +129,7 @@ function initSkills() {
 function getSkillData() {
     $.get(SKILLS_URL, {}, (data) => {
         GLOBALS.skill_data = data;
-        
+
         $('.skills').each((i, element) => {
             var name = $(element).data('name');
             if (name !== 'skills') {

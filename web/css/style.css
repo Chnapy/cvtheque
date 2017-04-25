@@ -718,8 +718,6 @@ a.but {
         padding: 5px; }
     .list-user .list-user-row > *:not(.user-avatar) {
       text-align: center; }
-  .list-user .list-user-row > *:nth-child(odd):not(:first-child) {
-    background: rgba(76, 86, 92, 0.05); }
   .list-user .list-user-row .user-name .user-lastname {
     text-transform: uppercase;
     font-weight: bold; }
@@ -740,6 +738,12 @@ a.but {
       vertical-align: top; }
   .list-user .list-user-row:hover .user-name {
     text-decoration: underline; }
+.list-user .list-user-head {
+  font-weight: bold;
+  height: 30px;
+  line-height: 30px; }
+.list-user.w-avatar .list-user-row > *:nth-child(odd):not(:first-child), .list-user:not(.w-avatar) .list-user-row > *:nth-child(odd) {
+  background: rgba(76, 86, 92, 0.05); }
 
 a.bloc {
   color: initial;

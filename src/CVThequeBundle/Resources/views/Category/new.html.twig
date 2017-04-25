@@ -1,16 +1,29 @@
-{% extends 'CVThequeBundle::layout.html.twig' %}
+{#{% extends 'CVThequeBundle::layout.html.twig' %}#}
+{% extends '::base.html.twig' %}
 
-{% block body %}
-    <h1>Création d'une catégorie</h1>
+{% block title %}
+    Création d'un domaine d'étude
+{% endblock %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Création d'un domaine d'étude</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
 
     {{ form_start(form) }}
+    <div class='bloc'>
         {{ form_widget(form) }}
-        <input type="submit" value="Créer" />
+    </div>
+    <div class='form-group'>
+        <input type="submit" value="Créer" class='but primary d-block' />
+    </div>
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_category_index') }}">Retour à la liste des catégories</a>
-        </li>
-    </ul>
+    <div class='form-group'>
+        <a href="{{ path('admin_category_index') }}" class='but'>Retourner à la liste des catégories</a>
+    </div>
+
 {% endblock %}

@@ -1,36 +1,51 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Candidatures
+{% endblock %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Liste des candidatures</h1>
+        {#        <div class="lead"></div>#}
+    </div>
+{% endblock %}
 
 {% block content %}
-    <h1>Liste des candidatures</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nom d'utilisateur</th>
-                <th>Date d'envoie</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="list-user container">
+
+        <div class="bloc list-user-head list-user-row row">
+            <div class='col-md-7'>
+                Nom d'utilisateur
+            </div>
+            <div class='col-md-2'>
+                Date d'envoi
+            </div>
+            <div class='col-md-3'>
+                Actions
+            </div>
+        </div>
+
         {% for application in applications %}
-            <tr>
-                <td>{{ application.candidate.username }}</td>
-                <td>{% if application.created %}{{ application.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('application_show', { 'id': application.id }) }}">Afficher</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('application_new') }}">Create a new application</a>
-        </li>
-    </ul>
+            <div class="bloc list-user-row row">
+                <div class='col-md-7'>
+                    {{ application.candidate.username }}
+                </div>
+                <div class='col-md-2'>
+                    <a href="{{ path('application_show', { 'id': application.id }) }}" class="but">Afficher</a>
+                </div>
+                <div class='col-md-3'>
+                    {% if application.created %}Créé le {{ application.created|date('Y-m-d H:i:s') }}{% endif %}
+                </div>
+            </div>
+
+        {% else %}
+            <div class="bloc list-user-row row text-center">
+                Il n'y a aucune candidature
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

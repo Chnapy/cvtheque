@@ -1,21 +1,32 @@
-{% extends 'CVThequeBundle::layout.html.twig' %}
+{#{% extends 'CVThequeBundle::layout.html.twig' %}#}
+{% extends '::base.html.twig' %}
 
-{% block body %}
-    <h1>Modifier une catégorie</h1>
+{% block title %}
+    {{ category.name }}
+{% endblock %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>{{ category.name }}</h1>
+        <div class="lead">Modification</div>
+    </div>
+{% endblock %}
+
+{% block content %}
 
     {{ form_start(edit_form) }}
+    <div class='bloc'>
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+    </div>
+    <div class='form-group'>
+        <input type="submit" value="Edit" class='but primary d-block' />
+    </div>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_category_index') }}">Retourner à la liste des catégories</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class='form-group'>
+        <a href="{{ path('admin_category_index') }}" class='but'>Retourner à la liste des catégories</a>
+    </div>
+    {#{{ form_start(delete_form) }}
+    <input type="submit" value="Delete" class='but error' />
+    {{ form_end(delete_form) }}#}
 {% endblock %}

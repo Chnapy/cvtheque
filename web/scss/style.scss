@@ -36,6 +36,7 @@
 }
 
 .list-user {
+
     .list-user-row {
         display: block;
         color: initial;
@@ -60,10 +61,6 @@
             &:not(.user-avatar) {
                 text-align: center;
             }
-        }
-
-        &>*:nth-child(odd):not(:first-child) {
-            background: rgba($bg_dark_color, 0.05);
         }
 
         .user-name {
@@ -104,6 +101,17 @@
                 text-decoration: underline;
             }
         }
+    }
+
+    .list-user-head {
+        font-weight: bold;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    &.w-avatar .list-user-row>*:nth-child(odd):not(:first-child),
+        &:not(.w-avatar) .list-user-row>*:nth-child(odd) {
+        background: rgba($bg_dark_color, 0.05);
     }
 }
 

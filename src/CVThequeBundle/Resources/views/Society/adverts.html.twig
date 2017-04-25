@@ -8,13 +8,13 @@
 {% block bandeau %}
     <div class="row">
         <h1>Vos annonces</h1>
-        <div class="lead">Liste des annonces.</div>
+        <div class="lead">Liste des annonces</div>
     </div>
 {% endblock %}
 
 {% block content %}
 
-    <div class="list-user container">
+    <div class="list-user w-avatar container">
         {% for advertisement in advertisements %}
 
             <a class="bloc list-user-row row" href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
@@ -35,7 +35,7 @@
                     <span class='icon-bloc'>
                         Publiée
                         <span class='spinner-box'>
-                            <span class='icon l-white glyphicon {% if advertisement.published is null %}glyphicon-remove{% else %}glyphicon-ok{% endif %}'></span>
+                            <span class='icon l-white glyphicon {% if advertisement.published %}glyphicon-ok{% else %}glyphicon-remove{% endif %}'></span>
                         </span>
                     </span>
                 </div>
@@ -45,14 +45,14 @@
             </a>
 
         {% else %}
-            <div class="bloc list-user-row row">
+            <div class="bloc list-user-row row text-center">
                 Il n'y a pas d'annonce dans la base de données.
             </div>
         {% endfor %}
     </div>
 
     {% if nb_page > 1 %}
-        <div>
+        <div class="text-center">
             <ul class="pagination">
                 {% for p in range(1, nb_page) %}
                     {% if p == page %}

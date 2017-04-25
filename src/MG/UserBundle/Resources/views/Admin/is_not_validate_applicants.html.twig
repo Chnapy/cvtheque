@@ -14,7 +14,7 @@
 
 {% block content %}
 
-    <div class="list-user container">
+    <div class="list-user w-avatar container">
         {% for applicant in applicants %}
             
             <a class="bloc list-user-row row" href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}">
@@ -27,7 +27,7 @@
                     <span class='user-username'>{{ applicant.username }}</span>
                 </div>
                 <div class='col-md-2 user-category'>
-                    <span class='tag'>{{ applicant.category.name }}</span>
+                    <span class='tag'>{% if applicant.category is not null %}{{ applicant.category.name }}{% endif %}</span>
                 </div>
                 <div class='col-md-1'>
                     <span class='icon-bloc'>
@@ -51,13 +51,13 @@
             </a>
                 
         {% else %}
-            <div class="bloc list-user-row row">
+            <div class="bloc list-user-row row text-center">
                 Il n'y a aucun profil étudiant non validé.
             </div>
         {% endfor %}
     </div>
     {% if nb_page > 1 %}
-        <div>
+        <div class="text-center">
             <ul class="pagination">
                 {% for p in range(1, nb_page) %}
                     {% if p == page %}

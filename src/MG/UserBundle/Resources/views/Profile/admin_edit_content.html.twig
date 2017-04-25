@@ -14,7 +14,13 @@
     <script>var FORM = 'fos_user_profile_form';</script>
 
     <div class='bloc'>
+        {{ form_row(form.email) }}
         {{ form_row(form.category) }}
+    </div>
+
+    <div class='bloc'>
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
         {{ form_row(form.address.street) }}
         {{ form_row(form.address.country) }}
         {{ form_row(form.address.town) }}
@@ -27,6 +33,6 @@
         <button type="submit" class="but d-block primary">{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}</button>
     </div>
 
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false}) }}
 
 {% endblock %}

@@ -1,19 +1,40 @@
-{{ form_start(form, {'method': 'post', 'action': path('mg_admin_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword) }}
-    {{ form_row(form.firstname) }}
-    {{ form_row(form.lastname) }}
-    {{ form_row(form.category) }}
-    {{ form_row(form.address.street) }}
-    {{ form_row(form.address.zipCode) }}
-    {{ form_row(form.address.town) }}
-    {{ form_row(form.address.country) }}
-    {{ form_row(form.phoneNumber) }}
-    <input type="hidden" name="_csrf_token"
-        value="{{ csrf_token('authenticate') }}"
-    >
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+{% extends '::base.html.twig' %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Inscription - Administrateur</h1>
+        <div class="lead">Remplissez les différents champs demandés.</div>
     </div>
-{{ form_end(form) }}
+{% endblock %}
+
+{% block content %}
+
+    {{ form_start(form, {'method': 'post', 'action': path('mg_admin_registration'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+    <script>var FORM = 'fos_user_registration_form';</script>
+
+    <div class='bloc'>
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword) }}
+    </div>
+
+    <div class='bloc'>
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.address.street) }}
+        {{ form_row(form.address.zipCode) }}
+        {{ form_row(form.address.town) }}
+        {{ form_row(form.address.country) }}
+        {{ form_row(form.phoneNumber) }}
+    </div>
+
+    {{ form_widget(form._token) }}
+
+    <div class="form-group">
+        <button type="submit" class="but d-block primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
