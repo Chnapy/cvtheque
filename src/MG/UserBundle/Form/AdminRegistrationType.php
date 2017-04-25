@@ -38,7 +38,8 @@ class AdminRegistrationType extends AbstractType
                 'translation_domain' => 'CVThequeBundle',
                 'class'    => 'CVThequeBundle:Category',
                 'choice_label' => 'name',
-                'multiple' => false
+                'multiple' => false,
+                'required' => true
         ));
     }
     

@@ -60,7 +60,8 @@ class ApplicantRegistrationType extends AbstractType
                 'translation_domain' => 'CVThequeBundle',
                 'class'    => 'CVThequeBundle:Category',
                 'choice_label' => 'name',
-                'multiple' => false
+                'multiple' => false,
+                'required' => true
         ))
         ->add('educations',  CollectionType::class, array(
                 'entry_type' => EducationType::class,
