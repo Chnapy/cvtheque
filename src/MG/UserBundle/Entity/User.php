@@ -27,7 +27,11 @@ abstract class User extends BaseUser
 
     /**
      * @var string
-     * @Assert\Length(min = 8, max = 20, minMessage = "min_lenght", maxMessage = "max_lenght")
+     * @Assert\Regex(
+     *     pattern="/^0[1-9]([-. ]?[0-9]{2}){4}$/",
+     *     match=true,
+     *     message="Numéro de téléphone invalide"
+     * )
      */
     protected $phoneNumber;
 
@@ -49,6 +53,7 @@ abstract class User extends BaseUser
 
     /**
      * @var \MG\UserBundle\Entity\Address
+     * @Assert\Valid()
      */
     protected $address;
 

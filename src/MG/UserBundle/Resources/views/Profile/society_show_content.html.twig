@@ -24,14 +24,16 @@
                         {% endif %}
                     </a>
                 </div>
-                {% if isuser %}
+                {% if isuser or is_granted('ROLE_ADMIN') %}
                     <hr/>
                     <div class="row">
-                        <a href='{{ path('society_advert_show') }}' class="but d-block primary" >
-                            Liste de vos annonces
+                        <a href='{{ path('society_advert_show', {'slug': user.slug}) }}' class="but d-block primary" >
+                            Liste des annonces enregistrées
                         </a>
                     </div>
                     <hr/>
+                {% endif %}
+                {% if isuser %}
                     <div class="row">
                         <a href='{{ path('fos_user_profile_edit') }}' class="but d-block" >
                             Modifier le profil

@@ -152,8 +152,13 @@ class Applicant extends User
      *
      */
     public function setUsername($username) {
-        parent::setUsername($username);
+        $this->username = $username;
         $this->setSlug($username);
+    }
+    
+    public function getUsername()
+    {
+        return $this->username;
     }
     
     /**

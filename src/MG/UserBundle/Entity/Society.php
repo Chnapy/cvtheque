@@ -37,7 +37,7 @@ class Society extends User
     public function setSocietyName($societyName)
     {
         $this->societyName = $societyName;
-        parent::setUsername($societyName);
+        $this->username = $societyName;
         $this->setSlug($societyName);
 
         return $this;

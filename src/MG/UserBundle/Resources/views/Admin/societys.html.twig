@@ -1,0 +1,59 @@
+{#{% extends "CVThequeBundle::layout.html.twig" %} #}
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Liste des entreprises
+{% endblock %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Profils entreprises</h1>
+        <div class="lead">Liste des entreprises.</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="list-user container">
+        {% for society in societys %}
+
+            <a class="bloc list-user-row row" href="{{ path('mg_user_profile_visite', {'slug': society.slug}) }}">
+                <div class='col-md-1 user-avatar'>
+                    <img {% if society.image is not null %}src="{{ society.image.webPath }}" alt="{{ society.image.alt }}"{% endif %} />
+                </div>
+                <div class='col-md-4 user-name'>
+                    <span class='user-lastname'>{{ society.societyName }}</span> 
+                    <span class='user-username'>{{ society.username }}</span>
+                </div>
+                <div class='col-md-2 user-category'>
+                    <span class='tag'>{% if society.category is not null %}{{ society.category.name }}{% endif %}</span>
+                </div>
+                <div>
+                    Créé le {{ society.created|date('d/m/Y') }}, màj le {{ society.updated|date('d/m/Y') }}
+                </div>
+            </a>
+
+        {% else %}
+            <div class="bloc list-user-row row">
+                Il n'y a aucun profil entreprise.
+            </div>
+        {% endfor %}
+    </div>
+    {% if nb_page > 1 %}
+        <div>
+            <ul class="pagination">
+                {% for p in range(1, nb_page) %}
+                    {% if p == page %}
+                        <li class="active">
+                            <span>{{ p }}</span>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('mg_admin_show_societys', {'page': p}) }}">{{ p }}</a>
+                        </li>
+                    {% endif %} 
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %} 
+{% endblock %}

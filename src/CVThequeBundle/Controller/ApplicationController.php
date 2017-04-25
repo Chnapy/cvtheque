@@ -22,32 +22,8 @@ class ApplicationController extends Controller
 
         $applications = $em->getRepository('CVThequeBundle:Application')->findAll();
 
-        return $this->render('application/index.html.twig', array(
+        return $this->render('CVThequeBundle:Application:index.html.twig', array(
             'applications' => $applications,
-        ));
-    }
-
-    /**
-     * Creates a new application entity.
-     *
-     */
-    public function newAction(Request $request)
-    {
-        $application = new Application();
-        $form = $this->createForm('CVThequeBundle\Form\ApplicationType', $application);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($application);
-            $em->flush();
-
-            return $this->redirectToRoute('application_show', array('id' => $application->getId()));
-        }
-
-        return $this->render('application/new.html.twig', array(
-            'application' => $application,
-            'form' => $form->createView(),
         ));
     }
 
@@ -59,31 +35,8 @@ class ApplicationController extends Controller
     {
         $deleteForm = $this->createDeleteForm($application);
 
-        return $this->render('application/show.html.twig', array(
+        return $this->render('CVThequeBundle:Application:show.html.twig', array(
             'application' => $application,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing application entity.
-     *
-     */
-    public function editAction(Request $request, Application $application)
-    {
-        $deleteForm = $this->createDeleteForm($application);
-        $editForm = $this->createForm('CVThequeBundle\Form\ApplicationType', $application);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('application_edit', array('id' => $application->getId()));
-        }
-
-        return $this->render('application/edit.html.twig', array(
-            'application' => $application,
-            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

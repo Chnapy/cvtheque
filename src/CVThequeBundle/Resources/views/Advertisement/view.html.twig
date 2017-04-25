@@ -10,7 +10,7 @@
 {% block bandeau %}
     <div class="row">
         <h1>{{ advertisement.title }}</h1>
-        <div class="lead">Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</div>
+        <div class="lead">Par <a href="{{ path('mg_user_profile_visite', {'slug': advertisement.society.slug}) }}">{{ advertisement.author }}</a>, le {{ advertisement.created|date('d/m/Y') }}</div>
     </div>
 {% endblock %}
 

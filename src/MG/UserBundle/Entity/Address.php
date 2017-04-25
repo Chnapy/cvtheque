@@ -28,7 +28,11 @@ class Address
 
     /**
      * @var string
-     * @Assert\Length(min=4, max=8)
+     * @Assert\Regex(
+     *     pattern="/^[0-9]{5,5}$/",
+     *     match=true,
+     *     message="Code postal invalide"
+     * )
      */
     private $zipCode;
 

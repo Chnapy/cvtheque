@@ -2,6 +2,8 @@
 
 namespace MG\UserBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * SocietyRepository
  *
@@ -10,4 +12,22 @@ namespace MG\UserBundle\Repository;
  */
 class SocietyRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getSocietys($numberByPage, $page, $validate)
+    {
+        if ((int) $page < 1) {
+             throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
+         }
+
+         $query = $this->createQueryBuilder('s')
+                  ->leftJoin('s.image', 'i')
+                    ->addSelect('i')
+                  //->where('s.validate = '.strval((int)$validate))
+                  ->orderBy('s.updated', 'DESC')
+                  ->getQuery();
+
+        $query->setFirstResult(($page-1) * $numberByPage)
+            ->setMaxResults($numberByPage);
+
+        return new Paginator($query);
+    }
 }

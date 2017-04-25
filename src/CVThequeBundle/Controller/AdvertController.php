@@ -13,10 +13,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use CVThequeBundle\Entity\Advertisement;
 use CVThequeBundle\Entity\Categorie;
-use MG\UserBundle\Entity\Skill;
 use CVThequeBundle\Entity\Application;
 use CVThequeBundle\Form\AdvertisementType;
 use CVThequeBundle\Form\AdvertisementEditType;
+use MG\UserBundle\Entity\Skill;
+use MG\UserBundle\Entity\Society;
 
 class AdvertController extends Controller
 {
@@ -25,8 +26,7 @@ class AdvertController extends Controller
    * @Secure(roles="ROLE_USER")
    */
   public function showAction(Advertisement $advertisement, Request $request)
-  {
-      
+  {    
       $author = $advertisement->getSociety();
       $user = $this->getUser(); // Visiteur
       // Vérification des droits de l'utilisateur à consulter l'annonce
@@ -176,7 +176,7 @@ class AdvertController extends Controller
   }
 
   /**
-   * @Secure(roles="ROLE_ADMIN")
+   * @Secure(roles="ROLE_SOCIETY")
    */
   public function deleteAction(Advertisement $advertisement, Request $request)
   {
@@ -225,11 +225,11 @@ class AdvertController extends Controller
     /**
     * @Secure(roles="ROLE_SOCIETY")
     */    
-    public function listSocietyAdvertAction($page)
+    public function listSocietyAdvertAction(Society $society, $page)
     {
         // app/config/parameters.yml
         $nbrByPage = 5;//$this->container->getParameter('mgblog.nbr_by_page');
-        $user = $this->getUser();
+        $user = $society;
         if(get_class($user) !== "MG\UserBundle\Entity\Society")
         {
           $message = "Vous n'avez pas les droits pour accèder à cette page, vous devez être connecté avec un profil entreprise";
@@ -243,7 +243,8 @@ class AdvertController extends Controller
         return $this->render('CVThequeBundle:Society:adverts.html.twig', array(
             'advertisements' => $advertisements,
             'page'     => $page,
-            'nb_page'  => ceil(count($advertisements) / $nbrByPage) ? : 1
+            'nb_page'  => ceil(count($advertisements) / $nbrByPage) ? : 1,
+            'user' => $user
         ));
     }
 }

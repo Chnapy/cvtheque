@@ -61,7 +61,7 @@
                         </li>
                         {% else %}
                         <li>
-                            <a href="{{ path('society_advert_show', {'page': p}) }}">{{ p }}</a>
+                            <a href="{{ path('society_advert_show', {'slug': user.slug, 'page': p}) }}">{{ p }}</a>
                         </li>
                         {% endif %} 
                     {% endfor %}

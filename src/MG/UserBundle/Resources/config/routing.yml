@@ -63,6 +63,14 @@ mg_user_admin_show:
     path:     /admin/user/{id}/show
     defaults: { _controller: "MGUserBundle:User:show" }
     methods:  GET
+
+
+mg_admin_show_societys:
+    path:         /admin/societys{page}
+    defaults:     { _controller: MGUserBundle:Society:list, page: 1 }
+    requirements:
+        page:     \d+
+
     
 mg_admin_show_applicants_validate:
     path:         /admin/applicants/validate/{page}

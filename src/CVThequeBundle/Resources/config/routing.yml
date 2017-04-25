@@ -1,7 +1,3 @@
-category:
-    resource: "@CVThequeBundle/Resources/config/routing/category.yml"
-    prefix:   /admin/category
-
 
 homepage:
     path:     /
@@ -34,7 +30,15 @@ admin_advert_show:
         page:     \d+
 
 society_advert_show:
-    path:         /society/advert/{page}
+    path:         /society/advert/{slug}/{page}
     defaults:     { _controller: CVThequeBundle:Advert:listSocietyAdvert, page: 1 }
     requirements:
         page:     \d+
+
+category:
+    resource: "@CVThequeBundle/Resources/config/routing/category.yml"
+    prefix:   /admin/category
+    
+application:
+    resource: "@CVThequeBundle/Resources/config/routing/application.yml"
+    prefix:   /admin/application
