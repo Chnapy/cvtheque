@@ -17,6 +17,7 @@
 
     <div class='bloc'>
         {{ form_row(form.username) }}
+        {{ form_row(form.category)}}
         {{ form_row(form.description) }}     
     </div>
 
@@ -26,6 +27,13 @@
         {{ form_row(form.address.town) }}
         {{ form_row(form.address.country) }}
         {{ form_row(form.phoneNumber) }}
+    </div>
+
+    <div class='bloc'>
+        {{ form_row(form.effectif) }}
+        {{ form_row(form.activity) }}
+        {{ form_row(form.signatory) }}
+        {{ form_row(form.tutor) }}
     </div>
 
     {{ form_widget(form._token) }}

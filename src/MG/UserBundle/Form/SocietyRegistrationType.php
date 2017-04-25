@@ -43,6 +43,26 @@ class SocietyRegistrationType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false,
                 'required' => true
+        ))
+        ->add('effectif', TextType::class, array(
+            'label' => 'form.effectif',
+            'translation_domain' => 'MGUserBundle',
+            'required' => true 
+        ))
+        ->add('activity', TextType::class, array(
+            'label' => 'form.activity',
+            'translation_domain' => 'MGUserBundle',
+            'required' => true 
+        ))
+        ->add('signatory', TextType::class, array(
+            'label' => 'form.signatory',
+            'translation_domain' => 'MGUserBundle',
+            'required' => true 
+        ))
+        ->add('tutor', TextType::class, array(
+            'label' => 'form.tutor',
+            'translation_domain' => 'MGUserBundle',
+            'required' => true
         ));
     }
     

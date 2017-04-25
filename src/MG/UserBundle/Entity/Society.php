@@ -16,8 +16,34 @@ class Society extends User
      */
     private $societyName;
 
+    /**
+     * @var integer
+     * @Assert\Regex(
+     *     pattern="/^[0-9]*$/",
+     *     match=true,
+     *     message="Effectif invalide"
+     * )
+     */
+    private $effectif;
 
-    
+    /**
+     * @var string
+     * @Assert\Length(min=2)
+     */
+    private $activity;
+
+    /**
+     * @var string
+     * @Assert\Length(min=2, max=128)
+     */
+    private $signatory;
+
+    /**
+     * @var string
+     * @Assert\Length(min=2, max=128)
+     */
+    private $tutor;
+
     /**
      * Constructor
      */
@@ -59,5 +85,69 @@ class Society extends User
         $this->setSocietyName($username);
         
         return $this;
+    }
+
+    /**
+     * Set effectif
+     * @param integer $effectif
+     */
+    public function setEffectif($effectif) {
+    	$this->effectif = $effectif;
+    }
+
+    /**
+     * Get effectif
+     * @return integer
+     */
+    public function getEffectif(){
+    	return $this->effectif;
+    }
+
+    /**
+     * Set effectif
+     * @param string $activity
+     */
+    public function setActivity($activity) {
+    	$this->activity = $activity;
+    }
+
+    /**
+     * Get activity
+     * @return string
+     */
+    public function getActivity(){
+    	return $this->activity;
+    }
+
+    /**
+     * Set effectif
+     * @param string $signatory
+     */
+    public function setSignatory($signatory) {
+    	$this->signatory = $signatory;
+    }
+
+    /**
+     * Get signatory
+     * @return string
+     */
+    public function getSignatory() {
+    	return $this->signatory;
+    }
+
+    /**
+     * Set tutor
+     * @param string $tutor
+     */
+    public function setTutor($tutor){
+    	$this->tutor = $tutor;
+    }
+
+    /**
+     * Get tutor
+     * @return string
+     */
+    public function getTutor(){
+    	return $this->tutor;
     }
 }

@@ -57,6 +57,8 @@
                 <h3>Informations générales</h3>
                 <div class='bloc'>
                     <p>{{ 'profile.show.country'|trans({'%country%': user.address.country|country }, 'MGUserBundle') }}</p>
+                    <p>Effectif: {{ user.effectif }}</p>
+                    <p>Activité: {{ user.activity }}</p>
                 </div>
 
                 <h3>Description</h3>

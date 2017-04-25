@@ -6,4 +6,15 @@ MG\UserBundle\Entity\Society:
         societyName:
             type: string
             length: 255
+        effectif:
+            type: integer
+        activity:
+            type: string
+            length: 255
+        signatory:
+            type: string
+            length: 255
+        tutor:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
