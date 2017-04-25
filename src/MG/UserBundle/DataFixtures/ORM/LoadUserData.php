@@ -94,6 +94,10 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         $society->setCategory($this->getReference("category01"));
         
         $society->setDescription("Fort de plus de 180 000 collaborateurs et présent dans plus de 40 pays, Capgemini est l'un des leaders mondiaux du conseil, des services informatiques et de l'infogérance. Le Groupe a réalisé en 2014 un chiffre d'affaires de 10,573 milliards d'euros. Avec ses clients, Capgemini conçoit et met en oeuvre les solutions business, technologiques et digitales qui correspondent à leurs besoins et leur permettent d'encourager l'innovation tout en gagnant en compétitivité.");
+        $society->setEffectif(100);
+        $society->setActivity("Réseau et sécurité informatique");
+        $society->setSignatory("Robert Dupond");
+        $society->setTutor("Robert Duponpond");
         $society->setEnabled(true);
         $userManager->updateUser($society, true);
         $this->addReference('admin', $admin);
