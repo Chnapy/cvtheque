@@ -62,14 +62,10 @@ form:
         submit: Envoyer le CV
     logbook:
         file: Fichier de votre journal
-<<<<<<< HEAD
         submit: Envoyer le journal
-=======
-        submit: Envoyer le CV
     effectif: Effectif de votre entreprise
     activity: Domaine d'activité de l'entreprise
     signatory: Nom et prénom du signataire de la convention
     tutor: Nom et prénom du futur tuteur de stage
->>>>>>> 468d252176a11262396212372b9c1f406ab46658
 societyname:
     already_used: "Ce nom d'entreprise est déja utilisé (Vous pouvez contacter un administrateur)"
