@@ -36,12 +36,6 @@ class Society extends User
      * @var string
      * @Assert\Length(min=2, max=128)
      */
-    private $signatory;
-
-    /**
-     * @var string
-     * @Assert\Length(min=2, max=128)
-     */
     private $tutor;
 
     /**
@@ -117,22 +111,6 @@ class Society extends User
      */
     public function getActivity(){
     	return $this->activity;
-    }
-
-    /**
-     * Set effectif
-     * @param string $signatory
-     */
-    public function setSignatory($signatory) {
-    	$this->signatory = $signatory;
-    }
-
-    /**
-     * Get signatory
-     * @return string
-     */
-    public function getSignatory() {
-    	return $this->signatory;
     }
 
     /**

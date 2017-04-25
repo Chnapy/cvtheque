@@ -65,7 +65,6 @@ form:
         submit: Envoyer le journal
     effectif: Effectif de votre entreprise
     activity: Domaine d'activité de l'entreprise
-    signatory: Nom et prénom du signataire de la convention
     tutor: Nom et prénom du futur tuteur de stage
 societyname:
     already_used: "Ce nom d'entreprise est déja utilisé (Vous pouvez contacter un administrateur)"

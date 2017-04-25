@@ -11,9 +11,6 @@ MG\UserBundle\Entity\Society:
         activity:
             type: string
             length: 255
-        signatory:
-            type: string
-            length: 255
         tutor:
             type: string
             length: 255

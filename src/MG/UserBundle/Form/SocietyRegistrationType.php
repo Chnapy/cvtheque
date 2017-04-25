@@ -54,11 +54,6 @@ class SocietyRegistrationType extends AbstractType
             'translation_domain' => 'MGUserBundle',
             'required' => true 
         ))
-        ->add('signatory', TextType::class, array(
-            'label' => 'form.signatory',
-            'translation_domain' => 'MGUserBundle',
-            'required' => true 
-        ))
         ->add('tutor', TextType::class, array(
             'label' => 'form.tutor',
             'translation_domain' => 'MGUserBundle',
