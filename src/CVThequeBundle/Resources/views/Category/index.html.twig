@@ -17,7 +17,7 @@
     <div class="list-user container">
 
         <div class="bloc list-user-head list-user-row row">
-                <div class='col-md-1'>
+                <div class='col-md-1' title='Identifiant'>
                     Identifiant
                 </div>
                 <div class='col-md-7'>
@@ -35,7 +35,7 @@
                     {{ category.id }}
                 </div>
                 <div class='col-md-7'>
-                    <span class='tag'>{{ category.name }}</span> 
+                    {{ category.name }}
                 </div>
                 <div class='col-md-2'>
                     <a href="{{ path('admin_category_show', { 'id': category.id }) }}" class="but">Afficher</a>

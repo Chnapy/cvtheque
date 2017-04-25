@@ -33,7 +33,7 @@
                 {{ category.id }}
             </div>
             <div class='col-md-7'>
-                <span class='tag'>{{ category.name }}</span> 
+                {{ category.name }} 
             </div>
             <div class='col-md-2'>
                 <a href="{{ path('admin_category_edit', { 'id': category.id }) }}" class="but">Modifier</a>

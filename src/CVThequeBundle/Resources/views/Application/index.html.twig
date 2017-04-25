@@ -29,17 +29,17 @@
 
         {% for application in applications %}
 
-            <div class="bloc list-user-row row">
-                <div class='col-md-7'>
+            <a class="bloc list-user-row row" href="{{ path('application_show', { 'id': application.id }) }}">
+                <div class='col-md-9'>
                     {{ application.candidate.username }}
                 </div>
-                <div class='col-md-2'>
+                {#<div class='col-md-2'>
                     <a href="{{ path('application_show', { 'id': application.id }) }}" class="but">Afficher</a>
-                </div>
+                </div>#}
                 <div class='col-md-3'>
                     {% if application.created %}Créé le {{ application.created|date('Y-m-d H:i:s') }}{% endif %}
                 </div>
-            </div>
+            </a>
 
         {% else %}
             <div class="bloc list-user-row row text-center">
