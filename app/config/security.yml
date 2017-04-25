@@ -43,3 +43,8 @@ security:
     
     access_control:
         - { path: ^/admin/*, roles: ROLE_ADMIN }
+        - { path: ^/profile/show, roles: ROLE_USER }
+        - { path: ^/profile/show/*, roles: ROLE_USER }
+        - { path: ^/uploads/cv/*, roles: ROLE_USER }
+        - { path: ^/uploads/logbook/*, roles: ROLE_USER }
+        - { path: ^/uploads/img/*, roles: ROLE_USER }
