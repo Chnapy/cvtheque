@@ -1,4 +1,3 @@
-
 {% if user.id == app.user.id %}
 
     <h3>Profil administrateur</h3>
@@ -21,15 +20,15 @@
 
         <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="but">Étudiants non validés</a>
         <a href="{{ path('mg_admin_show_applicants_validate') }}" class="but">Étudiants validés</a>
+        <a href="{{ path('search_applicant') }}" class="but">Rechercher des étudiants</a>
         <a href="{{ path('mg_admin_show_societys') }}" class="but">Entreprises</a>
 
     </div>
 
     <h3>Annonces</h3>
     <div class="bloc">
-
         <a href="{{ path('admin_advert_show') }}" class="but">Liste des annonces</a>
-
+        <a href="{{ path('admin_advert_show') }}" class="but">Rechercher des annonces</a>
     </div>
 
     <h3>Administration</h3>

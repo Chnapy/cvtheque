@@ -50,7 +50,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         $discriminator->setClass('MG\UserBundle\Entity\Applicant');
         
         
-        for($i=0; $i<30; $i++)
+        for($i=0; $i<20; $i++)
         {
             sleep(5);
             $address = new Address();

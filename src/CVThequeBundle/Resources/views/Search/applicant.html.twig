@@ -1,7 +1,36 @@
-{% extends "::base.html.twig" %}
+{% extends '::base.html.twig' %}
 
-{% block title %}CVThequeBundle:Search:applicant{% endblock %}
+{% block title %}
+    Recherche d'applicant
+{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Search:applicant page</h1>
+{% block bandeau %}
+    <div class="row">
+        <h1>Recherche d'étudiant</h1>
+        <div class="lead">Liste des profils étudiants <b>validés</b> par un administrateur.</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <didv>{{ form(form)  }}</div>
+    <div class="list-user w-avatar container">
+        {% for applicant in applicants %}
+
+            <a class="bloc list-user-row row" href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}">
+                {#<div class='col-md-1 user-avatar'>
+                    <img {% if applicant.image is not null %}src="{{ applicant.image.webPath }}" alt="{{ applicant.image.alt }}"{% endif %} />
+                </div>#}
+                <div class='col-md-4 user-name'>
+                    <span class='user-lastname'>{{ applicant.lastname }}</span> 
+                    <span class='user-firstname'>{{ applicant.firstname }}</span> 
+                    <span class='user-username'>{{ applicant.username }}</span>
+                </div>
+            </a>
+
+        {% else %}
+            <div class="bloc list-user-row row text-center">
+                <p>Aucun résultat pour la recherche.</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

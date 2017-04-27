@@ -30,7 +30,7 @@ class SearchController extends Controller
     public function applicantAction(Request $request)
     {
         $applicants = null;
-        $formApplicant = $this->createForm();
+        $formApplicant = $this->createFormSearch();
         $formApplicant->handleRequest($request);
         if ($formApplicant->isSubmitted() && $formApplicant->isValid())
         {
