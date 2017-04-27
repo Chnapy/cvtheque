@@ -45,6 +45,15 @@ function onLoad() {
     minorFixes();
 }
 
+function stopEvent(e) {
+    if(e.preventDefault) {
+        e.preventDefault();
+    } else {
+        e.returnValue = false;
+    }
+    e.stopPropagation();
+}
+
 function fixFooter() {
     let footHeight = $('#footer')[0].clientHeight;
     $('.main-content').css('padding-bottom', footHeight + 'px');
@@ -55,7 +64,7 @@ function fixFooter() {
 function bugFixes() {
     $('.field>input[type="hidden"]').parent().hide();
     $('input[type="password"]').each((i, element) => {
-        element.onpaste = (e) => e.preventDefault();
+        element.onpaste = (e) => stopEvent(e);
     });
 }
 
@@ -98,21 +107,33 @@ function initSkills() {
         }
 
         $(element).data('index', -1);
-
-        $(element).find('.ip_skills').keypress(e => {
-            if (e.key !== 'Enter') {
-                return;
-            }
-            e.preventDefault();
-
-            let i = e.target;
-            let val = i.value;
-            if (!val || !i.checkValidity()) {
+        
+        $(element).find('.skills-content').append('<button class="mini-but but_skills"><span class="sr-only sr-only-focusable">Ajouter</span>+</button>');
+        
+        function onValid(e, inp) {
+            stopEvent(e);
+            
+            let val = inp.value;
+            if (!val || !inp.checkValidity()) {
                 return;
             }
 
             newSkill(element, val, name, supp);
-            e.target.value = '';
+            inp.value = '';
+        }
+        
+        var input = $(element).find('.ip_skills')[0];
+        $(element).find('.but_skills').click(e => onValid(e, input));
+
+        $(input).keypress(e => {
+            if (e.key !== 'Enter') {
+                return;
+            }
+
+            let inp = e.target;
+            onValid(e, inp);
+            
+            return false;
         });
 
         setItemDeletable($(element).find('.skills-item'));
@@ -186,7 +207,7 @@ function newSkill(element, value, name, supp) {
 		<input type="hidden" name="${GLOBALS.form}[${name}][${index}][name]" value="${value}"/>
 	</span>`;
 
-    $(element).find('.skills-content .skills-add').after(hobby);
+    $(element).find('.skills-content .but_skills').after(hobby);
 
     setItemDeletable($(element).find('.skills-content .skills-item').first());
 }
@@ -202,10 +223,11 @@ function initEducations() {
     }
 
     $('#educations-add').click(e => {
-        e.preventDefault();
+        stopEvent(e);
         $(e.target).attr('disabled', false);
         $(e.target).removeClass('load disabled');
         newEducation();
+        return false;
     });
 }
 
@@ -246,10 +268,11 @@ function initWork() {
     }
 
     $('#works-add').click(e => {
-        e.preventDefault();
+        stopEvent(e);
         $(e.target).attr('disabled', false);
         $(e.target).removeClass('load disabled');
         newWork();
+        return false;
     });
 
 }
