@@ -1,0 +1,78 @@
+#fos_elastica
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    serializer:
+        callback_class: FOS\ElasticaBundle\Serializer\Callback
+        serializer: serializer
+    indexes:
+        cvtheque:
+            client: default
+            types:
+                Applicant:
+                    mappings:
+                        titleProfile : ~
+                        body : ~
+                        educations : 
+                            type : object
+                            properties : 
+                                school: ~
+                                degree : ~
+                                id : 
+                                    type : integer
+                        workexperiences : 
+                            type : object
+                            properties : 
+                                jobTitle : ~
+                                employer : ~
+                                description : ~
+                                id : 
+                                    type : integer
+                        skills : 
+                            type : object
+                            properties : 
+                                name : ~
+                                id : 
+                                    type : integer
+                        hobbies : 
+                            type : object
+                            properties : 
+                                name : ~
+                                id : 
+                                    type : integer
+                    persistence:
+                        driver: orm
+                        model:  MG\UserBundle\Entity\Applicant
+                        provider: ~
+                        listener: ~ # default : "insert", "update", "delete"
+                Advertisement:
+                    mappings:
+                        author : ~
+                        image : ~
+                        slug : ~
+                        title : ~
+                        body: ~
+                        published : ~
+                        society : 
+                            type : object
+                            properties : 
+                                username : ~
+                                id : 
+                                    type : integer
+                        category : 
+                            type : object
+                            properties : 
+                                name : ~
+                                id : 
+                                    type : integer
+                        skills : 
+                            type : object
+                            properties : 
+                                name : ~
+                                id : 
+                                    type : integer
+                    persistence:
+                        driver: orm
+                        model:  CVThequeBundle\Entity\Advertisement
+                        provider: ~
+                        listener: ~ # default : "insert", "update", "delete"

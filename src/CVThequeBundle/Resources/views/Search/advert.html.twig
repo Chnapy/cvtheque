@@ -1,0 +1,55 @@
+{#{% extends "CVThequeBundle::layout.html.twig" %} #}
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Annonces
+{% endblock %}
+
+{% block bandeau %}
+    <div class="row">
+        <h1>Annonces</h1>
+        <div class="lead">Liste des annonces</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div>{{ form(form) }}</div>
+    <div class="list-user w-avatar container">
+        
+        {% for advertisement in advertisements %}
+
+            <a class="bloc list-user-row row" href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
+                {#<div class='col-md-1 user-avatar'>
+                    <img {% if advertisement.image is not null %}src="{{ advertisement.image.webPath }}" alt="{{ advertisement.image.alt }}"{% endif %} />
+                </div>#}
+                <div class='col-md-3 user-name'>
+                    <span class='user-firstname'>{{ advertisement.society.username }}</span> 
+                    <span class='user-username'>{{ advertisement.author }}</span>
+                </div>
+                <div class='col-md-2'>
+                    {{ advertisement.title }}
+                </div>
+                <div class='col-md-2 user-category'>
+                    <span class='tag'>{{ advertisement.category.name }}</span>
+                </div>
+                <div class='col-md-1'>
+                    <span class='icon-bloc'>
+                        Publiée
+                        <span class='spinner-box'>
+                            <span class='icon l-white glyphicon {% if advertisement.published %}glyphicon-ok{% else %}glyphicon-remove{% endif %}'></span>
+                        </span>
+                    </span>
+                </div>
+                <div class='col-md-3'>
+                    Créé le {{ advertisement.created|date('d/m/Y') }}, màj le {{ advertisement.updated|date('d/m/Y') }}
+                </div>
+            </a>
+
+        {% else %}
+            <div class="bloc list-user-row row text-center">
+                <p>La recherche a donné aucun résultat.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

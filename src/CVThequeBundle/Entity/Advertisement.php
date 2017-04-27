@@ -7,11 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use FOS\ElasticaBundle\Configuration\Search;
 
 /**
  * @ORM\Entity(repositoryClass="CVThequeBundle\Repository\AdvertisementRepository")
  * @ORM\Table(name="advertisement")
  * @ORM\HasLifecycleCallbacks()
+ * ***Search(repositoryClass="CVThequeBundle\Repository\SearchRepository\AdvertisementRepository")
  */
 class Advertisement 
 {

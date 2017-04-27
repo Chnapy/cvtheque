@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@CVThequeBundle/Resources/config/config.yml" }
+    - { resource: fos_elastica.yml }
 
 parameters:
     locale: fr

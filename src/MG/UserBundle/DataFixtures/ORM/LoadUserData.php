@@ -52,6 +52,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         
         for($i=0; $i<30; $i++)
         {
+            sleep(5);
             $address = new Address();
         $address->setStreet('31 Boulevard Jourdan');
         $address->setTown('Paris');

@@ -5,10 +5,12 @@ namespace MG\UserBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
+use FOS\ElasticaBundle\Configuration\Search;
 
 /**
  * @UniqueEntity(fields = "username", targetClass = "MG\UserBundle\Entity\User", message="fos_user.username.already_used")
  * @UniqueEntity(fields = "email", targetClass = "MG\UserBundle\Entity\User", message="fos_user.email.already_used")
+ * ***Search(repositoryClass="MG\UserBundle\Repository\SearchRepository\ApplicantRepository")
  */
 class Applicant extends User
 {

@@ -5,6 +5,7 @@ namespace MG\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use FOS\ElasticaBundle\Configuration\Search;
 
 /**
  * Skill

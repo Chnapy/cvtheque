@@ -28,6 +28,7 @@ class ApplicantRegistrationEditType extends ApplicantRegistrationType
         ->remove('lastname')
         ->remove('gender')
         ->remove('birthday')
+        ->remove('category')
         ->remove('image');
     }
     
