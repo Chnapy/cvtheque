@@ -5,7 +5,8 @@ var GLOBALS = {
     education_index: -1,
     work_index: -1,
     skill_id_index: -1,
-    skill_data: undefined //Données ajax
+    skill_data: undefined, //Données ajax
+    skill_names: ['skills', 'advertSkills']
 };
 
 var SKILLS_URL = '/api/skills';
@@ -43,10 +44,20 @@ function onLoad() {
     initWork();
 
     minorFixes();
+
+    $('[data-toggle="tooltip"]').each((i, e) => {
+        if ($(e).is('input')) {
+            let type = $(e).attr('type');
+            if (type === 'text' || type === 'email' || type === 'password') {
+                $(e).tooltip({trigger: 'focus'});
+            }
+        }
+        $(e).tooltip();
+    });
 }
 
 function stopEvent(e) {
-    if(e.preventDefault) {
+    if (e.preventDefault) {
         e.preventDefault();
     } else {
         e.returnValue = false;
@@ -107,12 +118,12 @@ function initSkills() {
         }
 
         $(element).data('index', -1);
-        
-        $(element).find('.skills-content').append('<button class="mini-but but_skills"><span class="sr-only sr-only-focusable">Ajouter</span>+</button>');
-        
+
+        $(element).find('.skills-content').append('<button class="but but_skills"><span class="sr-only sr-only-focusable">Ajouter</span><span class="glyphicon glyphicon-plus"></span></button>');
+
         function onValid(e, inp) {
             stopEvent(e);
-            
+
             let val = inp.value;
             if (!val || !inp.checkValidity()) {
                 return;
@@ -120,9 +131,16 @@ function initSkills() {
 
             newSkill(element, val, name, supp);
             inp.value = '';
+            inp.focus();
         }
-        
+
         var input = $(element).find('.ip_skills')[0];
+
+        //tooltip bootstrap
+        $(input).data('toggle', 'tooltip');
+        $(input).data('placement', 'bottom');
+        $(input).attr('title', 'Appuyez sur entrée pour ajouter la valeur');
+
         $(element).find('.but_skills').click(e => onValid(e, input));
 
         $(input).keypress(e => {
@@ -132,7 +150,7 @@ function initSkills() {
 
             let inp = e.target;
             onValid(e, inp);
-            
+
             return false;
         });
 
@@ -153,7 +171,7 @@ function getSkillData() {
 
         $('.skills').each((i, element) => {
             var name = $(element).data('name');
-            if (name !== 'skills') {
+            if (GLOBALS.skill_names.indexOf(name) === -1) {
                 return;
             }
 
@@ -194,7 +212,7 @@ function newSkill(element, value, name, supp) {
     }
 
     var id_html;
-    if (name === 'skills' && skillIndex(value) > -1) {
+    if (GLOBALS.skill_names.indexOf(name) > -1 && skillIndex(value) > -1) {
         let id = GLOBALS.skill_data[skillIndex(value)].id;
         id_html = `<input type="hidden" name="${GLOBALS.form}[${name}][${index}][id]" value="${id}"/>`;
     } else {
