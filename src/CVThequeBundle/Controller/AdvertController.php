@@ -57,8 +57,6 @@ class AdvertController extends Controller
                 'label' => 'Envoyer' 
           ));        
         $formSuggest = $builder->getForm();
-      
-      
           $formSuggest->handleRequest($request);
           if ($formSuggest->isSubmitted() && $formSuggest->isValid()) {
               // Récupération de l'utilisateur à qui suggérer l'annonce
@@ -68,12 +66,30 @@ class AdvertController extends Controller
               ->getRepository('MGUserBundle:User');
               
               $user = $repository->findOneBySlug($slug);
-              if(get_class($user) === "MG\UserBundle\Entity\Applicant") {
-                  $user->addAdvertisement($advertisement);
-                  $em = $this->getDoctrine()->getManager();
-                  $em->persist($user);
-                  $em->flush();
-                  $this->get('session')->getFlashBag()->add('info', "Une invitation à consulter cette annonce a été envoyé à ".$user->getUsername());
+              if(get_class($user) === "MG\UserBundle\Entity\Applicant")
+              {
+                if($user->isValidate())
+                {
+                  if(!$user->getAdvertisements()->contains($advertisement))
+                  { 
+                    $user->addAdvertisement($advertisement);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()
+                    ->add('info', "Une invitation à consulter cette annonce a été envoyé à ".$user->getUsername().".");
+                  }
+                  else
+                  {
+                    $this->get('session')->getFlashBag()
+                    ->add('info', "Vous avez déjà envoyé une invitation à ".$user->getUsername()." pour cette annonce.");
+                  }
+                }
+                else
+                {
+                  $this->get('session')->getFlashBag()
+                  ->add('info', "Vous devez valider le profil de ".$user->getUsername()." pour lui suggérer des annonces.");    
+                }
               }
               else
               {
@@ -85,32 +101,39 @@ class AdvertController extends Controller
       } 
       else if(get_class($user) === "MG\UserBundle\Entity\Applicant")
       {
-        $application = new Application();
-        $formApply = $this->createForm('CVThequeBundle\Form\ApplicationType', $application);
-        $formApply->handleRequest($request);
+        // Si l'étudiant n'a jamais postulé à cette annonce  
+        if(!$user->containsApplication($advertisement))
+        {    
+          $application = new Application();
+          $formApply = $this->createForm('CVThequeBundle\Form\ApplicationType', $application);
+          $formApply->handleRequest($request);
 
-        if ($formApply->isSubmitted() && $formApply->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $application->setAdvertisement($advertisement);
-            $application->setCandidate($user);
-            $em->persist($application);
-            $em->flush();
+          if ($formApply->isSubmitted() && $formApply->isValid()) 
+          {
+              $em = $this->getDoctrine()->getManager();
+              $application->setAdvertisement($advertisement);
+              $application->setCandidate($user);
+              $em->persist($application);
+              $em->flush();
             
-            $message = \Swift_Message::newInstance()
-            ->setSubject("Candidature de ".$user->getFirstname()." ".$user->getLastname())
-            ->setFrom($this->container->getParameter('cvtheque.emails.noreply'))
-            ->setTo($advertisement->getSociety()->getEmail())
-            ->setBody($this->renderView('CVThequeBundle:CVTheque:ApplyEmail.txt.twig', 
-            array('application' => $application, 'profile' => $this->generateUrl('mg_user_profile_visite', array('slug' => $user->getSlug())))
-            ));
-        $this->get('mailer')->send($message);
-        
-            $this->get('session')->getFlashBag()->add('info', "Votre candidature a bien été envoyée");
+              $message = \Swift_Message::newInstance()
+              ->setSubject("Candidature de ".$user->getFirstname()." ".$user->getLastname())
+              ->setFrom($this->container->getParameter('cvtheque.emails.noreply'))
+              ->setTo($advertisement->getSociety()->getEmail())
+              ->setBody($this->renderView('CVThequeBundle:CVTheque:ApplyEmail.txt.twig', 
+              array('application' => $application, 
+              'profile' => $this->generateUrl('mg_user_profile_visite', array('slug' => $user->getSlug())))
+              ));
+              $this->get('mailer')->send($message);
+              $this->get('session')->getFlashBag()->add('info', "Votre candidature a bien été envoyée");
+          }
+          $formApply = $formApply->createView();
         }
-
-        $formApply = $formApply->createView();
+        else
+        {
+            $this->get('session')->getFlashBag()->add('info', "Vous avez postulé à cette annonce.");
+        }
       }
-          
       return $this->render('CVThequeBundle:Advertisement:view.html.twig', array(
           'advertisement' => $advertisement,
           'author'        => $author,

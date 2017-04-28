@@ -47,9 +47,11 @@
             </a>
 
         {% else %}
+        {% if advertisements is not null %}
             <div class="bloc list-user-row row text-center">
                 <p>La recherche a donné aucun résultat.</p>
             </div>
+        {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

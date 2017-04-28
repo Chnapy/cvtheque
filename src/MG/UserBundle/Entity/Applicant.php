@@ -491,7 +491,7 @@ class Applicant extends User
     /**
      * Remove application
      *
-     * @param \MG\UserBundle\Entity\Application $application
+     * @param \CVTheque\Bundle\Entity\Application $application
      */
     public function removeApplication(\CVThequeBundle\Entity\Application $application)
     {
@@ -508,6 +508,23 @@ class Applicant extends User
         return $this->applications;
     }
     
+    /**
+     * Retourne vrai si l'étudiant a déjà postulé à l'annonce
+     *
+     * @param \CVThequeBundle\Entity\Advertisement $advertisement
+     * @return bool
+     */
+    public function containsApplication(\CVThequeBundle\Entity\Advertisement $advertisement)
+    {
+        foreach($this->applications as $application)
+        {
+            if ($application->getAdvertisement() === $advertisement)
+            {
+                return true;
+            }                
+        }            
+        return false;
+    }
     /**
      * Add advertisement
      *

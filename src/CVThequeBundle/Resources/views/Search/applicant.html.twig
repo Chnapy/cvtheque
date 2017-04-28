@@ -28,9 +28,11 @@
             </a>
 
         {% else %}
+        {% if applicants is not null %}
             <div class="bloc list-user-row row text-center">
                 <p>Aucun résultat pour la recherche.</p>
             </div>
+        {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

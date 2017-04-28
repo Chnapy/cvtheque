@@ -43,7 +43,7 @@
 
                     <hr/>
 
-                    {% if formSuggest is not null %}
+                    {% if formSuggest is not null and is_granted('ROLE_ADMIN') %}
                     <div class='row bloc'>
                         <h3>Suggérer cette annonce</h3>
                         {{ form(formSuggest)  }}

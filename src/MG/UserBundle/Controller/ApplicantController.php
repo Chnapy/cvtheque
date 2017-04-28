@@ -24,6 +24,34 @@ class ApplicantController extends Controller
         $user->permuteValidation();
         $userManager = $this->get('fos_user.user_manager');
         $userManager->updateUser($user);
+        
+        if($user->isValidate())
+        {
+            $message = \Swift_Message::newInstance()
+              ->setSubject("Notification de profil CV-theque villetaneuse.")
+              ->setFrom($this->container->getParameter('cvtheque.emails.noreply'))
+              ->setTo($user->getEmail())
+              ->setBody($this->renderView('ValidateEmail.txt.twig',
+              array('profile' => $this->generateUrl('mg_user_profile_visite',
+              array('slug' => $user->getSlug())))
+              ));
+              $this->get('mailer')->send($message);
+        }
+        else
+        {
+            $message = \Swift_Message::newInstance()
+              ->setSubject("Notification de profil CV-theque villetaneuse.")
+              ->setFrom($this->container->getParameter('cvtheque.emails.noreply'))
+              ->setTo($user->getEmail())
+              ->setBody($this->renderView('UnvalidateEmail.txt.twig',
+              array('profile' => $this->generateUrl('mg_user_profile_visite',
+              array('slug' => $user->getSlug())))
+              ));
+              $this->get('mailer')->send($message);
+              
+        }
+        
+        $this->get('session')->getFlashBag()->add('info', "Un mail a été envoyé à l'étudiant.");
         return $this->render('MGUserBundle:Profile:applicant_show.html.twig', array(
                 'user' => $user,
         ));

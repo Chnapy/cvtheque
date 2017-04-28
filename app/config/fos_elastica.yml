@@ -11,6 +11,13 @@ fos_elastica:
             types:
                 Applicant:
                     mappings:
+                        slug : ~
+                        firstname : ~
+                        lastname : ~
+                        username : ~
+                        email : ~
+                        description : ~
+                        
                         titleProfile : ~
                         body : ~
                         educations : 
@@ -48,7 +55,6 @@ fos_elastica:
                 Advertisement:
                     mappings:
                         author : ~
-                        image : ~
                         slug : ~
                         title : ~
                         body: ~
