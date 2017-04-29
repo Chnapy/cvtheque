@@ -6,6 +6,12 @@ img {
     word-break: break-word;
 }
 
+label.required::after {
+    content: '*';
+    color: $color_error;
+    margin-left: 1px;
+}
+
 .hobbys-content {
     min-height: 34px;
 }

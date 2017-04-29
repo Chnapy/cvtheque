@@ -263,7 +263,6 @@ $icon_width: 16px;
 
     &>.delete {
         position: absolute;
-        display: none;
         right: 4px;
         top: 50%;
         transform: translateY(-50%);
@@ -271,6 +270,7 @@ $icon_width: 16px;
         height: 18px;
         padding: 2px;
         cursor: pointer;
+        opacity: 0;
     }
 
     &.clickable {
@@ -301,7 +301,7 @@ $icon_width: 16px;
             padding-right: 26px;
 
             &>.delete {
-                display: inline-block;
+                opacity: 1;
                 @include wout-prefix(animation-name, opa);
                 @include wout-prefix(animation-duration, $transition_dur);
             }
