@@ -33,12 +33,6 @@ class Society extends User
     private $activity;
 
     /**
-     * @var string
-     * @Assert\Length(min=2, max=128)
-     */
-    private $tutor;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -113,19 +107,4 @@ class Society extends User
     	return $this->activity;
     }
 
-    /**
-     * Set tutor
-     * @param string $tutor
-     */
-    public function setTutor($tutor){
-    	$this->tutor = $tutor;
-    }
-
-    /**
-     * Get tutor
-     * @return string
-     */
-    public function getTutor(){
-    	return $this->tutor;
-    }
 }

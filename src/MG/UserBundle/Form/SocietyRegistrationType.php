@@ -53,11 +53,6 @@ class SocietyRegistrationType extends AbstractType
             'label' => 'form.activity',
             'translation_domain' => 'MGUserBundle',
             'required' => true 
-        ))
-        ->add('tutor', TextType::class, array(
-            'label' => 'form.tutor',
-            'translation_domain' => 'MGUserBundle',
-            'required' => true
         ));
     }
     

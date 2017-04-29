@@ -48,6 +48,6 @@ search_advert:
     defaults: { _controller: CVThequeBundle:Search:advert }
 
 search_applicant:
-    path:     /admin/search/applicant
+    path:     /society/search/applicant
     defaults: { _controller: CVThequeBundle:Search:applicant }
 
