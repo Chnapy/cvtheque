@@ -1,21 +1,21 @@
 # Form field labels
 form:
-    user: "Utilisateur :"
-    author: "Auteur :"
-    title: "Titre:"
-    content: "Contenu :"
-    categories: "Domaines d'études :"
+    user: "Utilisateur"
+    author: "Auteur"
+    title: "Titre"
+    content: "Contenu"
+    categories: "Domaines d'études"
     category:
-        name: "Nom de la catégorie :"
-    skills: "Liste des compétences :"
+        name: "Nom de la catégorie"
+    skills: "Liste des compétences"
     skill:
         name: Nom de la compétence
         add_button: "Ajouter une compétence"
         del_button: "Supprimer cette compétence"
     image:
-        file: "Ajouter une image :"
-        alt: "Entrez une courte description de l’image :"
-    created: "Créé le :"
-    updated: "Mise à jour le :"
-    published: "Publier ?"
+        file: "Ajouter une image"
+        alt: "Entrez une courte description de l’image"
+    created: "Créé le"
+    updated: "Mise à jour le"
+    published: "Publier"
     submit: "Enregistrer l'annonce"

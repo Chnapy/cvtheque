@@ -200,7 +200,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
       right: 0; }
       .field > .field-feedback > .glyphicon::before {
         display: block; }
-  .field > input:not([readonly]):focus + .field-feedback > .glyphicon::before {
+  .field > input:not([readonly]):focus + .field-feedback > .glyphicon::before, .field > input:not([readonly]):focus + * + .field-feedback > .glyphicon::before {
     content: '\270f'; }
   .field > input:not(:focus):valid + .field-feedback > .glyphicon::before {
     content: '\e013'; }
@@ -320,6 +320,8 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
   background: #4c565c; }
   .dark h1, .dark h2, .dark h3 {
     color: #6CB; }
+    .dark h1 small, .dark h1 .small, .dark h2 small, .dark h2 .small, .dark h3 small, .dark h3 .small {
+      color: rgba(102, 204, 187, 0.75); }
   .dark a, .dark .a {
     color: #6CB; }
   .dark .bloc {
@@ -678,6 +680,9 @@ a.but {
 .main-content.no-header #alertList {
   top: 2px; }
 
+img {
+  word-break: break-word; }
+
 .hobbys-content {
   min-height: 34px; }
 
@@ -689,7 +694,8 @@ a.but {
 
 .avatar {
   min-width: 50px;
-  min-height: 50px; }
+  min-height: 50px;
+  max-width: 100%; }
 
 .univ-logo {
   max-width: 100%;
@@ -770,6 +776,10 @@ a.bloc {
   padding-right: 5px;
   font-weight: lighter;
   font-size: .8em; }
+  .icon-bloc.error {
+    background: #B94A48; }
+  .icon-bloc.primary {
+    background: #6CB; }
   .icon-bloc .spinner-box {
     margin-left: 5px; }
     .icon-bloc .spinner-box .glyphicon {
@@ -786,13 +796,22 @@ a.bloc {
 
 .bloc {
   text-overflow: clip;
-  overflow: hidden;
+  /*overflow: hidden;*/
   word-wrap: break-word; }
 
 #footer {
   padding: 15px 0; }
 
 .but_skills {
-  height: 26px; }
+  height: 24px;
+  vertical-align: top;
+  font-size: .9em; }
+
+.header .header-content .nav-item:not(.active):hover {
+  color: #000 !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15) inset; }
+
+.nav-right .compte .compte-pseudo {
+  text-decoration: none; }
 
 /*# sourceMappingURL=style.css.map */

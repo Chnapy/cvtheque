@@ -220,7 +220,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
         }
     }
 
-    &>input:not([readonly]):focus+.field-feedback>.glyphicon::before {
+    &>input:not([readonly]):focus+.field-feedback>.glyphicon::before, &>input:not([readonly]):focus+*+.field-feedback>.glyphicon::before {
         content: '\270f';
     }
 
@@ -380,6 +380,10 @@ $confirmpad: 3px;
 
     h1, h2, h3 {
         color: $color_primary;
+        
+        small, .small {
+            color: rgba($color_primary, 0.75);
+        }
     }
 
     a, .a {

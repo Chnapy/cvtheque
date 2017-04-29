@@ -2,6 +2,10 @@
 
 @import 'chnapflat/chnapflat';
 
+img {
+    word-break: break-word;
+}
+
 .hobbys-content {
     min-height: 34px;
 }
@@ -21,6 +25,7 @@
 .avatar {
     min-width: 50px;
     min-height: 50px;
+    max-width: 100%;
 }
 
 .univ-logo {
@@ -147,6 +152,14 @@ a.bloc {
     font-weight: lighter;
     font-size: .8em;
 
+    &.error {
+        background: $color_delete;
+    }
+
+    &.primary {
+        background: $color_primary;
+    }
+
     .spinner-box {
         margin-left: $ajax_bloc_pad;
 
@@ -159,7 +172,7 @@ a.bloc {
 
 .bloc {
     text-overflow: clip;
-    overflow: hidden;
+    /*overflow: hidden;*/
     word-wrap: break-word;
 }
 
@@ -168,5 +181,16 @@ a.bloc {
 }
 
 .but_skills {
-    height: 26px;
+    height: 24px;
+    vertical-align: top;
+    font-size: .9em;
+}
+
+.header .header-content .nav-item:not(.active):hover {
+    color: $color_main !important;
+    box-shadow: 0 0 5px rgba(0,0,0,0.15) inset;
+}
+
+.nav-right .compte .compte-pseudo {
+    text-decoration: none;
 }

@@ -33,7 +33,7 @@
                     <span class='tag'>{{ advertisement.category.name }}</span>
                 </div>
                 <div class='col-md-1'>
-                    <span class='icon-bloc'>
+                    <span class='icon-bloc {% if advertisement.published %}primary{% else %}error{% endif %}'>
                         Publiée
                         <span class='spinner-box'>
                             <span class='icon l-white glyphicon {% if advertisement.published %}glyphicon-ok{% else %}glyphicon-remove{% endif %}'></span>

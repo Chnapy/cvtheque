@@ -4,7 +4,7 @@
 
 {% block bandeau %}
     <div class="row">
-        <h1>{{ 'profile.show.username'|trans({'%username%': user.username }, 'MGUserBundle') }}</h1>
+        <h1><span class="text-uppercase">{{ user.lastname }}</span> <span class="text-capitalize">{{ user.firstname }}</span> <small>{{ 'profile.show.username'|trans({'%username%': user.username }, 'MGUserBundle') }}</small></h1>
         <div class="lead">Un accès à toutes vos données.</div>
     </div>
 {% endblock %}
@@ -27,7 +27,7 @@
                 <hr/>
                 <div class="row but-group">
                     {% if user.cvFile is not null %}
-                        <a href="{{ user.cvFile.webPath }}" class="but col-xs-10" >
+                        <a href="{{ user.cvFile.webPath }}" target='_blank' class="but col-xs-10" >
                             CV (pdf)
                         </a>
                         {% if isuser %}
@@ -50,7 +50,7 @@
                 </div>
                 <div class="row but-group">
                     {% if user.logBookFile is not null %}
-                        <a href="{{ user.logBookFile.webPath }}" class="but col-xs-10" >
+                        <a href="{{ user.logBookFile.webPath }}" target='_blank' class="but col-xs-10" >
                             Journal (pdf)
                         </a>
                         {% if isuser %}
@@ -140,7 +140,7 @@
                     </div>
                 {% endif %}
 
-                <h3>Expériences professionnelle</h3>
+                <h3>Expériences professionnelles</h3>
                 {% if user.workExperiences.count > 0 %}
                     {% for w in user.workExperiences %}
                         <div class='bloc'>
@@ -157,7 +157,7 @@
                     </div>
                 {% endif %}
 
-                <h3>Compétences :</h3>
+                <h3>Compétences</h3>
                 <div class="bloc">
                     {% if user.skills.count > 0 %}
                         <div class='tag-content'>
