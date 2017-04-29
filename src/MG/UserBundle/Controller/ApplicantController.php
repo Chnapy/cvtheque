@@ -64,7 +64,7 @@ class ApplicantController extends Controller
     {
         // app/config/parameters.yml
         $nbrByPage = 5;//$this->container->getParameter('cvtheque.nbr_by_page');
-        $applicants = $this->getApplicants($page, $nbrByPage, true);
+        $applicants = $this->getApplicants($page, $nbrByPage, true, $this->getUser());
         return $this->render('MGUserBundle:Admin:is_validate_applicants.html.twig', array(
             'applicants' => $applicants,
             'page'     => $page,
@@ -79,7 +79,7 @@ class ApplicantController extends Controller
     {
         // app/config/parameters.yml
         $nbrByPage = 5;//$this->container->getParameter('cvtheque.nbr_by_page');
-        $applicants = $this->getApplicants($page, $nbrByPage, false);
+        $applicants = $this->getApplicants($page, $nbrByPage, false, $this->getUser());
         return $this->render('MGUserBundle:Admin:is_not_validate_applicants.html.twig', array(
             'applicants' => $applicants,
             'page'     => $page,
@@ -90,13 +90,11 @@ class ApplicantController extends Controller
     /*
      *
      */
-    private function getApplicants($page, $nbrByPage, $validate)
+    private function getApplicants($page, $nbrByPage, $validate, $admin)
     {
-        
-  
         return $this->getDoctrine()
             ->getManager()
             ->getRepository('MGUserBundle:Applicant')
-            ->getApplicants($nbrByPage, $page, $validate);
+            ->getApplicants($nbrByPage, $page, $validate, $admin);
     }
 }

@@ -236,7 +236,7 @@ class AdvertController extends Controller
         $advertisements = $this->getDoctrine()
         ->getManager()
         ->getRepository('CVThequeBundle:Advertisement')
-        ->getAdvertisements($nbrByPage, $page);
+        ->getAdvertisements($nbrByPage, $page, $this->getUser());
   
         return $this->render('CVThequeBundle:Admin:adverts.html.twig', array(
             'advertisements' => $advertisements,

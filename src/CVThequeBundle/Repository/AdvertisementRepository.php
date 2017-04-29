@@ -22,7 +22,7 @@ class AdvertisementRepository extends EntityRepository
     return $qb;
   }
 
-  public function getAdvertisements($numberByPage, $page)
+  public function getAdvertisements($numberByPage, $page, $admin)
   {
     if ((int) $page < 1) {
         throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
@@ -31,8 +31,20 @@ class AdvertisementRepository extends EntityRepository
     $query = $this->createQueryBuilder('a')
                   ->leftJoin('a.image', 'i')
                     ->addSelect('i')
-                  ->where('a.published = 1')
-                  ->orderBy('a.created', 'DESC')
+                  ->leftJoin('a.category', 'c')
+                    ->addSelect('c');
+                  if(!$admin->hasRole("ROLE_SUPER_ADMIN")) 
+                  {
+                      $query->where('a.published = 1')
+                      ->andWhere('c.name LIKE :category')
+                      ->setParameter(':category', '%'.$admin->getCategory()->getName().'%');
+                  }
+                  else
+                  {
+                       $query->where('a.published = 1');
+                  }
+                 
+                  $query->orderBy('a.created', 'DESC')
                   ->getQuery();
 
     $query->setFirstResult(($page-1) * $numberByPage)

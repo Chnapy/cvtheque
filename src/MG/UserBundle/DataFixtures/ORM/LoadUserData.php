@@ -30,6 +30,24 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         $discriminator->setClass('MG\UserBundle\Entity\Admin');
         $userManager = $this->container->get('pugx_user_manager');
         $address = new Address();
+        $address->setStreet('99, Avenue Jean-Batiste Clément');
+        $address->setTown('Villetaneuse');
+        $address->setZipCode('93430');
+        $address->setCountry('FR');
+        $admin = $userManager->createUser();
+        $admin->setUsername('sylvie.cardoso');
+        $admin->setFirstname('Sylvie');
+        $admin->setLastname('Cardoso');
+        $admin->setPlainPassword('root');
+        $admin->setEmail('sylvie.cardoso@univ-paris13.fr');
+        $admin->setPhoneNumber('01 49 40 31 19');
+        $admin->setAddress($address);
+        $admin->setCategory($this->getReference("category01"));
+        $admin->addRole("ROLE_SUPER_ADMIN");
+        $admin->setEnabled(true);
+        $userManager->updateUser($admin, true);
+        sleep(5);
+        $address = new Address();
         $address->setStreet('31 Boulevard Jourdan');
         $address->setTown('Paris');
         $address->setZipCode('75014');
@@ -42,14 +60,10 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         $admin->setEmail('martin3129@gmail.com');
         $admin->setPhoneNumber('06 13 74 45 79');
         $admin->setAddress($address);
-        
         $admin->setCategory($this->getReference("category01"));
-        
         $admin->setEnabled(true);
         $userManager->updateUser($admin, true);
         $discriminator->setClass('MG\UserBundle\Entity\Applicant');
-        
-        
         for($i=0; $i<20; $i++)
         {
             sleep(5);

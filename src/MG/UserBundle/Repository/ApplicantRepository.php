@@ -11,18 +11,30 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ApplicantRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getApplicants($numberByPage, $page, $validate)
+    public function getApplicants($numberByPage, $page, $validate, $admin)
     {
         if ((int) $page < 1) {
              throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
-         }
+        }
 
-         $query = $this->createQueryBuilder('a')
-                  ->leftJoin('a.image', 'i')
-                    ->addSelect('i')
-                  ->where('a.validate = '.strval((int)$validate))
-                  ->orderBy('a.updated', 'DESC')
-                  ->getQuery();
+        $query = $this->createQueryBuilder('a')
+                 ->leftJoin('a.image', 'i')
+                   ->addSelect('i')
+                 ->leftJoin('a.category', 'c')
+                   ->addSelect('c');
+                 if(!$admin->hasRole("ROLE_SUPER_ADMIN")) 
+                 {
+                     $query->where('a.validate = '.strval((int)$validate))
+                     ->andWhere('c.name LIKE :category')
+                     ->setParameter(':category', '%'.$admin->getCategory()->getName().'%');
+                 }
+                 else
+                 {
+                     $query->where('a.validate = '.strval((int)$validate));
+                 }
+                 
+                 $query->orderBy('a.updated', 'DESC')
+                 ->getQuery();
 
         $query->setFirstResult(($page-1) * $numberByPage)
             ->setMaxResults($numberByPage);
