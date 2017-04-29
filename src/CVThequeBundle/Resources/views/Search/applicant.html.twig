@@ -15,6 +15,7 @@
     <div class="list-user container">
         <div class="bloc row">{{ form(form)  }}</div>
         {% for applicant in applicants %}
+        {% if applicant.validate %}
 
             <a class="bloc list-user-row row" href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}">
                 {#<div class='col-md-1 user-avatar'>
@@ -32,7 +33,7 @@
                     Créé le {{ applicant.created|date('d/m/Y') }}, màj le {{ applicant.updated|date('d/m/Y') }}
                 </div>
             </a>
-
+        {% endif %}
         {% else %}
             {% if applicants is not null %}
                 <div class="bloc list-user-row row text-center">
