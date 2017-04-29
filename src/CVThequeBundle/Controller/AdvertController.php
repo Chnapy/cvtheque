@@ -184,7 +184,8 @@ class AdvertController extends Controller
         foreach ($originalAdvertSkills as $advertSkill) {
             if (false === $advertisement->getAdvertSkills()->contains($advertSkill)) {
                 // remove the Advertisement from the AdvertSkill
-                $advertSkill->setAdvertisement(null);
+                $advertSkill->removeAdvertisement($Advertisement);
+                $advertisement->removeAdvertSkill($advertSkill);
             }
         }
         $em->persist($advertisement);
