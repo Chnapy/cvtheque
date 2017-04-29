@@ -22,7 +22,11 @@ class Address
 
     /**
      * @var string
-     * @Assert\Length(min=3, max=64)
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z]{2,32}$/",
+     *     match=true,
+     *     message="Ville invalide"
+     * )
      */
     private $town;
 
