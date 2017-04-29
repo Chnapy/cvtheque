@@ -2,28 +2,28 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}
-    Annonces
+    Recherche d'annonce
 {% endblock %}
 
 {% block bandeau %}
     <div class="row">
-        <h1>Annonces</h1>
-        <div class="lead">Liste des annonces</div>
+        <h1>Recherche d'annonce</h1>
+        {#        <div class="lead"></div>#}
     </div>
 {% endblock %}
 
 {% block content %}
 
-    <div>{{ form(form) }}</div>
-    <div class="list-user w-avatar container">
-        
+    <div class="list-user container">
+        <div class="bloc row">{{ form(form)  }}</div>
+
         {% for advertisement in advertisements %}
 
             <a class="bloc list-user-row row" href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
                 {#<div class='col-md-1 user-avatar'>
                     <img {% if advertisement.image is not null %}src="{{ advertisement.image.webPath }}" alt="{{ advertisement.image.alt }}"{% endif %} />
                 </div>#}
-                <div class='col-md-3 user-name'>
+                <div class='col-md-4 user-name'>
                     <span class='user-firstname'>{{ advertisement.society.username }}</span> 
                     <span class='user-username'>{{ advertisement.author }}</span>
                 </div>
@@ -34,7 +34,7 @@
                     <span class='tag'>{{ advertisement.category.name }}</span>
                 </div>
                 <div class='col-md-1'>
-                    <span class='icon-bloc'>
+                    <span class='icon-bloc {% if advertisement.published %}primary{% else %}error{% endif %}'>
                         Publiée
                         <span class='spinner-box'>
                             <span class='icon l-white glyphicon {% if advertisement.published %}glyphicon-ok{% else %}glyphicon-remove{% endif %}'></span>
@@ -47,11 +47,11 @@
             </a>
 
         {% else %}
-        {% if advertisements is not null %}
-            <div class="bloc list-user-row row text-center">
-                <p>La recherche a donné aucun résultat.</p>
-            </div>
-        {% endif %}
+            {% if advertisements is not null %}
+                <div class="bloc list-user-row row text-center">
+                    La recherche n'a donné aucun résultat.
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

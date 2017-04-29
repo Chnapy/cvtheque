@@ -30,7 +30,7 @@
                     <span class='tag'>{% if applicant.category is not null %}{{ applicant.category.name }}{% endif %}</span>
                 </div>
                 <div class='col-md-1'>
-                    <span class='icon-bloc'>
+                    <span class='icon-bloc {% if applicant.cvFile is null %}error{% else %}primary{% endif %}'>
                         CV
                         <span class='spinner-box'>
                             <span class='icon l-white glyphicon {% if applicant.cvFile is null %}glyphicon-remove{% else %}glyphicon-ok{% endif %}'></span>
@@ -38,7 +38,7 @@
                     </span>
                 </div>
                 <div class='col-md-1'>
-                    <span class='icon-bloc'>
+                    <span class='icon-bloc {% if applicant.logBookFile is null %}error{% else %}primary{% endif %}'>
                         Journal
                         <span class='spinner-box'>
                             <span class='icon l-white glyphicon {% if applicant.logBookFile is null %}glyphicon-remove{% else %}glyphicon-ok{% endif %}'></span>

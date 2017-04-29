@@ -27,7 +27,7 @@ function onLoad() {
         $(but).addClass('load disabled');
     }
 
-    $('.but:not([type="submit"]):not(.disabled)').click(e => butClicked(e.target));
+    $('.but:not([type="submit"]):not(.disabled):not([target="_blank"])').click(e => butClicked(e.target));
 
     $('form').submit(e => {
         let form = e.target;
@@ -68,6 +68,7 @@ function stopEvent(e) {
 function fixFooter() {
     let footHeight = $('#footer')[0].clientHeight;
     $('.main-content').css('padding-bottom', footHeight + 'px');
+    $('#footer').css('opacity', 1);
 }
 
 //Corrige les bugs recensés non corrigés de PHP
@@ -85,6 +86,15 @@ function minorFixes() {
     if (!$('select option[selected]').length) {
         $('select option[value="FR"]').attr('selected', true);
     }
+
+    $('header .compte').click(function (e) {
+        if ($(e.target).is('.deco') || $(e.target).parents('.deco').length) {
+            return;
+        }
+        if (!$(e.target).is('.compte-pseudo')) {
+            $(this).find('.compte-pseudo')[0].click();
+        }
+    });
 }
 
 //General
@@ -119,13 +129,14 @@ function initSkills() {
 
         $(element).data('index', -1);
 
-        $(element).find('.skills-content').append('<button class="but but_skills"><span class="sr-only sr-only-focusable">Ajouter</span><span class="glyphicon glyphicon-plus"></span></button>');
+        $(element).find('.skills-add').after('<button class="but but_skills"><span class="sr-only sr-only-focusable">Ajouter</span><span class="glyphicon glyphicon-plus"></span></button>');
 
         function onValid(e, inp) {
             stopEvent(e);
 
             let val = inp.value;
             if (!val || !inp.checkValidity()) {
+                inp.focus();
                 return;
             }
 
@@ -137,9 +148,14 @@ function initSkills() {
         var input = $(element).find('.ip_skills')[0];
 
         //tooltip bootstrap
-        $(input).data('toggle', 'tooltip');
-        $(input).data('placement', 'bottom');
-        $(input).attr('title', 'Appuyez sur entrée pour ajouter la valeur');
+        $(input).tooltip({
+            toggle: 'tooltip',
+            placement: 'top',
+            title: 'Appuyez sur entrée pour ajouter la valeur',
+            trigger: 'focus'
+        });
+
+        $(element).find('.skills-content').addClass('but-group');
 
         $(element).find('.but_skills').click(e => onValid(e, input));
 

@@ -3,39 +3,39 @@
     <h3>Profil administrateur</h3>
     <div class="bloc">
 
-        <a href="{{ path('fos_user_profile_edit') }}" class="but">
-            Modifier le profil administrateur
-        </a>
-        <a href='{{ path('fos_user_change_password') }}' class="but" >
-            Modifier le mot de passe
-        </a>
-        <a href="{{ path('mg_user_profile_delete') }}" class="but error">
-            Supprimer le profil administrateur
-        </a>
+        <a href="{{ path('fos_user_profile_edit') }}" class="but">Modifier le profil administrateur</a>
+        <a href='{{ path('fos_user_change_password') }}' class="but">Modifier le mot de passe </a>
+        <a href="{{ path('mg_user_profile_delete') }}" class="but error">Supprimer le profil administrateur</a>
 
     </div>
 
-    <h3>Profils</h3>
+    <h3>Étudiants</h3>
     <div class="bloc">
 
-        <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="but">Étudiants non validés</a>
-        <a href="{{ path('mg_admin_show_applicants_validate') }}" class="but">Étudiants validés</a>
-        <a href="{{ path('search_applicant') }}" class="but">Rechercher des étudiants</a>
-        <a href="{{ path('mg_admin_show_societys') }}" class="but">Entreprises</a>
+        <a href="{{ path('mg_admin_show_applicants_not_validate') }}" class="but">Liste des étudiants non validés</a>
+        <a href="{{ path('mg_admin_show_applicants_validate') }}" class="but">Liste des étudiants validés</a>
+        <a href="{{ path('search_applicant') }}" class="but primary">Rechercher des étudiants</a>
+
+    </div>
+
+    <h3>Entreprises</h3>
+    <div class="bloc">
+
+        <a href="{{ path('mg_admin_show_societys') }}" class="but">Liste des entreprises</a>
 
     </div>
 
     <h3>Annonces</h3>
     <div class="bloc">
         <a href="{{ path('admin_advert_show') }}" class="but">Liste des annonces</a>
-        <a href="{{ path('search_advert') }}" class="but">Rechercher des annonces</a>
+        <a href="{{ path('search_advert') }}" class="but primary">Rechercher des annonces</a>
     </div>
 
     <h3>Administration</h3>
     <div class="bloc">
-        <a href="{{ path('application_index') }}" class="but">Voir les candidatures</a>
+        <a href="{{ path('application_index') }}" class="but">Liste des candidatures</a>
+        <a href="{{ path('admin_category_index') }}" class="but">Liste de domaine d'étude</a>
         <a href="{{ path('mg_admin_registration') }}" class="but">Créer un nouveau profil administrateur</a>
-        <a href="{{ path('admin_category_index') }}" class="but">Modifier la liste de domaine d'étude</a>
     </div>
 {% endif %}
 <hr/>

@@ -1,38 +1,44 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}
-    Recherche d'applicant
+    Recherche d'étudiant
 {% endblock %}
 
 {% block bandeau %}
     <div class="row">
         <h1>Recherche d'étudiant</h1>
-        <div class="lead">Liste des profils étudiants <b>validés</b> par un administrateur.</div>
+        {#        <div class="lead"></div>#}
     </div>
 {% endblock %}
 
 {% block content %}
-    <didv>{{ form(form)  }}</div>
-    <div class="list-user w-avatar container">
+    <div class="list-user container">
+        <div class="bloc row">{{ form(form)  }}</div>
         {% for applicant in applicants %}
 
             <a class="bloc list-user-row row" href="{{ path('mg_user_profile_visite', {'slug': applicant.slug}) }}">
                 {#<div class='col-md-1 user-avatar'>
                     <img {% if applicant.image is not null %}src="{{ applicant.image.webPath }}" alt="{{ applicant.image.alt }}"{% endif %} />
                 </div>#}
-                <div class='col-md-4 user-name'>
+                <div class='col-md-7 user-name'>
                     <span class='user-lastname'>{{ applicant.lastname }}</span> 
                     <span class='user-firstname'>{{ applicant.firstname }}</span> 
                     <span class='user-username'>{{ applicant.username }}</span>
                 </div>
+                <div class='col-md-2 user-category'>
+                    <span class='tag'>{% if applicant.category is not null %}{{ applicant.category.name }}{% endif %}</span>
+                </div>
+                <div class='col-md-3'>
+                    Créé le {{ applicant.created|date('d/m/Y') }}, màj le {{ applicant.updated|date('d/m/Y') }}
+                </div>
             </a>
 
         {% else %}
-        {% if applicants is not null %}
-            <div class="bloc list-user-row row text-center">
-                <p>Aucun résultat pour la recherche.</p>
-            </div>
-        {% endif %}
+            {% if applicants is not null %}
+                <div class="bloc list-user-row row text-center">
+                    Aucun résultat pour la recherche.
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
