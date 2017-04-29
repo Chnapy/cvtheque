@@ -194,7 +194,14 @@
 
                         {% for advertisement in user.advertisements %}
                             <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
-                                <h4>{{ advertisement.society.username }}<br/>
+                                {% for application in user.applications %}
+                                    {% if advertisement.id == application.advertisement.id %}
+                                        <p style="color:green;"> Candidature envoyée le {{ application.created|date('d/m/Y') }}</p>
+                                        <hr/>
+                                    {% endif %}
+                                {% endfor %}
+                                <h4>{{ advertisement.society.username }}
+                                <br/>
                                     <small>{{ advertisement.title }}</small>
                                 </h4>
                                 <p>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</p>

@@ -16,7 +16,10 @@
     <div class="list-user container">
 
         <div class="bloc list-user-head list-user-row row">
-            <div class='col-md-9'>
+            <div class='col-md-6'>
+                Titre de l'annonce
+            </div>
+            <div class='col-md-3'>
                 Nom d'utilisateur
             </div>
             <div class='col-md-3'>
@@ -27,7 +30,10 @@
         {% for application in applications %}
 
             <a class="bloc list-user-row row" href="{{ path('application_show', { 'id': application.id }) }}">
-                <div class='col-md-9'>
+                <div class='col-md-6'>
+                    {{ application.advertisement.slug}}
+                </div>
+                <div class='col-md-3'>
                     {{ application.candidate.username }}
                 </div>
                 <div class='col-md-3'>

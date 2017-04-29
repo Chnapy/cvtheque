@@ -10,7 +10,7 @@
         <div class="lead">
             {% if application.created %}
                 Créée le {{ application.created|date('Y-m-d H:i:s') }}
-                {% if application.updated %}, màj le {{ application.updated|date('Y-m-d H:i:s') }}{% endif %}
+                {% if application.updated %}, mise à jour le {{ application.updated|date('Y-m-d H:i:s') }}{% endif %}
             {% endif %}
         </div>
     </div>
@@ -23,8 +23,12 @@
             <div class="col-md-3 colonne">
 
                 <div class="row">
+                    <a href="{{ path('show_advert', {'slug': application.advertisement.slug}) }}" class="but d-block primary">Voir l'annonce</a>
+                </div>
+                <hr/>
+                <div class="row">
                     {{ form_start(delete_form) }}
-                    <input type="submit" value="Supprimer" class='but d-block d-block' />
+                        <input type="submit" value="Supprimer la candidature" class='but d-block error' />
                     {{ form_end(delete_form) }}
                 </div>
                 <hr/>
