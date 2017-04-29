@@ -230,14 +230,14 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
     margin-right: 2px; }
   .tag > .delete {
     position: absolute;
-    display: none;
     right: 4px;
     top: 50%;
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
     padding: 2px;
-    cursor: pointer; }
+    cursor: pointer;
+    opacity: 0; }
   .tag.clickable {
     cursor: pointer; }
   .tag.reduce > .tag-text {
@@ -255,7 +255,7 @@ a, .a, a:hover, .a:hover, a:visited, .a:visited {
     .tag:not(.reduce).deletable:not(.onhover), .tag:not(.reduce).deletable.onhover:hover, .tag.reduce.extendhover.deletable:not(.onhover), .tag.reduce.extendhover.deletable.onhover:hover, .tag.deletable:not(.onhover), .tag.deletable.onhover:hover {
       padding-right: 26px; }
       .tag:not(.reduce).deletable:not(.onhover) > .delete, .tag:not(.reduce).deletable.onhover:hover > .delete, .tag.reduce.extendhover.deletable:not(.onhover) > .delete, .tag.reduce.extendhover.deletable.onhover:hover > .delete, .tag.deletable:not(.onhover) > .delete, .tag.deletable.onhover:hover > .delete {
-        display: inline-block;
+        opacity: 1;
         -webkit-animation-name: opa;
         -moz-animation-name: opa;
         -o-animation-name: opa;
@@ -682,6 +682,11 @@ a.but {
 
 img {
   word-break: break-word; }
+
+label.required::after {
+  content: '*';
+  color: #B94A48;
+  margin-left: 1px; }
 
 .hobbys-content {
   min-height: 34px; }
