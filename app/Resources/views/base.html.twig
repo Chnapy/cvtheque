@@ -38,6 +38,7 @@
                         {% else %}
                             {% if is_granted('ROLE_SOCIETY') %}
                                 <a class="nav-item{% if route == 'add_advert' %} active{% endif %}" href="{{ path('add_advert') }}">Ajouter une annonce</a>
+                                <a class="nav-item{% if route == 'search_applicant'%} active {% endif %}" href="{{ path('search_applicant') }}">Rechercher des profils</a>
                             {% endif %}
                         {% endif %}
 

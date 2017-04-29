@@ -5,7 +5,9 @@
 {% block bandeau %}
     <div class="row">
         <h1><span class="text-uppercase">{{ user.lastname }}</span> <span class="text-capitalize">{{ user.firstname }}</span> <small>{{ 'profile.show.username'|trans({'%username%': user.username }, 'MGUserBundle') }}</small></h1>
-        <div class="lead">Un accès à toutes vos données.</div>
+        {% if is_granted('ROLE_APPLICANT') %}
+            <div class="lead">Un accès à toutes vos données.</div>
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -183,23 +185,25 @@
                     {% endif %}
                 </div>
 
-                <h3>Suggestions d'annonces</h3>
-                {% if user.advertisements.count > 0 %}
+                {% if is_granted('ROLE_APPLICANT') %}
 
-                    {% for advertisement in user.advertisements %}
-                        <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
-                            <h4>{{ advertisement.society.username }}<br/>
-                                <small>{{ advertisement.title }}</small>
-                            </h4>
-                            <p>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</p>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    <div class='bloc'>
-                        Aucune suggestion d'annonce.
-                    </div>
-                {% endif %}
+                    <h3>Suggestions d'annonces</h3>
+                    {% if user.advertisements.count > 0 %}
 
+                        {% for advertisement in user.advertisements %}
+                            <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
+                                <h4>{{ advertisement.society.username }}<br/>
+                                    <small>{{ advertisement.title }}</small>
+                                </h4>
+                                <p>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</p>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <div class='bloc'>
+                            Aucune suggestion d'annonce.
+                        </div>
+                    {% endif %}
+               {% endif %}
                 <hr/>
 
                 <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}<br/>
