@@ -75,7 +75,7 @@ class ProfileController extends BaseController
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
-        $originalSkills = new ArrayCollection();
+        $originalEducations = new ArrayCollection();
         $originalWorkExperiences = new ArrayCollection();
         $originalSkills = new ArrayCollection();
         $originalHobbies = new ArrayCollection();
