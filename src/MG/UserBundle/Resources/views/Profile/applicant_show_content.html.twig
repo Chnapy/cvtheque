@@ -51,25 +51,27 @@
                     {% endif %}
                 </div>
                 <div class="row but-group">
-                    {% if user.logBookFile is not null %}
-                        <a href="{{ user.logBookFile.webPath }}" target='_blank' class="but col-xs-10" >
-                            Journal (pdf)
-                        </a>
-                        {% if isuser %}
-                            <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
-                                <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
-                                <span class="glyphicon glyphicon-edit"></span>
+                    {% if (is_granted('ROLE_APPLICANT') or is_granted('ROLE_ADMIN')) %}
+                        {% if user.logBookFile is not null %}
+                            <a href="{{ user.logBookFile.webPath }}" target='_blank' class="but col-xs-10" >
+                                Journal (pdf)
                             </a>
-                        {% endif %}
-                    {% else %}
-                        <a class="but col-xs-10 disabled" >
-                            Aucun journal enregistré
-                        </a>
-                        {% if isuser %}
-                            <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
-                                <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
-                                <span class="glyphicon glyphicon-upload"></span>
+                            {% if isuser %}
+                                <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
+                                    <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a class="but col-xs-10 disabled" >
+                                Aucun journal enregistré
                             </a>
+                            {% if isuser %}
+                                <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
+                                    <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
+                                    <span class="glyphicon glyphicon-upload"></span>
+                                </a>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 </div>
