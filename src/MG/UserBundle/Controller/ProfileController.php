@@ -80,8 +80,8 @@ class ProfileController extends BaseController
         $originalSkills = new ArrayCollection();
         $originalHobbies = new ArrayCollection();
         if(get_class($user) === "MG\UserBundle\Entity\Applicant") {
-            foreach ($user->getSkills() as $education) {
-                $originalSkills->add($education);
+            foreach ($user->getEducations() as $education) {
+                $originalEducations->add($education);
             }
             foreach ($user->getWorkExperiences() as $workExperience) {
                 $originalWorkExperiences->add($workExperience);
@@ -128,9 +128,9 @@ class ProfileController extends BaseController
             ));
         } else if(get_class($user) === "MG\UserBundle\Entity\Applicant") {
             if ($form->isSubmitted() && $form->isValid()) {
-                foreach ($originalSkills as $education) {
-                    if (false === $user->getSkills()->contains($education)) {
-                        $user->removeSkill($education);
+                foreach ($originalEducations as $education) {
+                    if (false === $user->getEducations()->contains($education)) {
+                        $user->removeEducation($education);
                     }
                 }
                 foreach ($originalWorkExperiences as $workExperience) {
@@ -140,11 +140,13 @@ class ProfileController extends BaseController
                 }
                 foreach ($originalSkills as $skill) {
                     if (false === $user->getSkills()->contains($skill)) {
+                        $skill->removeApplicant($user);
                         $user->removeSkill($skill);
                     }
                 }
                 foreach ($originalHobbies as $hobby) {
                     if (false === $user->getHobbies()->contains($hobby)) {
+                        $hobby->removeApplicant($user);
                         $user->removeHobby($hobby);
                     }
                 }
