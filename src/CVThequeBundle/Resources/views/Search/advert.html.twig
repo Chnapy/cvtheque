@@ -18,6 +18,7 @@
         <div class="bloc row">{{ form(form)  }}</div>
 
         {% for advertisement in advertisements %}
+        {% if advertisement.published %}
 
             <a class="bloc list-user-row row" href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
                 {#<div class='col-md-1 user-avatar'>
@@ -46,6 +47,7 @@
                 </div>
             </a>
 
+        {% endif %}
         {% else %}
             {% if advertisements is not null %}
                 <div class="bloc list-user-row row text-center">
