@@ -66,7 +66,7 @@ class AdvertisementType extends AbstractType
         ));
         
         // Fonction qui écoute l'événement PRE_SET_DATA
-        $builder->addEventListener(
+        /*$builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function(FormEvent $event) {
               $advertisement = $event->getData();
@@ -86,7 +86,7 @@ class AdvertisementType extends AbstractType
                 ));
               }
             }
-        );
+        );*/
     }
     
     /**

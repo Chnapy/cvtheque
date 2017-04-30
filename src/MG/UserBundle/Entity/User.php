@@ -72,7 +72,6 @@ abstract class User extends BaseUser
     {
         parent::__construct();
         $this->ips = new ArrayCollection();
-        //$this->image = new Image();
         $this->address = new Address();
     }
     

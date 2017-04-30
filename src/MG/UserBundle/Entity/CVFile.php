@@ -24,7 +24,11 @@ class CVFile
   private $extension;
   
   /**
-   * @Assert\File(maxSize="10M")
+   * @Assert\File(
+   *  maxSize="3M",
+   *  mimeTypes={"application/pdf", "application/x-pdf"},
+   *  mimeTypesMessage = "Merci d'envoyer un fichier au format PDF"
+   *  )
    */
   private $file;
 

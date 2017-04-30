@@ -28,7 +28,7 @@ class Image
   private $alt;
 
   /**
-   * @Assert\File(maxSize="10M")
+   * @Assert\File(maxSize="4M")
    */
   private $file;
 

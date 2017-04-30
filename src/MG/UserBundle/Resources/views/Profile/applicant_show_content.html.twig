@@ -5,7 +5,9 @@
 {% block bandeau %}
     <div class="row">
         <h1><span class="text-uppercase">{{ user.lastname }}</span> <span class="text-capitalize">{{ user.firstname }}</span> <small>{{ 'profile.show.username'|trans({'%username%': user.username }, 'MGUserBundle') }}</small></h1>
-        <div class="lead">Un accès à toutes vos données.</div>
+        {% if is_granted('ROLE_APPLICANT') %}
+            <div class="lead">Un accès à toutes vos données.</div>
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -49,25 +51,27 @@
                     {% endif %}
                 </div>
                 <div class="row but-group">
-                    {% if user.logBookFile is not null %}
-                        <a href="{{ user.logBookFile.webPath }}" target='_blank' class="but col-xs-10" >
-                            Journal (pdf)
-                        </a>
-                        {% if isuser %}
-                            <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
-                                <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
-                                <span class="glyphicon glyphicon-edit"></span>
+                    {% if (is_granted('ROLE_APPLICANT') or is_granted('ROLE_ADMIN')) %}
+                        {% if user.logBookFile is not null %}
+                            <a href="{{ user.logBookFile.webPath }}" target='_blank' class="but col-xs-10" >
+                                Journal (pdf)
                             </a>
-                        {% endif %}
-                    {% else %}
-                        <a class="but col-xs-10 disabled" >
-                            Aucun journal enregistré
-                        </a>
-                        {% if isuser %}
-                            <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
-                                <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
-                                <span class="glyphicon glyphicon-upload"></span>
+                            {% if isuser %}
+                                <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
+                                    <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a class="but col-xs-10 disabled" >
+                                Aucun journal enregistré
                             </a>
+                            {% if isuser %}
+                                <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
+                                    <span class="sr-only sr-only-focusable">Ajouter un journal (pdf)</span>
+                                    <span class="glyphicon glyphicon-upload"></span>
+                                </a>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 </div>
@@ -187,25 +191,32 @@
                     {% endif %}
                 </div>
 
-                <h3>Suggestions d'annonces</h3>
-                <div class="mh-300">
-                {% if user.advertisements.count > 0 %}
+                {% if is_granted('ROLE_APPLICANT') %}
 
-                    {% for advertisement in user.advertisements %}
-                        <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
-                            <h4>{{ advertisement.society.username }}<br/>
-                                <small>{{ advertisement.title }}</small>
-                            </h4>
-                            <p>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</p>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    <div class='bloc'>
-                        Aucune suggestion d'annonce.
-                    </div>
-                {% endif %}
-                </div>
+                    <h3>Suggestions d'annonces</h3>
+                    {% if user.advertisements.count > 0 %}
 
+                        {% for advertisement in user.advertisements %}
+                            <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
+                                {% for application in user.applications %}
+                                    {% if advertisement.id == application.advertisement.id %}
+                                        <p style="color:green;"> Candidature envoyée le {{ application.created|date('d/m/Y') }}</p>
+                                        <hr/>
+                                    {% endif %}
+                                {% endfor %}
+                                <h4>{{ advertisement.society.username }}
+                                <br/>
+                                    <small>{{ advertisement.title }}</small>
+                                </h4>
+                                <p>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</p>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <div class='bloc'>
+                            Aucune suggestion d'annonce.
+                        </div>
+                    {% endif %}
+               {% endif %}
                 <hr/>
 
                 <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}<br/>

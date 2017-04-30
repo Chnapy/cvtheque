@@ -49,7 +49,7 @@ class SearchController extends Controller
         $builder = $this
           ->createFormBuilder()
           ->add('search', TextType::class, array(
-                'label' => "Recherche :" 
+                'label' => "Mot(s) clé(s) :" 
           ))
           ->add('submit', SubmitType::class, array(
                 'label' => 'Rechercher' 

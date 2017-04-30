@@ -28,9 +28,9 @@ MG\UserBundle\Entity\User:
             type: text
             nullable: true
         created:
-            type: date
+            type: datetime
         updated:
-            type: date
+            type: datetime
     oneToOne:
         address:
             targetEntity: Address
