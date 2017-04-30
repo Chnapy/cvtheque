@@ -125,6 +125,7 @@
                 </div>
 
                 <h3>Formations</h3>
+                <div class="mh-300">
                 {% if user.educations.count > 0 %}
                     {% for e in user.educations %}
                         <div class='bloc'>
@@ -139,8 +140,10 @@
                         Aucune formation indiquée.
                     </div>
                 {% endif %}
+                </div>
 
                 <h3>Expériences professionnelles</h3>
+                <div class="mh-300">
                 {% if user.workExperiences.count > 0 %}
                     {% for w in user.workExperiences %}
                         <div class='bloc'>
@@ -156,6 +159,7 @@
                         Aucune expérience professionnelle indiquée. Il y a un début à tout.
                     </div>
                 {% endif %}
+                </div>
 
                 <h3>Compétences</h3>
                 <div class="bloc">
@@ -184,6 +188,7 @@
                 </div>
 
                 <h3>Suggestions d'annonces</h3>
+                <div class="mh-300">
                 {% if user.advertisements.count > 0 %}
 
                     {% for advertisement in user.advertisements %}
@@ -199,6 +204,7 @@
                         Aucune suggestion d'annonce.
                     </div>
                 {% endif %}
+                </div>
 
                 <hr/>
 
