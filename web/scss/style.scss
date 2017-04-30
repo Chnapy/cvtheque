@@ -12,6 +12,11 @@ label.required::after {
     margin-left: 1px;
 }
 
+.mh-300 {
+    max-height: 300px;
+    overflow: auto;
+}
+
 .hobbys-content {
     min-height: 34px;
 }
@@ -129,7 +134,7 @@ label.required::after {
 a.bloc {
     color: initial;
     display: block;
-
+    text-decoration: none;
 }
 
 .pagination>li>a, .pagination>li>span {

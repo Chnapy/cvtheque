@@ -130,39 +130,39 @@
 
                 <h3>Formations</h3>
                 <div class="mh-300">
-                {% if user.educations.count > 0 %}
-                    {% for e in user.educations %}
+                    {% if user.educations.count > 0 %}
+                        {% for e in user.educations %}
+                            <div class='bloc'>
+                                <span class='tag'>{{ e.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ e.toDate|date('d-m-Y') }}</span>
+                                <h4>{{ e.school }}<br/>
+                                    <small>{{ e.degree }}</small>
+                                </h4>
+                            </div>
+                        {% endfor %}
+                    {% else %}
                         <div class='bloc'>
-                            <span class='tag'>{{ e.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ e.toDate|date('d-m-Y') }}</span>
-                            <h4>{{ e.school }}<br/>
-                                <small>{{ e.degree }}</small>
-                            </h4>
+                            Aucune formation indiquée.
                         </div>
-                    {% endfor %}
-                {% else %}
-                    <div class='bloc'>
-                        Aucune formation indiquée.
-                    </div>
-                {% endif %}
+                    {% endif %}
                 </div>
 
                 <h3>Expériences professionnelles</h3>
                 <div class="mh-300">
-                {% if user.workExperiences.count > 0 %}
-                    {% for w in user.workExperiences %}
+                    {% if user.workExperiences.count > 0 %}
+                        {% for w in user.workExperiences %}
+                            <div class='bloc'>
+                                <span class='tag'>{{ w.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ w.toDate|date('d-m-Y') }}</span>
+                                <h4>{{ w.jobTitle }}<br/>
+                                    <small>{{ w.employer }}</small>
+                                </h4>
+                                <p>{{ w.description }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
                         <div class='bloc'>
-                            <span class='tag'>{{ w.fromDate|date('d-m-Y') }} <span class='glyphicon glyphicon-arrow-right'></span> {{ w.toDate|date('d-m-Y') }}</span>
-                            <h4>{{ w.jobTitle }}<br/>
-                                <small>{{ w.employer }}</small>
-                            </h4>
-                            <p>{{ w.description }}</p>
+                            Aucune expérience professionnelle indiquée. Il y a un début à tout.
                         </div>
-                    {% endfor %}
-                {% else %}
-                    <div class='bloc'>
-                        Aucune expérience professionnelle indiquée. Il y a un début à tout.
-                    </div>
-                {% endif %}
+                    {% endif %}
                 </div>
 
                 <h3>Compétences</h3>
@@ -194,29 +194,32 @@
                 {% if is_granted('ROLE_APPLICANT') %}
 
                     <h3>Suggestions d'annonces</h3>
-                    {% if user.advertisements.count > 0 %}
+                    <div class="mh-300">
+                        {% if user.advertisements.count > 0 %}
 
-                        {% for advertisement in user.advertisements %}
-                            <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
-                                {% for application in user.applications %}
-                                    {% if advertisement.id == application.advertisement.id %}
-                                        <p style="color:green;"> Candidature envoyée le {{ application.created|date('d/m/Y') }}</p>
-                                        <hr/>
-                                    {% endif %}
-                                {% endfor %}
-                                <h4>{{ advertisement.society.username }}
-                                <br/>
-                                    <small>{{ advertisement.title }}</small>
-                                </h4>
-                                <p>Par {{ advertisement.author }}, le {{ advertisement.created|date('d/m/Y') }}</p>
-                            </a>
-                        {% endfor %}
-                    {% else %}
-                        <div class='bloc'>
-                            Aucune suggestion d'annonce.
-                        </div>
-                    {% endif %}
-               {% endif %}
+                            {% for advertisement in user.advertisements %}
+                                <a class='bloc' href="{{ path('show_advert', {'slug': advertisement.slug}) }}">
+                                    {% for application in user.applications %}
+                                        {% if advertisement.id == application.advertisement.id %}
+                                            <div class="alert alert-success" role="alert"><b>Vous avez postulé</b> le {{ application.created|date('d/m/Y') }}. Bonne chance !</div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <h4><b>{{ advertisement.author }}</b>
+                                        <small>{{ advertisement.society.username }}</small>
+                                    </h4>
+                                    <p><b>{{ advertisement.title }}</b></p>
+                                    <p class="text-muted">Le {{ advertisement.created|date('d/m/Y') }}</p>
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <div class='bloc'>
+                                Aucune suggestion d'annonce.
+                            </div>
+                        {% endif %}
+                    </div>
+
+                {% endif %}
+
                 <hr/>
 
                 <p>{{ 'profile.show.created'|trans({'%date%': user.created|localizeddate('full', 'none')}, 'MGUserBundle') }}<br/>
