@@ -15,7 +15,7 @@ final class SocietyTest extends TestCase {
 	public function testRole(){
 
 		$society = new Society();
-		$this->assertEquals($society->getRoles(), "ROLE_SOCIETY");
+		$this->assertEquals($society->getRoles()[0], "ROLE_SOCIETY");
 
 	}
 }

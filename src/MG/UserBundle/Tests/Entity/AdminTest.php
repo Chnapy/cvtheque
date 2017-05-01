@@ -15,7 +15,7 @@ final class AdminTest extends TestCase {
 	public function testRole(){
 
 		$admin = new Admin();
-		$this->assertEquals($admin->getRoles(), "ROLE_ADMIN");
+		$this->assertEquals($admin->getRoles()[0], "ROLE_ADMIN");
 		
 	}
 }
