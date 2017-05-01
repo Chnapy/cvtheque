@@ -54,7 +54,7 @@
                     {% if (is_granted('ROLE_APPLICANT') or is_granted('ROLE_ADMIN')) %}
                         {% if user.logBookFile is not null %}
                             <a href="{{ user.logBookFile.webPath }}" target='_blank' class="but col-xs-10" >
-                                Journal (pdf)
+                                Journal
                             </a>
                             {% if isuser %}
                                 <a href="{{ path('mg_applicant_profile_log_book_upload') }}" class="but col-xs-2">
