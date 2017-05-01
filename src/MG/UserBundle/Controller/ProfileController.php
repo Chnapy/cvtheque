@@ -48,6 +48,12 @@ class ProfileController extends BaseController
         
         $user = $repository->findOneBySlug($slug);
         if(get_class($user) === "MG\UserBundle\Entity\Applicant") {
+            $visitor = $this->getUser();
+            if(get_class($visitor) === "MG\UserBundle\Entity\Applicant" && $visitor->getId() !== $user->getId())
+            {
+                $message = "Vous n'avez pas les droits pour accéder à cette annonce";
+                throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException ($message);
+            }
             
             return $this->render('MGUserBundle:Profile:applicant_show.html.twig', array(
                     'user' => $user,
@@ -109,7 +115,7 @@ class ProfileController extends BaseController
 
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
-
+                $user->setUpdated(new \DateTime());
                 $userManager->updateUser($user);
                 if (null === $response = $event->getResponse()) {
                     $url = $this->generateUrl('fos_user_profile_show');
@@ -154,7 +160,7 @@ class ProfileController extends BaseController
 
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
-
+                $user->setUpdated(new \DateTime());
                 $userManager->updateUser($user);
                 if (null === $response = $event->getResponse()) {
                     $url = $this->generateUrl('fos_user_profile_show');

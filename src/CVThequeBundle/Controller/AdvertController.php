@@ -188,6 +188,7 @@ class AdvertController extends Controller
                 $advertisement->removeAdvertSkill($advertSkill);
             }
         }
+        $advertisement->setUpdated(new \DateTime());
         $em->persist($advertisement);
         $em->flush();
         $this->get('session')->getFlashBag()->add('info', 'Annonce modifiée');

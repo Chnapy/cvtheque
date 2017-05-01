@@ -17,7 +17,8 @@ fos_elastica:
                         username : ~
                         email : ~
                         description : ~
-                        
+                        created: ~
+                        updated: ~
                         titleProfile : ~
                         body : ~
                         educations : 
@@ -51,7 +52,10 @@ fos_elastica:
                         driver: orm
                         model:  MG\UserBundle\Entity\Applicant
                         provider: ~
-                        listener: ~ # default : "insert", "update", "delete"
+                        listener:
+                            insert: true
+                            update: true
+                            delete: true
                 Advertisement:
                     mappings:
                         author : ~
@@ -59,6 +63,8 @@ fos_elastica:
                         title : ~
                         body: ~
                         published : ~
+                        created : ~
+                        updated : ~
                         society : 
                             type : object
                             properties : 
@@ -81,4 +87,47 @@ fos_elastica:
                         driver: orm
                         model:  CVThequeBundle\Entity\Advertisement
                         provider: ~
-                        listener: ~ # default : "insert", "update", "delete"
+                        listener:
+                            insert: true
+                            update: true
+                            delete: true
+                Skill:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model: MG\UserBundle\Entity\Skill
+                        provider: ~
+                        listener:
+                            insert: true
+                            update: true
+                            delete: true
+                Hobby:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model: MG\UserBundle\Entity\Hobby
+                        provider: ~
+                        listener:
+                            insert: true
+                            update: true
+                            delete: true
+                Education:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model: MG\UserBundle\Entity\Education
+                        provider: ~
+                        listener:
+                            insert: true
+                            update: true
+                            delete: true
+                WorkExperience:
+                    mappings: ~
+                    persistence:
+                        driver: orm
+                        model: MG\UserBundle\Entity\WorkExperience
+                        provider: ~
+                        listener:
+                            insert: true
+                            update: true
+                            delete: true
