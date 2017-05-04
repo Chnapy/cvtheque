@@ -9,7 +9,7 @@ var GLOBALS = {
     skill_names: ['skills', 'advertSkills']
 };
 
-var SKILLS_URL = '/api/skills';
+var SKILLS_URL = '/app.php/api/skills';
 
 window.onload = onLoad;
 
@@ -124,7 +124,7 @@ function initSkills() {
         var name = $(element).data('name');
         var supp = $(element).data('supp');
         if (!name) {
-            alert('Champ skill: name non défini');
+            console.error('Champ skill: name non défini');
         }
 
         $(element).data('index', -1);
